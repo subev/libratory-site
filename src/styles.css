@@ -47,16 +47,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Temporary: ?off=glow, ?off=sticky, ?off=img, ?off=fonts — remove once the stutter is pinned down */
-:root[data-off~="glow"] .lamplight::before { display: none; }
-:root[data-off~="sticky"] header { position: static; }
-:root[data-off~="img"] img { visibility: hidden; }
-:root[data-off~="fonts"] {
-  --stack-wordmark: Georgia, serif;
-  --stack-display: Georgia, serif;
-  --stack-body: Georgia, serif;
-}
-
 body {
   background: var(--bg-page);
   color: var(--text-primary);
