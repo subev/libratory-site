@@ -15,6 +15,10 @@
     <meta property="og:url" content="https://libratory.dev/" />
   </head>
   <body>
+    <script>
+      const off = new URLSearchParams(location.search).get("off");
+      if (off) document.documentElement.dataset.off = off;
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/mac.tsx"></script>
   </body>

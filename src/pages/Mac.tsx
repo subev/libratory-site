@@ -1,11 +1,5 @@
 import { Button, DOWNLOAD, Eyebrow, Footer, GitHubIcon, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
-
-const PIPELINE = [
-  { step: "Drop a PDF", detail: "Text comes back in seconds. OCR is there when a scan needs it." },
-  { step: "Get chapters", detail: "Detected from the table of contents, or drawn by hand where the book is odd." },
-  { step: "Pick a voice", detail: "Local models, macOS system voices, or a cloud engine if you have a key." },
-  { step: "Listen", detail: "One M4B with real chapter markers and a cover, ready for any player." },
-];
+import { Flow } from "../components/Flow.tsx";
 
 const FEATURES = [
   { title: "Per-chapter control", body: "Edit the text, exclude a chapter, re-synthesize just that one. Nothing retries silently behind your back." },
@@ -55,21 +49,17 @@ export function Mac() {
               <Button href={REPO} variant="ghost"><GitHubIcon className="mr-2.5 size-[1.05em]" />Read the source</Button>
             </div>
             <p className="mt-6 text-[0.95rem] text-ink-faint">
-              Free and open source · Apple Silicon · Linux and headless servers run the same thing in Docker
+              Free for noncommercial use · source on GitHub · Apple Silicon · Linux and headless
+              servers run the same thing in Docker
             </p>
           </div>
         </section>
 
-        <Section title="How it works" lead="Four steps, and you can stop after any of them.">
-          <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {PIPELINE.map((item, index) => (
-              <li key={item.step}>
-                <span className="font-display text-3xl text-brass">{String(index + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 text-xl">{item.step}</h3>
-                <p className="mt-2 text-ink-muted">{item.detail}</p>
-              </li>
-            ))}
-          </ol>
+        <Section
+          title="How it works"
+          lead="Two ways in, a loop in the middle, and more than one way out. You can stop anywhere along it."
+        >
+          <Flow />
         </Section>
 
         <Section
