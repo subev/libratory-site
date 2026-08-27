@@ -5,18 +5,24 @@ export const DOWNLOAD = `${REPO}/releases/latest`;
 
 export function Mark({ className = "size-8" }: { className?: string }) {
   return (
-    <svg viewBox="0 2 64 64" className={className} fill="none" stroke="#fdf1e4" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M32 10.5 L17 30.5 Q15.6 34.4 18.4 36.2 Q26 30 32 19 Z" fill="#e2601f" stroke="none" />
-      <path d="M32 10.5 L47 30.5 Q48.4 34.4 45.6 36.2 Q38 30 32 19 Z" fill="#e2601f" stroke="none" />
-      <path d="M30.5 12.4 L17 30.5" strokeWidth="4.6" />
-      <path d="M33.5 12.4 L47 30.5" strokeWidth="4.6" />
+    <svg viewBox="0 2 64 64" className={className} fill="none" stroke="#fffdf9" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M30.5 15.4 L19 30.82" stroke="#e2601f" strokeWidth="1.2" />
+      <path d="M30.5 18 L20 32.08" stroke="#e2601f" strokeWidth="1.2" />
+      <path d="M30.5 20.6 L21 33.34" stroke="#e2601f" strokeWidth="1.2" />
+      <path d="M33.5 15.4 L45 30.82" stroke="#e2601f" strokeWidth="1.2" />
+      <path d="M33.5 18 L44 32.08" stroke="#e2601f" strokeWidth="1.2" />
+      <path d="M33.5 20.6 L43 33.34" stroke="#e2601f" strokeWidth="1.2" />
+      <path d="M30.5 12.4 L17 30.5" strokeWidth="4" />
+      <path d="M33.5 12.4 L47 30.5" strokeWidth="4" />
       <circle cx="32" cy="38" r="7.4" />
       <path d="M23.4 61 Q23.4 52.6 32 52.6 Q40.6 52.6 40.6 61" />
       <path d="M25 54 L17.8 44.4" />
       <path d="M39 54 L46.2 44.4" />
+      <path d="M14 36.6 Q12 38 14 39.4" stroke="#e2601f" />
+      <path d="M50 36.6 Q52 38 50 39.4" stroke="#e2601f" />
       <path d="M10.4 34.6 Q8 38 10.4 41.4" stroke="#e2601f" />
-      <path d="M6.8 32.6 Q3.4 38 6.8 43.4" stroke="#e2601f" />
       <path d="M53.6 34.6 Q56 38 53.6 41.4" stroke="#e2601f" />
+      <path d="M6.8 32.6 Q3.4 38 6.8 43.4" stroke="#e2601f" />
       <path d="M57.2 32.6 Q60.6 38 57.2 43.4" stroke="#e2601f" />
     </svg>
   );
