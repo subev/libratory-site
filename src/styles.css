@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+
+  --bg-page: #16140f;
+  --bg-raised: #1e1b14;
+  --bg-inset: --alpha(#fdf1e4 / 4%);
+
+  --border: --alpha(#fdf1e4 / 12%);
+  --border-strong: --alpha(#fdf1e4 / 26%);
+
+  --text-primary: #fdf1e4;
+  --text-secondary: --alpha(#fdf1e4 / 82%);
+  --text-muted: --alpha(#fdf1e4 / 62%);
+  --text-faint: --alpha(#fdf1e4 / 42%);
+
+  --ember: #e2601f;
+  --ember-bright: #ef7734;
+  --brass: #e0913d;
+}
+
+@theme inline {
+  --color-page: var(--bg-page);
+  --color-raised: var(--bg-raised);
+  --color-inset: var(--bg-inset);
+  --color-edge: var(--border);
+  --color-edge-strong: var(--border-strong);
+  --color-ink: var(--text-primary);
+  --color-ink-secondary: var(--text-secondary);
+  --color-ink-muted: var(--text-muted);
+  --color-ink-faint: var(--text-faint);
+  --color-ember: var(--ember);
+  --color-ember-bright: var(--ember-bright);
+  --color-brass: var(--brass);
+
+  --font-display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+/* The reading room: lamplight from above, everything falling away at the edges */
+.lamplight {
+  background:
+    radial-gradient(70rem 34rem at 50% -10rem, --alpha(var(--brass)/15%), transparent 70%),
+    radial-gradient(42rem 26rem at 10% 14rem, --alpha(var(--ember)/10%), transparent 70%),
+    radial-gradient(46rem 30rem at 90% 4rem, --alpha(var(--brass)/8%), transparent 72%);
+}
+
+.rule-double {
+  border-top: 1px solid var(--border-strong);
+  box-shadow: 0 3px 0 -2px var(--border);
+}
