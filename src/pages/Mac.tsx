@@ -1,4 +1,5 @@
 import { Button, DOWNLOAD, Eyebrow, Footer, GitHubIcon, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
+import { Download } from "../components/Download.tsx";
 import { Flow } from "../components/Flow.tsx";
 
 const FEATURES = [
@@ -49,8 +50,10 @@ export function Mac() {
               <Button href={REPO} variant="ghost"><GitHubIcon className="mr-2.5 size-[1.05em]" />Read the source</Button>
             </div>
             <p className="mt-6 text-[0.95rem] text-ink-faint">
-              Free for noncommercial use · source on GitHub · Apple Silicon Mac, Linux, or one
-              Docker container on a headless server
+              Free for noncommercial use · source on GitHub ·{" "}
+              <a href="#download" className="text-brass hover:text-ember-bright">
+                Linux and Windows run the same thing in Docker
+              </a>
             </p>
           </div>
         </section>
@@ -89,6 +92,14 @@ export function Mac() {
               </div>
             ))}
           </div>
+        </Section>
+
+        <Section
+          id="download"
+          title="Get it"
+          lead="A Mac gets an app. Everywhere else gets the same server in one container."
+        >
+          <Download />
         </Section>
 
         <Section

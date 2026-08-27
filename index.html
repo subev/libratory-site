@@ -15,6 +15,14 @@
     <meta property="og:url" content="https://libratory.dev/" />
   </head>
   <body>
+    <script>
+      var p = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+      var ua = navigator.userAgent;
+      if (!/iPhone|iPad|Android/i.test(ua)) {
+        var os = /Mac/i.test(p) ? "mac" : /Win/i.test(p) ? "win" : /Linux|X11|CrOS/i.test(p) ? "linux" : "";
+        if (os) document.documentElement.dataset.os = os;
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/mac.tsx"></script>
   </body>

@@ -71,6 +71,23 @@ html {
   scroll-behavior: smooth;
 }
 
+.platform-yours {
+  display: none;
+}
+
+:root[data-os="mac"] [data-card="mac"] .platform-yours,
+:root[data-os="linux"] [data-card="linux"] .platform-yours,
+:root[data-os="win"] [data-card="win"] .platform-yours {
+  display: inline;
+}
+
+:root[data-os="mac"] [data-card="mac"],
+:root[data-os="linux"] [data-card="linux"],
+:root[data-os="win"] [data-card="win"] {
+  border-color: --alpha(var(--brass) / 45%);
+  background: --alpha(var(--brass) / 4%);
+}
+
 body {
   background: var(--bg-page);
   color: var(--text-primary);
