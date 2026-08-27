@@ -15,7 +15,8 @@ pnpm dev      # localhost:3040
 pnpm build
 ```
 
-Pushing to `main` builds and deploys to Pages.
+Cloudflare Pages builds and deploys every push to `main` — build command `pnpm build`, output
+directory `dist`, `NODE_VERSION=22`. There is no workflow in this repo; Cloudflare does the build.
 
 ## Why this is not in the app repo
 
@@ -30,6 +31,6 @@ things:
 
 ## DNS
 
-`public/CNAME` claims `libratory.dev`. The domain needs four `A` records at the apex pointing at
-185.199.108.153, 185.199.109.153, 185.199.110.153 and 185.199.111.153, and `www` as a `CNAME` to
-`subev.github.io`.
+The domain is on Cloudflare, and Pages wires the apex record itself when the custom domain is added
+from the project's **Custom domains** tab. `public/CNAME` is left in place only so a move back to
+GitHub Pages needs no thought; Cloudflare ignores it.
