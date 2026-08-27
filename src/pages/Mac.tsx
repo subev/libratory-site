@@ -1,4 +1,4 @@
-import { Button, DOWNLOAD, Eyebrow, Footer, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
+import { Button, DOWNLOAD, Eyebrow, Footer, GitHubIcon, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
 
 const PIPELINE = [
   { step: "Drop a PDF", detail: "Text comes back in seconds. OCR is there when a scan needs it." },
@@ -42,7 +42,7 @@ export function Mac() {
           <div className="mx-auto max-w-5xl px-6 pt-24 pb-28 text-center sm:pt-32 sm:pb-36">
             <Mark className="mx-auto size-16" />
             <Wordmark className="mt-8 block text-4xl text-ink sm:text-6xl" />
-            <p className="mt-6 font-display text-xl font-light tracking-wide text-brass sm:text-2xl">
+            <p className="mt-6 font-display text-xl tracking-wide text-brass sm:text-2xl">
               A reading room for the books you already own
             </p>
             <p className="mx-auto mt-10 max-w-2xl text-lg text-ink-secondary">
@@ -52,7 +52,7 @@ export function Mac() {
             </p>
             <div className="mt-12 flex flex-wrap justify-center gap-4">
               <Button href={DOWNLOAD}>Download for macOS</Button>
-              <Button href={REPO} variant="ghost">Read the source</Button>
+              <Button href={REPO} variant="ghost"><GitHubIcon className="mr-2.5 size-[1.05em]" />Read the source</Button>
             </div>
             <p className="mt-6 text-[0.95rem] text-ink-faint">
               Free and open source · Apple Silicon · Linux and headless servers run the same thing in Docker
@@ -115,9 +115,14 @@ export function Mac() {
               >
                 <div className="overflow-hidden rounded-sm border border-edge bg-inset">
                   <img
-                    src={`https://img.youtube.com/vi/${video.id}/hq720.jpg`}
+                    src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                    srcSet={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg 480w, https://img.youtube.com/vi/${video.id}/hq720.jpg 1280w`}
+                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 46vw, 92vw"
+                    width={1280}
+                    height={720}
                     alt=""
                     loading="lazy"
+                    decoding="async"
                     className="aspect-video w-full object-cover transition-opacity group-hover:opacity-85"
                   />
                 </div>

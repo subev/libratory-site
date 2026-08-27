@@ -5,6 +5,10 @@ The site for [Libratory](https://github.com/subev/libratory) — one page, about
 Vite + React + Tailwind 4, matching the app's `packages/web`. A static build with no router: a
 second page is a second `.html` entry, and GitHub Pages needs no 404 fallback.
 
+`pnpm build` renders the page to static markup and deletes the client bundle — the page has no
+state and no events, so it ships CSS and HTML and no JavaScript. `pnpm dev` still renders in the
+browser as usual. Anything interactive added later has to opt back into hydration.
+
 ```bash
 pnpm install
 pnpm dev      # localhost:3040

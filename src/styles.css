@@ -3,6 +3,10 @@
 :root {
   color-scheme: dark;
 
+  --stack-wordmark: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --stack-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --stack-body: "Source Serif 4", Georgia, serif;
+
   --bg-page: #16140f;
   --bg-raised: #1e1b14;
   --bg-inset: --alpha(#fdf1e4 / 4%);
@@ -34,8 +38,9 @@
   --color-ember-bright: var(--ember-bright);
   --color-brass: var(--brass);
 
-  --font-display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
-  --font-body: "EB Garamond", Georgia, serif;
+  --font-wordmark: var(--stack-wordmark);
+  --font-display: var(--stack-display);
+  --font-body: var(--stack-body);
 }
 
 html {
@@ -47,23 +52,33 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 1.0625rem;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
+  line-height: 1.62;
 }
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.1;
+  font-weight: 600;
+  line-height: 1.12;
 }
 
-/* The reading room: lamplight from above, everything falling away at the edges */
+/* Own composited layer, so the glow rasterizes once instead of per scroll tile */
 .lamplight {
+  position: relative;
+  isolation: isolate;
+}
+
+.lamplight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  transform: translateZ(0);
   background:
     radial-gradient(70rem 34rem at 50% -10rem, --alpha(var(--brass)/15%), transparent 70%),
-    radial-gradient(42rem 26rem at 10% 14rem, --alpha(var(--ember)/10%), transparent 70%),
-    radial-gradient(46rem 30rem at 90% 4rem, --alpha(var(--brass)/8%), transparent 72%);
+    radial-gradient(46rem 30rem at 90% 4rem, --alpha(var(--ember)/9%), transparent 72%);
 }
+
 
 .rule-double {
   border-top: 1px solid var(--border-strong);
