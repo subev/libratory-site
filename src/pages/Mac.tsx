@@ -49,8 +49,8 @@ export function Mac() {
               <Button href={REPO} variant="ghost"><GitHubIcon className="mr-2.5 size-[1.05em]" />Read the source</Button>
             </div>
             <p className="mt-6 text-[0.95rem] text-ink-faint">
-              Free for noncommercial use · source on GitHub · Apple Silicon · Linux and headless
-              servers run the same thing in Docker
+              Free for noncommercial use · source on GitHub · Apple Silicon Mac, Linux, or one
+              Docker container on a headless server
             </p>
           </div>
         </section>
