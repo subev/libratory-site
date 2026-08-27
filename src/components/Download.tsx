@@ -58,10 +58,9 @@ export function Download() {
       <Card os="win" title="Windows" sub="The same container, through Docker Desktop and WSL2.">
         <Command />
         <p className="mt-4 text-sm text-ink-faint">
-          There is no native Windows app. Nothing in the container is Mac- or Linux-specific, so
-          this should work — but it is untested rather than supported.{" "}
-          <a href={`${REPO}/issues`} className="text-brass hover:text-ember-bright">Say so in an issue</a>{" "}
-          if it does not.
+          There is no native Windows app yet. This route is new, so if something does not work,{" "}
+          <a href={`${REPO}/issues/new`} className="text-brass hover:text-ember-bright">let us know</a>{" "}
+          and it will get fixed.
         </p>
       </Card>
     </div>
