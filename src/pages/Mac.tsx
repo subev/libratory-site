@@ -38,7 +38,7 @@ export function Mac() {
             <Mark className="mx-auto size-16" />
             <Wordmark className="mt-8 block text-4xl text-ink sm:text-6xl" />
             <p className="mt-6 font-display text-xl tracking-wide text-brass sm:text-2xl">
-              A reading room for the books you already own
+              Your free book and audiobook laboratory
             </p>
             <p className="mx-auto mt-10 max-w-2xl text-lg text-ink-secondary">
               Libratory turns a shelf of PDFs into chapter-marked audiobooks — and then keeps them,
