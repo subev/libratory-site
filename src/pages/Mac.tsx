@@ -50,7 +50,7 @@ export function Mac() {
               <Button href={REPO} variant="ghost"><GitHubIcon className="mr-2.5 size-[1.05em]" />Read the source</Button>
             </div>
             <p className="mt-6 text-[0.95rem] text-ink-faint">
-              Free for noncommercial use · source on GitHub ·{" "}
+              Free · source on GitHub ·{" "}
               <a href="#download" className="text-brass hover:text-ember-bright">
                 Linux and Windows run the same thing in Docker
               </a>
