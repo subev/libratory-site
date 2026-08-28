@@ -15,6 +15,20 @@ pnpm dev      # localhost:3040
 pnpm build
 ```
 
+## The social card
+
+`public/og.png` is the 1200×630 image every link unfurl shows — iMessage, Slack, Twitter,
+LinkedIn. It is drawn in `scripts/og.html` with the site's own fonts and colours and screenshotted
+by `pnpm og`, which needs Chrome installed (or `CHROMIUM_PATH` pointed at a Chromium binary).
+
+The PNG is committed rather than built: Cloudflare has no browser, and the card only changes when
+the words on it do. Edit `scripts/og.html`, run `pnpm og`, commit both.
+
+Unfurl caches are stubborn and keyed on the URL, so a redrawn card can keep showing the old one for
+days. To force it, bump the `og:image` URL in `index.html` to `/og.png?v=2`. Facebook, LinkedIn and
+Twitter each have a debugger that re-fetches on demand; iMessage does not, and clears only by
+sending the link to a fresh conversation.
+
 Cloudflare Pages builds and deploys every push to `main` — build command `pnpm build`, output
 directory `dist`, `NODE_VERSION=22`. There is no workflow in this repo; Cloudflare does the build.
 
