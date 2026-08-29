@@ -1,16 +1,18 @@
 import { Button, DOWNLOAD, Eyebrow, Footer, GitHubIcon, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
 import { Download } from "../components/Download.tsx";
 import { Flow } from "../components/Flow.tsx";
+import { LibraryChat } from "../components/LibraryChat.tsx";
+import { Pipeline } from "../components/Pipeline.tsx";
+import { Reader } from "../components/Reader.tsx";
+import { Transform } from "../components/Transform.tsx";
 
 const FEATURES = [
-  { title: "Per-chapter control", body: "Edit the text, exclude a chapter, re-synthesize just that one. Nothing retries silently behind your back." },
+  { title: "Local by default, cloud if you ask", body: "Every narrator and every AI feature has a local option — a running Ollama or LM Studio is found without configuration. Add a cloud key if you want one; add none and nothing leaves the machine." },
   { title: "Cleanup that reads", body: "An AI pass strips OCR artifacts, running heads and hyphen breaks before the voice ever sees them." },
-  { title: "Translations and rewrites", body: "Any chapter in another language, or shortened, or explained simply — the original text is always kept beside it." },
-  { title: "Ask, and keep the answer", body: "Question a chapter or a whole book. Every answer is saved as a note, and any note can become a chapter you narrate." },
-  { title: "Chat across the shelves", body: "Hybrid full-text and semantic search over the content of every book, with citations that open the PDF at the page." },
-  { title: "Digests", body: "Pick ten books, get one audiobook with a summary chapter for each — or drive it from a script through the JSON API." },
-  { title: "Exports", body: "PDF and EPUB of the chapters you choose, or a synced EPUB that carries the audio and the highlighting with it." },
+  { title: "Read along on the train, too", body: "A synced EPUB carries the audio and the highlighting with it, so the same read-along plays offline on a phone." },
+  { title: "Digests", body: "Pick ten books, get one audiobook with a summary chapter for each." },
   { title: "A library, not a converter", body: "Nested folders, drag and drop, cross-folder search, and separate workspaces for separate people." },
+  { title: "A JSON API, and what it invites", body: "POST a book and get it back as audio. The bundled script turns a day of Hacker News into a podcast that way." },
 ];
 
 const VOICES = [
@@ -19,13 +21,6 @@ const VOICES = [
   { title: "Cloud, if you want it", body: "Cartesia and ElevenLabs are one API key away, for the languages the local models do not reach. Optional, and never required." },
 ];
 
-const VIDEOS = [
-  { id: "OKMiox3nxPY", n: "I", title: "The core idea", body: "PDF in, chapter-marked audiobook out" },
-  { id: "GhQW_Ma2qwI", n: "II", title: "Smart features", body: "Ask AI, chat with citations, translate and transform" },
-  { id: "g9kX_cNFD6k", n: "III", title: "Scaling your library", body: "Instant indexing, library-wide chat, digests" },
-  { id: "os3-bJxDhsM", n: "IV", title: "Documents and read-along", body: "PDF/EPUB export, synced read-along for your phone" },
-  { id: "fmIiWdthnfg", n: "V", title: "Extensions and the road ahead", body: "The JSON API, scripted audiobooks, what's next" },
-];
 
 export function Mac() {
   return (
@@ -67,6 +62,48 @@ export function Mac() {
 
         <Section
           id="features"
+          title="Take a book apart. Put it back together."
+          lead="The workbench itself. Edit a chapter, swap a voice, re-synthesize that one — and leave the rest alone."
+        >
+          <Pipeline />
+        </Section>
+
+        <Section
+          title="And then you read along with it"
+          lead="The narration comes back to the book it came from: the sentence being spoken is lit on the real print, and the word inside it moves as the voice reaches it."
+        >
+          <Reader />
+        </Section>
+
+        <Section
+          title="Voices"
+          lead="That was Kokoro. Pick the language first and you get every voice that can read it, grouped by engine, each with a preview."
+        >
+          <div className="grid gap-10 sm:grid-cols-3">
+            {VOICES.map((voice) => (
+              <div key={voice.title}>
+                <h3 className="text-xl">{voice.title}</h3>
+                <p className="mt-2 text-ink-muted">{voice.body}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          title="Read it in another language, or in plainer words"
+          lead="A translation, or a rewrite — explain it like I'm five, shorten it, or any prompt you write — from whichever model you have."
+        >
+          <Transform />
+        </Section>
+
+        <Section
+          title="Ask the shelf, not the search box"
+          lead="Ask a question and the assistant searches the content of every book, then answers with the passages it actually used."
+        >
+          <LibraryChat />
+        </Section>
+
+        <Section
           title="What you get after the audiobook"
           lead="The conversion is the easy half. The rest is what makes a messy PDF collection worth keeping."
         >
@@ -81,61 +118,11 @@ export function Mac() {
         </Section>
 
         <Section
-          title="Voices"
-          lead="Pick the language first and you get every voice that can read it, grouped by engine, each with a preview."
-        >
-          <div className="grid gap-10 sm:grid-cols-3">
-            {VOICES.map((voice) => (
-              <div key={voice.title}>
-                <h3 className="text-xl">{voice.title}</h3>
-                <p className="mt-2 text-ink-muted">{voice.body}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        <Section
           id="download"
           title="Get it"
           lead="A Mac gets an app. Everywhere else gets the same server in one container."
         >
           <Download />
-        </Section>
-
-        <Section
-          id="tours"
-          title="Watch it work"
-          lead="Five short tours, narrated by the app's own synthesized voice — the script is a book inside the app."
-        >
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {VIDEOS.map((video) => (
-              <a
-                key={video.id}
-                href={`https://youtu.be/${video.id}`}
-                className="group block"
-              >
-                <div className="overflow-hidden rounded-sm border border-edge bg-inset">
-                  <img
-                    src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
-                    srcSet={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg 480w, https://img.youtube.com/vi/${video.id}/hq720.jpg 1280w`}
-                    sizes="(min-width: 1024px) 300px, (min-width: 640px) 46vw, 92vw"
-                    width={1280}
-                    height={720}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="aspect-video w-full object-cover transition-opacity group-hover:opacity-85"
-                  />
-                </div>
-                <h3 className="mt-4 text-lg">
-                  <span className="text-brass">{video.n}</span>
-                  <span className="text-ink-faint"> · </span>
-                  <span className="group-hover:text-brass transition-colors">{video.title}</span>
-                </h3>
-                <p className="mt-1 text-ink-muted">{video.body}</p>
-              </a>
-            ))}
-          </div>
         </Section>
 
         <section className="lamplight border-t border-edge">

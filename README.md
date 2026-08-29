@@ -5,9 +5,9 @@ The site for [Libratory](https://github.com/subev/libratory) — one page, about
 Vite + React + Tailwind 4, matching the app's `packages/web`. A static build with no router: a
 second page is a second `.html` entry, and GitHub Pages needs no 404 fallback.
 
-`pnpm build` renders the page to static markup and deletes the client bundle — the page has no
-state and no events, so it ships CSS and HTML and no JavaScript. `pnpm dev` still renders in the
-browser as usual. Anything interactive added later has to opt back into hydration.
+`pnpm build` prerenders the page to static markup and ships the client bundle beside it — the live
+demos in the middle of the page hydrate over that markup, so the text is there before any script
+runs. `pnpm dev` renders in the browser as usual.
 
 ```bash
 pnpm install
@@ -31,6 +31,19 @@ sending the link to a fresh conversation.
 
 Cloudflare Pages builds and deploys every push to `main` — build command `pnpm build`, output
 directory `dist`, `NODE_VERSION=22`. There is no workflow in this repo; Cloudflare does the build.
+
+## The read-along audio
+
+`public/audio/frankenstein-ch5-af_heart.m4a` is the narration the read-along demo plays, and
+`src/components/cues.ts` is the word timings its cursor follows. Both come out of `pnpm narrate`,
+which runs the app's own `scripts/synthesize.py` over the passage, groups the per-word timings
+Kokoro writes out, and encodes the audio — so the highlight is following real narration rather than
+an animation that approximates one.
+
+Committed rather than built, for the same reason as the card: Cloudflare has no Python and no model
+cache. Regenerating needs a libratory checkout with its `.venv` set up —
+`LIBRATORY_DIR=~/repos/libratory pnpm narrate` — and it fails loudly if a sentence does not come
+back word for word.
 
 ## Why this is not in the app repo
 

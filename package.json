@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
-    "og": "node scripts/og.mjs"
+    "og": "node scripts/og.mjs",
+    "narrate": "node scripts/narrate.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",

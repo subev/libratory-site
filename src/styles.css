@@ -46,6 +46,8 @@
   --ember: #e2601f;
   --ember-bright: #ef7734;
   --brass: #e0913d;
+  --green: oklch(0.72 0.14 150);
+  --green-bright: oklch(0.8 0.13 150);
 }
 
 @theme inline {
@@ -61,6 +63,8 @@
   --color-ember: var(--ember);
   --color-ember-bright: var(--ember-bright);
   --color-brass: var(--brass);
+  --color-green: var(--green);
+  --color-green-bright: var(--green-bright);
 
   --font-wordmark: var(--stack-wordmark);
   --font-display: var(--stack-display);
@@ -124,4 +128,23 @@ h1, h2, h3 {
 .rule-double {
   border-top: 1px solid var(--border-strong);
   box-shadow: 0 3px 0 -2px var(--border);
+}
+
+@keyframes softpulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.42; }
+}
+
+@keyframes slide-indeterminate {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(400%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -54,7 +54,6 @@ export function Nav() {
         </a>
         <div className="ml-auto flex items-center gap-7">
           <a href="#features" className={link}>What it does</a>
-          <a href="#tours" className={link}>Tours</a>
           <a href="#download" className={link}>Get it</a>
           <a href={REPO} className={link} aria-label="Source on GitHub" title="Source on GitHub">
             <GitHubIcon />
