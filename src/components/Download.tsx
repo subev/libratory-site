@@ -42,8 +42,8 @@ export function Download() {
           Download the DMG
         </a>
         <p className="mt-4 text-sm text-ink-faint">
-          Not notarized yet, so the first launch needs Right-click → Open. Intel Macs are not built
-          for: the Metal narrators would have nothing to run on.
+          Signed and notarised, so it just opens. Apple Silicon only — the Metal narrators would
+          have nothing to run on an Intel Mac.
         </p>
       </Card>
 
