@@ -264,7 +264,7 @@ export function Library() {
                           <span className="text-[11.5px] text-[#fdf1e4]/26">—</span>
                         )}
                       </span>
-                      <span className={`flex-wrap gap-1.5 px-3 py-2.5 ${AT_LG} lg:flex`}>
+                      <span className="hidden flex-wrap gap-1.5 px-3 py-2.5 lg:flex">
                         {langs.length ? (
                           langs.map((label) => (
                             <span

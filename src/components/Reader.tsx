@@ -23,8 +23,9 @@ CUES.forEach(([, a, , s], i) => {
   else SENTENCES[s] = { start: a, from: i, to: i };
 });
 
-// The clip loops on its own; the silent fallback needs the same length to wrap at
-const SILENT_LOOP = (CUES[CUES.length - 1]?.[2] ?? 0) + 900;
+// Where the wall clock wraps until the clip's own duration is known
+const CUE_END = CUES[CUES.length - 1]?.[2] ?? 0;
+const HAVE_CURRENT_DATA = 2;
 
 function timestamp(ms: number) {
   const total = Math.round(ms / 1000);
@@ -68,6 +69,8 @@ export function Reader() {
 
   const [ms, setMs] = useState(0);
   const msRef = useRef(0);
+  // Set while the highlight is running off the wall clock instead of the element
+  const wallClock = useRef<{ stamp: number; from: number } | null>(null);
   const [playing, setPlaying] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [rects, setRects] = useState<Rect[]>([]);
@@ -128,8 +131,10 @@ export function Reader() {
     }
     // Muted, which every browser allows to autoplay — the mute effect above has already applied it.
     // A refusal is not fatal: the tick below falls back to a wall clock and the demo still runs.
+    // soundOn is a dep because turning the sound on is a gesture, and a gesture is the one thing
+    // that can start audio a refused autoplay never got.
     audio.play().catch(() => {});
-  }, [shouldPlay]);
+  }, [shouldPlay, soundOn]);
 
   // Sound is an upgrade, never a gamble: take it only where the browser says the visitor has
   // really interacted, because unmuting without that is what gets the whole thing stopped
@@ -147,24 +152,25 @@ export function Reader() {
   useEffect(() => {
     if (!shouldPlay || !inView) return;
     let raf = 0;
-    let stamp: number | null = null;
-    let from = 0;
     const tick = () => {
       raf = requestAnimationFrame(tick);
       const audio = audioRef.current;
-      if (audio && !audio.paused) {
+      // paused flips false the instant play() is called and stays false all through buffering, so
+      // readyState is what actually says the element is producing time
+      if (audio && !audio.paused && audio.readyState >= HAVE_CURRENT_DATA) {
         // Handing back after a silent stretch: the voice picks up where the highlight had got to
-        if (stamp !== null) audio.currentTime = msRef.current / 1000;
-        stamp = null;
+        if (wallClock.current) {
+          audio.currentTime = msRef.current / 1000;
+          wallClock.current = null;
+        }
         msRef.current = audio.currentTime * 1000;
       } else {
-        // Autoplay refused, or the clip has not loaded yet. Wall clock, never frame deltas — the
-        // point is that the highlight runs anyway rather than the panel sitting frozen.
-        if (stamp === null) {
-          stamp = performance.now();
-          from = msRef.current;
-        }
-        msRef.current = (from + performance.now() - stamp) % SILENT_LOOP;
+        // Autoplay refused, still buffering, or stalled mid-clip. Wall clock, never frame deltas —
+        // the point is that the highlight runs anyway rather than the panel sitting frozen.
+        if (!wallClock.current) wallClock.current = { stamp: performance.now(), from: msRef.current };
+        const loop = audio && audio.duration > 0 ? audio.duration * 1000 : CUE_END;
+        const { stamp, from } = wallClock.current;
+        msRef.current = (from + performance.now() - stamp) % loop;
       }
       setMs(msRef.current);
     };
@@ -175,10 +181,15 @@ export function Reader() {
   const seek = useCallback((sentence: number) => {
     const audio = audioRef.current;
     const at = SENTENCES[sentence];
-    if (!audio || !at) return;
-    audio.currentTime = at.start / 1000;
+    if (!at) return;
     msRef.current = at.start;
     setMs(at.start);
+    // Rebase whichever clock is running, or the next frame drags the highlight straight back
+    if (wallClock.current) wallClock.current = { stamp: performance.now(), from: at.start };
+    if (audio) {
+      audio.currentTime = at.start / 1000;
+      audio.play().catch(() => {});
+    }
     setPlaying(true);
   }, []);
 
