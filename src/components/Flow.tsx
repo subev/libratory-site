@@ -99,16 +99,22 @@ function Node({ x, y, w, h, title, sub, stage, mono, accent }: NodeSpec) {
   );
 }
 
+function Tip({ id, fill }: { id: string; fill: string }) {
+  return (
+    <marker id={id} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill={fill} />
+    </marker>
+  );
+}
+
 function Landscape() {
   return (
+    // lg is where Section's max-w-5xl finally renders this viewBox near 1:1; narrower, the portrait
+    // layout below reads better than this one scaled down
     <svg viewBox="0 0 1080 452" className="hidden w-full lg:block" role="img" aria-label={ALT}>
       <defs>
-        <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0 0 L10 5 L0 10 z" fill="var(--brass)" />
-        </marker>
-        <marker id="tip-ember" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0 0 L10 5 L0 10 z" fill="var(--ember-bright)" />
-        </marker>
+        <Tip id="tip" fill="var(--brass)" />
+        <Tip id="tip-ember" fill="var(--ember-bright)" />
       </defs>
 
       {RAILS.map((rail) => (
@@ -141,7 +147,7 @@ function Landscape() {
 // Anything narrower than a laptop gets the same diagram stood on its end: one spine down the left
 // gutter, cards hanging off it at full width, so the type stays at reading size instead of being
 // scaled to five pixels. Like the landscape half, the card coordinates and the paths move together.
-const P = { x: 27, w: 292, cx: 173 };
+const P = { x: 27, w: 292 };
 
 type Card = Copy & { stage: Stage; y: number; h: number; accent?: boolean; note?: string };
 
@@ -165,22 +171,26 @@ const P_RAILS: { stage: Stage; label: string; y: number }[] = [
 // The two inputs join on the gutter line and turn into Extract; the three outputs come off the same
 // gutter below Narrate. Both elbows cross their stage rule at the spine, where no label sits, and
 // only a path that ends at a card carries a head.
-const P_PATHS: { d: string; head?: boolean }[] = [
-  { d: "M27 58 L 13 58" },
-  { d: "M27 126 L 13 126" },
-  { d: "M13 58 L 13 156 Q 13 168, 25 168 L 161 168 Q 173 168, 173 180 L 173 212", head: true },
-  { d: "M173 472 L 173 520 Q 173 532, 161 532 L 25 532 Q 13 532, 13 544 L 13 698" },
-  { d: "M13 574 L 24 574", head: true },
-  { d: "M13 636 L 24 636", head: true },
-  { d: "M13 698 L 24 698", head: true },
+const P_LINES = [
+  "M27 58 L 13 58",
+  "M27 126 L 13 126",
+  "M173 472 L 173 520 Q 173 532, 161 532 L 25 532 Q 13 532, 13 544 L 13 698",
+];
+
+const P_ARROWS = [
+  "M13 58 L 13 156 Q 13 168, 25 168 L 161 168 Q 173 168, 173 180 L 173 212",
+  "M13 574 L 24 574",
+  "M13 636 L 24 636",
+  "M13 698 L 24 698",
 ];
 
 const P_LOOP_PATHS = ["M173 280 L 173 300", "M173 384 L 173 404"];
 
 function PortraitNode({ y, h, title, sub, stage, mono, accent, note }: Card) {
   const big = h >= 64;
-  const titleY = y + (h >= 64 ? 27 : 23);
-  const subY = titleY + (h >= 64 ? 20 : 18);
+  const titleY = y + (big ? 27 : 23);
+  const subY = titleY + (big ? 20 : 18);
+  const center = P.x + P.w / 2;
 
   return (
     <g>
@@ -191,7 +201,7 @@ function PortraitNode({ y, h, title, sub, stage, mono, accent, note }: Card) {
         strokeOpacity={accent ? 0.6 : 0.28}
       />
       <text
-        x={P.cx} y={titleY} textAnchor="middle"
+        x={center} y={titleY} textAnchor="middle"
         className={mono ? "font-mono" : "font-display"}
         fontSize={mono ? 13.5 : big ? 17 : 15.5}
         fontWeight="600"
@@ -199,11 +209,11 @@ function PortraitNode({ y, h, title, sub, stage, mono, accent, note }: Card) {
       >
         {title}
       </text>
-      <text x={P.cx} y={subY} textAnchor="middle" className="font-body" fontSize="12" fill="var(--text-muted)">
+      <text x={center} y={subY} textAnchor="middle" className="font-body" fontSize="12" fill="var(--text-muted)">
         {sub}
       </text>
       {note ? (
-        <text x={P.cx} y={subY + 19} textAnchor="middle" className="font-body" fontSize="11.5" fill="var(--brass)">
+        <text x={center} y={subY + 19} textAnchor="middle" className="font-body" fontSize="11.5" fill="var(--brass)">
           {note}
         </text>
       ) : null}
@@ -215,12 +225,8 @@ function Portrait() {
   return (
     <svg viewBox="0 0 320 736" className="mx-auto w-full max-w-[400px] lg:hidden" role="img" aria-label={ALT}>
       <defs>
-        <marker id="tip-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0 0 L10 5 L0 10 z" fill="var(--brass)" />
-        </marker>
-        <marker id="tip-ember-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0 0 L10 5 L0 10 z" fill="var(--ember-bright)" />
-        </marker>
+        <Tip id="tip-p" fill="var(--brass)" />
+        <Tip id="tip-ember-p" fill="var(--ember-bright)" />
       </defs>
 
       {P_RAILS.map((rail) => (
@@ -233,7 +239,11 @@ function Portrait() {
       ))}
 
       <g stroke="var(--brass)" strokeOpacity="0.5" strokeWidth="1.25" fill="none">
-        {P_PATHS.map(({ d, head }) => <path key={d} d={d} markerEnd={head ? "url(#tip-p)" : undefined} />)}
+        {P_LINES.map((d) => <path key={d} d={d} />)}
+      </g>
+
+      <g stroke="var(--brass)" strokeOpacity="0.5" strokeWidth="1.25" fill="none" markerEnd="url(#tip-p)">
+        {P_ARROWS.map((d) => <path key={d} d={d} />)}
       </g>
 
       <g stroke="var(--ember-bright)" strokeOpacity="0.85" strokeWidth="1.25" fill="none" markerEnd="url(#tip-ember-p)">
