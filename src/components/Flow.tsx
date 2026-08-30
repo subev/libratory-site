@@ -101,7 +101,7 @@ function Node({ x, y, w, h, title, sub, stage, mono, accent }: NodeSpec) {
 
 function Landscape() {
   return (
-    <svg viewBox="0 0 1080 452" className="hidden w-full sm:block" role="img" aria-label={ALT}>
+    <svg viewBox="0 0 1080 452" className="hidden w-full lg:block" role="img" aria-label={ALT}>
       <defs>
         <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M0 0 L10 5 L0 10 z" fill="var(--brass)" />
@@ -138,9 +138,10 @@ function Landscape() {
   );
 }
 
-// A phone gets the same diagram stood on its end: one spine down the left gutter, cards hanging off
-// it at full width, so the type stays at reading size instead of being scaled to five pixels.
-const P = { x: 28, w: 292, cx: 174, bus: 13 };
+// Anything narrower than a laptop gets the same diagram stood on its end: one spine down the left
+// gutter, cards hanging off it at full width, so the type stays at reading size instead of being
+// scaled to five pixels. Like the landscape half, the card coordinates and the paths move together.
+const P = { x: 27, w: 292, cx: 173 };
 
 type Card = Copy & { stage: Stage; y: number; h: number; accent?: boolean; note?: string };
 
@@ -162,21 +163,19 @@ const P_RAILS: { stage: Stage; label: string; y: number }[] = [
 ];
 
 // The two inputs join on the gutter line and turn into Extract; the three outputs come off the same
-// gutter below Narrate. Both elbows cross their stage rule at the spine, where no label sits.
-const P_PATHS = [
-  "M28 58 L 13 58",
-  "M28 126 L 13 126",
-  "M13 58 L 13 156 Q 13 168, 25 168 L 162 168 Q 174 168, 174 180 L 174 212",
-  "M174 472 L 174 520 Q 174 532, 162 532 L 25 532 Q 13 532, 13 544 L 13 698",
-  "M13 574 L 25 574",
-  "M13 636 L 25 636",
-  "M13 698 L 25 698",
+// gutter below Narrate. Both elbows cross their stage rule at the spine, where no label sits, and
+// only a path that ends at a card carries a head.
+const P_PATHS: { d: string; head?: boolean }[] = [
+  { d: "M27 58 L 13 58" },
+  { d: "M27 126 L 13 126" },
+  { d: "M13 58 L 13 156 Q 13 168, 25 168 L 161 168 Q 173 168, 173 180 L 173 212", head: true },
+  { d: "M173 472 L 173 520 Q 173 532, 161 532 L 25 532 Q 13 532, 13 544 L 13 698" },
+  { d: "M13 574 L 24 574", head: true },
+  { d: "M13 636 L 24 636", head: true },
+  { d: "M13 698 L 24 698", head: true },
 ];
 
-const P_LOOP_PATHS = ["M174 280 L 174 300", "M174 384 L 174 404"];
-
-// Only the paths that end at a card carry a head; the gutter runs are plain line
-const P_HEADED = new Set([2, 4, 5, 6]);
+const P_LOOP_PATHS = ["M173 280 L 173 300", "M173 384 L 173 404"];
 
 function PortraitNode({ y, h, title, sub, stage, mono, accent, note }: Card) {
   const big = h >= 64;
@@ -214,7 +213,7 @@ function PortraitNode({ y, h, title, sub, stage, mono, accent, note }: Card) {
 
 function Portrait() {
   return (
-    <svg viewBox="0 0 320 736" className="w-full sm:hidden" role="img" aria-label={ALT}>
+    <svg viewBox="0 0 320 736" className="mx-auto w-full max-w-[400px] lg:hidden" role="img" aria-label={ALT}>
       <defs>
         <marker id="tip-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M0 0 L10 5 L0 10 z" fill="var(--brass)" />
@@ -234,7 +233,7 @@ function Portrait() {
       ))}
 
       <g stroke="var(--brass)" strokeOpacity="0.5" strokeWidth="1.25" fill="none">
-        {P_PATHS.map((d, i) => <path key={d} d={d} markerEnd={P_HEADED.has(i) ? "url(#tip-p)" : undefined} />)}
+        {P_PATHS.map(({ d, head }) => <path key={d} d={d} markerEnd={head ? "url(#tip-p)" : undefined} />)}
       </g>
 
       <g stroke="var(--ember-bright)" strokeOpacity="0.85" strokeWidth="1.25" fill="none" markerEnd="url(#tip-ember-p)">
@@ -251,7 +250,7 @@ export function Flow() {
     <>
       <Landscape />
       <Portrait />
-      <p className="mt-10 text-ink-muted sm:mt-12">
+      <p className="mt-10 text-ink-muted lg:mt-12">
         Each stage has a section of its own below — keep scrolling to see what it looks like in the app.
       </p>
     </>
