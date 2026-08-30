@@ -45,7 +45,7 @@ export function Transform() {
             Reasoning
           </span>
           <span className="hidden items-center gap-1.5 rounded-md border border-edge bg-page px-2.5 py-1 text-xs text-ink sm:flex">
-            qwen3.8:27b <span className="text-ink-faint">· local</span>
+            DeepSeek <span className="text-ink-faint">V4 Flash</span>
             <Icon name="caret" className="size-2.5 text-ink-faint" />
           </span>
           <span className="rounded-[5px] bg-ember-bright px-3 py-1 text-xs font-medium text-[#2a1408]">

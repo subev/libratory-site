@@ -1,6 +1,7 @@
 import { Button, DOWNLOAD, Eyebrow, Footer, GitHubIcon, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
 import { Download } from "../components/Download.tsx";
 import { Flow } from "../components/Flow.tsx";
+import { Library } from "../components/Library.tsx";
 import { LibraryChat } from "../components/LibraryChat.tsx";
 import { Pipeline } from "../components/Pipeline.tsx";
 import { Reader } from "../components/Reader.tsx";
@@ -73,6 +74,13 @@ export function Mac() {
           lead="The narration comes back to the book it came from: the sentence being spoken is lit on the real print, and the word inside it moves as the voice reaches it."
         >
           <Reader />
+        </Section>
+
+        <Section
+          title="One book is the demo. The shelf is the point."
+          lead="Add as many as you like and keep them tidy: folders you can drag rows into, sorting on every column, and one line per book telling you what it has. Four shelves, four ways people actually use it."
+        >
+          <Library />
         </Section>
 
         <Section

@@ -57,7 +57,7 @@ export function LibraryChat() {
               <Icon name="caret" className="size-2.5 text-ink-faint" />
             </span>
             <span className="hidden items-center gap-1.5 rounded-md border border-edge bg-raised px-2.5 py-1 text-[11.5px] text-ink sm:flex">
-              qwen3.8:27b
+              DeepSeek V4 Flash
               <Icon name="caret" className="size-2.5 text-ink-faint" />
             </span>
           </div>

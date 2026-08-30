@@ -23,6 +23,9 @@ CUES.forEach(([, a, , s], i) => {
   else SENTENCES[s] = { start: a, from: i, to: i };
 });
 
+// The clip loops on its own; the silent fallback needs the same length to wrap at
+const SILENT_LOOP = (CUES[CUES.length - 1]?.[2] ?? 0) + 900;
+
 function timestamp(ms: number) {
   const total = Math.round(ms / 1000);
   return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
@@ -64,6 +67,7 @@ export function Reader() {
   const reduced = useReducedMotion();
 
   const [ms, setMs] = useState(0);
+  const msRef = useRef(0);
   const [playing, setPlaying] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [rects, setRects] = useState<Rect[]>([]);
@@ -122,8 +126,9 @@ export function Reader() {
       audio.pause();
       return;
     }
-    // Muted, which every browser allows to autoplay — the mute effect above has already applied it
-    audio.play().catch(() => setPlaying(false));
+    // Muted, which every browser allows to autoplay — the mute effect above has already applied it.
+    // A refusal is not fatal: the tick below falls back to a wall clock and the demo still runs.
+    audio.play().catch(() => {});
   }, [shouldPlay]);
 
   // Sound is an upgrade, never a gamble: take it only where the browser says the visitor has
@@ -142,10 +147,26 @@ export function Reader() {
   useEffect(() => {
     if (!shouldPlay || !inView) return;
     let raf = 0;
+    let stamp: number | null = null;
+    let from = 0;
     const tick = () => {
       raf = requestAnimationFrame(tick);
       const audio = audioRef.current;
-      if (audio) setMs(audio.currentTime * 1000);
+      if (audio && !audio.paused) {
+        // Handing back after a silent stretch: the voice picks up where the highlight had got to
+        if (stamp !== null) audio.currentTime = msRef.current / 1000;
+        stamp = null;
+        msRef.current = audio.currentTime * 1000;
+      } else {
+        // Autoplay refused, or the clip has not loaded yet. Wall clock, never frame deltas — the
+        // point is that the highlight runs anyway rather than the panel sitting frozen.
+        if (stamp === null) {
+          stamp = performance.now();
+          from = msRef.current;
+        }
+        msRef.current = (from + performance.now() - stamp) % SILENT_LOOP;
+      }
+      setMs(msRef.current);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
@@ -156,6 +177,7 @@ export function Reader() {
     const at = SENTENCES[sentence];
     if (!audio || !at) return;
     audio.currentTime = at.start / 1000;
+    msRef.current = at.start;
     setMs(at.start);
     setPlaying(true);
   }, []);

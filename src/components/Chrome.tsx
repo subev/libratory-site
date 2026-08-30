@@ -43,17 +43,17 @@ export function Wordmark({ className = "" }: { className?: string }) {
 }
 
 export function Nav() {
-  const link = "text-[0.95rem] text-ink-muted hover:text-brass transition-colors";
+  const link = "text-[0.95rem] whitespace-nowrap text-ink-muted hover:text-brass transition-colors";
 
   return (
     <header className="sticky top-0 z-20 border-b border-edge bg-page">
-      <nav className="mx-auto flex h-16 max-w-5xl items-center gap-6 px-6">
-        <a href="/" className="flex items-center gap-3">
-          <Mark className="size-7" />
-          <Wordmark className="text-lg" />
+      <nav className="mx-auto flex h-16 max-w-5xl items-center gap-4 px-6 sm:gap-6">
+        <a href="/" className="flex items-center gap-2.5 sm:gap-3">
+          <Mark className="size-6 sm:size-7" />
+          <Wordmark className="text-base sm:text-lg" />
         </a>
-        <div className="ml-auto flex items-center gap-7">
-          <a href="#features" className={link}>What it does</a>
+        <div className="ml-auto flex items-center gap-5 sm:gap-7">
+          <a href="#features" className={`${link} hidden min-[425px]:inline`}>What it does</a>
           <a href="#download" className={link}>Get it</a>
           <a href={REPO} className={link} aria-label="Source on GitHub" title="Source on GitHub">
             <GitHubIcon />
