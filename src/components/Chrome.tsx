@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 export const REPO = "https://github.com/subev/libratory";
-export const DOWNLOAD = `${REPO}/releases/latest`;
+export const DOWNLOAD = "https://get.libratory.dev/mac";
 
 export function Mark({ className = "size-8" }: { className?: string }) {
   return (
