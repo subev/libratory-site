@@ -4,7 +4,8 @@ import { Flow } from "../components/Flow.tsx";
 import { Library } from "../components/Library.tsx";
 import { LibraryChat } from "../components/LibraryChat.tsx";
 import { Pipeline } from "../components/Pipeline.tsx";
-import { Reader } from "../components/Reader.tsx";
+import { ReadAlong } from "../components/ReadAlong.tsx";
+import { ReaderApp } from "../components/ReaderApp.tsx";
 import { Transform } from "../components/Transform.tsx";
 
 const FEATURES = [
@@ -14,6 +15,19 @@ const FEATURES = [
   { title: "Digests", body: "Pick ten books, get one audiobook with a summary chapter for each." },
   { title: "A library, not a converter", body: "Nested folders, drag and drop, cross-folder search, and separate workspaces for separate people." },
   { title: "A JSON API, and what it invites", body: "POST a book and get it back as audio. The bundled script turns a day of Hacker News into a podcast that way." },
+];
+
+const NAV = [
+  { href: "#features", label: "What it does", wide: true },
+  { href: "#reader", label: "Reader" },
+  { href: "#download", label: "Get it" },
+];
+
+const FOOT = [
+  { href: REPO, label: "Source" },
+  { href: `${REPO}/releases`, label: "Releases" },
+  { href: "/reader/", label: "Reader" },
+  { href: `${REPO}/blob/main/LICENSE.md`, label: "Licence" },
 ];
 
 const VOICES = [
@@ -26,7 +40,7 @@ const VOICES = [
 export function Mac() {
   return (
     <>
-      <Nav />
+      <Nav links={NAV} source />
 
       <main>
         <section className="lamplight border-b border-edge">
@@ -73,7 +87,7 @@ export function Mac() {
           title="And then you read along with it"
           lead="The narration comes back to the book it came from: the sentence being spoken is lit on the real print, and the word inside it moves as the voice reaches it."
         >
-          <Reader />
+          <ReadAlong />
         </Section>
 
         <Section
@@ -133,6 +147,8 @@ export function Mac() {
           <Download />
         </Section>
 
+        <ReaderApp />
+
         <section className="lamplight border-t border-edge">
           <div className="mx-auto max-w-5xl px-6 py-24 text-center">
             <Eyebrow>Start with one book</Eyebrow>
@@ -150,7 +166,7 @@ export function Mac() {
         </section>
       </main>
 
-      <Footer />
+      <Footer links={FOOT} />
     </>
   );
 }

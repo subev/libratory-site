@@ -107,23 +107,47 @@ h1, h2, h3 {
 }
 
 /* Own composited layer, so the glow rasterizes once instead of per scroll tile */
-.lamplight {
+.lamplight,
+.lamplight-pitch,
+.lamplight-hero,
+.lamplight-beta {
   position: relative;
   isolation: isolate;
 }
 
-.lamplight::before {
+.lamplight::before,
+.lamplight-pitch::before,
+.lamplight-hero::before,
+.lamplight-beta::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   transform: translateZ(0);
+}
+
+.lamplight::before {
   background:
     radial-gradient(70rem 34rem at 50% -10rem, --alpha(var(--brass)/15%), transparent 70%),
     radial-gradient(46rem 30rem at 90% 4rem, --alpha(var(--ember)/9%), transparent 72%);
 }
 
+.lamplight-pitch::before {
+  background:
+    radial-gradient(52rem 32rem at 12% 10%, --alpha(var(--ember)/12%), transparent 70%),
+    radial-gradient(40rem 28rem at 88% 90%, --alpha(var(--brass)/8%), transparent 72%);
+}
+
+.lamplight-hero::before {
+  background:
+    radial-gradient(64rem 34rem at 20% -6rem, --alpha(var(--brass)/15%), transparent 70%),
+    radial-gradient(46rem 30rem at 92% 30%, --alpha(var(--ember)/10%), transparent 72%);
+}
+
+.lamplight-beta::before {
+  background: radial-gradient(52rem 30rem at 50% -4rem, --alpha(var(--ember)/12%), transparent 70%);
+}
 
 .rule-double {
   border-top: 1px solid var(--border-strong);

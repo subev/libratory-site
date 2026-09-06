@@ -8,7 +8,7 @@ type NodeSpec = Copy & {
   w: number;
   h: number;
   stage: Stage;
-  accent?: boolean;
+  accent?: number;
 };
 
 // The same ramp the live panels below use for 1 · Input, 2 · Work and 3 · Output
@@ -25,15 +25,15 @@ const COPY = {
   extract: { title: "Extract", sub: "text and chapters" },
   narrate: { title: "Narrate", sub: "local or cloud voice" },
   loop: { title: "Translate · rewrite · clean up", sub: "every variant kept beside the original" },
-  m4b: { title: "M4B audiobook", sub: "chapters, cover" },
-  docs: { title: "PDF · EPUB", sub: "the chapters you pick" },
-  synced: { title: "Synced EPUB", sub: "audio and text together" },
+  m4b: { title: "M4B audiobook", sub: "audio · chapters, cover" },
+  docs: { title: "PDF · EPUB", sub: "text · the chapters you pick" },
+  synced: { title: "Synced EPUB", sub: "text + audio, one file" },
 } satisfies Record<string, Copy>;
 
 const LOOP_NOTE = "optional, and as often as you like";
 
 const ALT =
-  "Two ways in — a dropped PDF or the JSON API — through Extract and Narrate, with an optional translate, rewrite and clean-up loop between them, out to an M4B audiobook, a PDF or EPUB, or a synced EPUB.";
+  "Two ways in — a dropped PDF or the JSON API — through Extract and Narrate, with an optional translate, rewrite and clean-up loop between them, out to a synced EPUB carrying text and audio together, an M4B audiobook, or a PDF or EPUB of text alone.";
 
 // Everything is centred on the spine at y=212, so a node that moves takes its connector's control
 // points with it — which is why the coordinates and the paths live together in this file
@@ -42,12 +42,12 @@ const NODES: NodeSpec[] = [
   { ...COPY.api, stage: "in", x: 8, y: 222, w: 204, h: 80 },
   { ...COPY.extract, stage: "work", x: 296, y: 166, w: 212, h: 92 },
   { ...COPY.narrate, stage: "work", x: 592, y: 166, w: 212, h: 92 },
-  { ...COPY.m4b, stage: "out", x: 872, y: 100, w: 200, h: 64 },
-  { ...COPY.docs, stage: "out", x: 872, y: 180, w: 200, h: 64 },
-  { ...COPY.synced, stage: "out", x: 872, y: 260, w: 200, h: 64 },
+  { ...COPY.synced, stage: "out", accent: 0.55, x: 872, y: 100, w: 200, h: 64 },
+  { ...COPY.m4b, stage: "out", x: 872, y: 180, w: 200, h: 64 },
+  { ...COPY.docs, stage: "out", x: 872, y: 260, w: 200, h: 64 },
 ];
 
-const LOOP: NodeSpec = { ...COPY.loop, stage: "work", accent: true, x: 340, y: 340, w: 420, h: 80 };
+const LOOP: NodeSpec = { ...COPY.loop, stage: "work", accent: 0.6, x: 340, y: 340, w: 420, h: 80 };
 
 // Tips stop 4–6px short of an edge so the arrowhead never touches a card stroke
 const PATHS = [
@@ -81,7 +81,7 @@ function Node({ x, y, w, h, title, sub, stage, mono, accent }: NodeSpec) {
         x={x} y={y} width={w} height={h} rx="10"
         fill="var(--bg-raised)"
         stroke={STAGE[stage]}
-        strokeOpacity={accent ? 0.6 : 0.28}
+        strokeOpacity={accent ?? 0.28}
       />
       <text
         x={center} y={titleY} textAnchor="middle"
@@ -149,17 +149,17 @@ function Landscape() {
 // scaled to five pixels. Like the landscape half, the card coordinates and the paths move together.
 const P = { x: 27, w: 292 };
 
-type Card = Copy & { stage: Stage; y: number; h: number; accent?: boolean; note?: string };
+type Card = Copy & { stage: Stage; y: number; h: number; accent?: number; note?: string };
 
 const P_CARDS: Card[] = [
   { ...COPY.pdf, stage: "in", y: 30, h: 56 },
   { ...COPY.api, stage: "in", y: 98, h: 56 },
   { ...COPY.extract, stage: "work", y: 216, h: 64 },
-  { ...COPY.loop, stage: "work", y: 304, h: 80, accent: true, note: LOOP_NOTE },
+  { ...COPY.loop, stage: "work", y: 304, h: 80, accent: 0.6, note: LOOP_NOTE },
   { ...COPY.narrate, stage: "work", y: 408, h: 64 },
-  { ...COPY.m4b, stage: "out", y: 548, h: 52 },
-  { ...COPY.docs, stage: "out", y: 610, h: 52 },
-  { ...COPY.synced, stage: "out", y: 672, h: 52 },
+  { ...COPY.synced, stage: "out", y: 548, h: 52, accent: 0.55 },
+  { ...COPY.m4b, stage: "out", y: 610, h: 52 },
+  { ...COPY.docs, stage: "out", y: 672, h: 52 },
 ];
 
 const P_RAILS: { stage: Stage; label: string; y: number }[] = [
@@ -198,7 +198,7 @@ function PortraitNode({ y, h, title, sub, stage, mono, accent, note }: Card) {
         x={P.x} y={y} width={P.w} height={h} rx="9"
         fill="var(--bg-raised)"
         stroke={STAGE[stage]}
-        strokeOpacity={accent ? 0.6 : 0.28}
+        strokeOpacity={accent ?? 0.28}
       />
       <text
         x={center} y={titleY} textAnchor="middle"
@@ -260,7 +260,13 @@ export function Flow() {
     <>
       <Landscape />
       <Portrait />
-      <p className="mt-10 text-ink-muted lg:mt-12">
+      <p className="mt-12 max-w-2xl text-ink-muted">
+        The three ways out differ in one thing: whether you leave with the text, the voice, or both.
+        Only the <a href="#reader" className="text-brass hover:text-ember-bright">synced EPUB</a>{" "}
+        carries both — the print, the audio and the timings that tie them together — which is why it
+        is the one the iPhone reader opens.
+      </p>
+      <p className="mt-4 text-ink-muted">
         Each stage has a section of its own below — keep scrolling to see what it looks like in the app.
       </p>
     </>

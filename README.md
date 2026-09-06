@@ -1,13 +1,16 @@
 # libratory.dev
 
-The site for [Libratory](https://github.com/subev/libratory) — one page, about the free Mac app.
+The site for [Libratory](https://github.com/subev/libratory) — `/` about the free Mac app, `/reader/`
+about Libratory Reader for iPhone.
 
-Vite + React + Tailwind 4, matching the app's `packages/web`. A static build with no router: a
-second page is a second `.html` entry, and GitHub Pages needs no 404 fallback.
+Vite + React + Tailwind 4, matching the app's `packages/web`. A static build with no router: a page
+is an `.html` entry listed in `vite.config.ts` beside a client entry in `src/` and a component in
+`src/pages/`, and GitHub Pages needs no 404 fallback. `public/reader/privacy/` is hand-written HTML
+rather than a third entry — it is prose that never changes and needs no bundle.
 
-`pnpm build` prerenders the page to static markup and ships the client bundle beside it — the live
-demos in the middle of the page hydrate over that markup, so the text is there before any script
-runs. `pnpm dev` renders in the browser as usual.
+`pnpm build` prerenders both pages to static markup and ships the client bundle beside them — the
+live demos hydrate over that markup, so the text is there before any script runs. `pnpm dev` renders
+in the browser as usual.
 
 ```bash
 pnpm install

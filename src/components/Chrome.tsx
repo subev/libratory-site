@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 export const REPO = "https://github.com/subev/libratory";
 export const DOWNLOAD = "https://get.libratory.dev/mac";
+export const TESTFLIGHT = "https://testflight.apple.com/join/WNENBXzM";
 
 export function Mark({ className = "size-8" }: { className?: string }) {
   return (
@@ -42,8 +43,10 @@ export function Wordmark({ className = "" }: { className?: string }) {
   );
 }
 
-export function Nav() {
-  const link = "text-[0.95rem] whitespace-nowrap text-ink-muted hover:text-brass transition-colors";
+type Link = { href: string; label: string; current?: boolean; wide?: boolean };
+
+export function Nav({ links, source }: { links: Link[]; source?: boolean }) {
+  const style = "text-[0.95rem] whitespace-nowrap transition-colors";
 
   return (
     <header className="sticky top-0 z-20 border-b border-edge bg-page">
@@ -53,18 +56,29 @@ export function Nav() {
           <Wordmark className="text-base sm:text-lg" />
         </a>
         <div className="ml-auto flex items-center gap-5 sm:gap-7">
-          <a href="#features" className={`${link} hidden min-[425px]:inline`}>What it does</a>
-          <a href="#download" className={link}>Get it</a>
-          <a href={REPO} className={link} aria-label="Source on GitHub" title="Source on GitHub">
-            <GitHubIcon />
-          </a>
+          {links.map((link) => link.current ? (
+            <span key={link.label} className={`${style} text-brass`}>{link.label}</span>
+          ) : (
+            <a
+              key={link.label}
+              href={link.href}
+              className={`${style} text-ink-muted hover:text-brass ${link.wide ? "hidden min-[520px]:inline" : ""}`}
+            >
+              {link.label}
+            </a>
+          ))}
+          {source ? (
+            <a href={REPO} className={`${style} text-ink-muted hover:text-brass`} aria-label="Source on GitHub" title="Source on GitHub">
+              <GitHubIcon />
+            </a>
+          ) : null}
         </div>
       </nav>
     </header>
   );
 }
 
-export function Footer() {
+export function Footer({ links }: { links: Link[] }) {
   return (
     <footer className="border-t border-edge">
       <div className="mx-auto flex max-w-5xl flex-col gap-5 px-6 py-12 text-[0.95rem] text-ink-faint sm:flex-row sm:items-center">
@@ -72,13 +86,13 @@ export function Footer() {
           <Mark className="size-6" />
           <Wordmark className="text-ink-muted" />
         </div>
-        <div className="flex gap-7 sm:ml-auto">
-          <a href={REPO} className="inline-flex items-center gap-2 transition-colors hover:text-brass">
-            <GitHubIcon className="size-4" />
-            Source
-          </a>
-          <a href={`${REPO}/releases`} className="transition-colors hover:text-brass">Releases</a>
-          <a href={`${REPO}/blob/main/LICENSE.md`} className="transition-colors hover:text-brass">Licence</a>
+        <div className="flex flex-wrap gap-7 sm:ml-auto">
+          {links.map((link) => (
+            <a key={link.label} href={link.href} className="inline-flex items-center gap-2 transition-colors hover:text-brass">
+              {link.href === REPO ? <GitHubIcon className="size-4" /> : null}
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
@@ -91,10 +105,11 @@ export function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-export function Section({ id, title, lead, children }: {
+export function Section({ id, title, lead, sub, children }: {
   id?: string;
   title: string;
-  lead?: string;
+  lead?: ReactNode;
+  sub?: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -102,9 +117,26 @@ export function Section({ id, title, lead, children }: {
       <div className="rule-double pt-10">
         <h2 className="text-3xl tracking-tight sm:text-4xl">{title}</h2>
         {lead ? <p className="mt-4 max-w-2xl text-lg text-ink-muted">{lead}</p> : null}
+        {sub ? <p className="mt-4 max-w-2xl text-ink-muted">{sub}</p> : null}
         <div className="mt-12">{children}</div>
       </div>
     </section>
+  );
+}
+
+/** The TestFlight pitch, three times over: the same pair of buttons under a different note each time */
+export function BetaCta({ href, label, note }: { href: string; label: string; note: string }) {
+  return (
+    <>
+      <div className="mt-9 flex flex-wrap gap-4">
+        <Button href={TESTFLIGHT}>Join the TestFlight beta</Button>
+        <Button href={href} variant="ghost">{label}</Button>
+      </div>
+      <p className="mt-6 text-[0.95rem] text-ink-faint">
+        iPhone, iOS 26 · {note} ·{" "}
+        <a href="/reader/privacy/" className="text-brass hover:text-ember-bright">privacy policy</a>
+      </p>
+    </>
   );
 }
 

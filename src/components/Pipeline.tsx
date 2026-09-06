@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Icon, PlayIcon } from "./Icon.tsx";
-import { useInView, useLoopClock, useReducedMotion, Window } from "./demo.tsx";
+import { Phos, ThemeGlyph, type PhosName } from "./Phos.tsx";
+import {
+  App, Btn, Check, Divider, IconBtn, Pill, Tray, useAppWidth, useInView, useLoopClock,
+  useReducedMotion, Window,
+} from "./demo.tsx";
 
 const CHAPTERS = [
   { title: "Letter 1 · To Mrs. Saville", pages: "p.1–6", words: 1820, duration: "11:42" },
@@ -30,55 +33,114 @@ const LOOP = ASSEMBLE_END + EPUB_LAG + HOLD;
 // running, outputs still waiting
 const START_AT = 7500;
 
-const ROW = "grid-cols-[26px_32px_34px_minmax(180px,1fr)_168px_76px_84px_146px]";
-const FILE_ROW = "grid-cols-[36px_34px_minmax(160px,1fr)_190px_90px_120px]";
+const FILE_ROW = "grid-cols-[44px_48px_minmax(200px,1fr)_200px_110px_130px]";
 
 const BADGES = {
   pending: "bg-[#fdf1e4]/8 text-ink-secondary",
   synthesizing: "bg-ember-bright/20 text-[oklch(0.8_0.15_50)]",
   done: "bg-green/18 text-green-bright",
-  assembling: "bg-[oklch(0.5538_0.1207_66.44_/_0.24)] text-[oklch(0.8_0.11_66)]",
-  extracting: "bg-[oklch(0.7952_0.1617_86.05_/_0.2)] text-[oklch(0.86_0.14_86)]",
 } as const;
 
 function Badge({ kind, children }: { kind: keyof typeof BADGES; children: string }) {
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium whitespace-nowrap ${BADGES[kind]}`}>
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium whitespace-nowrap ${BADGES[kind]}`}>
       {children}
     </span>
   );
 }
 
-function Action({ dim, children }: { dim?: boolean; children: ReactNode }) {
+function Working({ tone, children }: { tone: string; children: string }) {
   return (
-    <span className={`flex size-6.5 items-center justify-center rounded-md border border-edge ${dim ? "text-[#fdf1e4]/30" : "text-ink-secondary"}`}>
+    <span className={`flex items-center gap-1.5 rounded-full px-1.5 text-[10.5px] font-semibold ${tone}`}>
+      <span className="size-1.5 rounded-full bg-current" style={{ animation: "softpulse 1.15s ease-in-out infinite" }} />
       {children}
     </span>
   );
 }
 
-function Stage({ accent, running, bar, ring, children }: {
-  accent: string;
-  running: boolean;
-  bar: string;
-  ring?: string;
-  children: ReactNode;
+function Tab({ n, label, count, active, showLabel, children }: {
+  n: number;
+  label: string;
+  count: number;
+  active: boolean;
+  showLabel: boolean;
+  children?: ReactNode;
 }) {
   return (
-    <div className={`relative overflow-hidden rounded-xl border border-edge bg-raised px-4 py-3.5 ${accent}`}>
-      {running ? (
-        <div className="absolute inset-x-0 top-0 h-0.5 overflow-hidden">
-          <div className={`h-full w-1/4 ${bar}`} style={{ animation: "slide-indeterminate 1.4s ease-in-out infinite" }} />
+    <span
+      className={`flex items-center gap-2 border-b-2 px-3 ${
+        active ? "border-ember-bright font-bold text-ink" : "border-transparent font-medium text-ink-muted"
+      }`}
+    >
+      <span
+        className={`grid size-4 place-items-center rounded-full border text-[9.5px] font-bold ${
+          active ? "border-ember-bright bg-ember-bright text-[#2a1408]" : "border-edge-strong text-ink-faint"
+        }`}
+      >
+        {n}
+      </span>
+      {showLabel ? label : null}
+      <span className="font-normal tabular-nums text-ink-faint">{count}</span>
+      {children}
+    </span>
+  );
+}
+
+function RowAction({ icon, dim }: { icon: PhosName; dim?: boolean }) {
+  return (
+    <span className={`flex size-6.5 items-center justify-center rounded-md border border-edge ${dim ? "text-[#fdf1e4]/30" : "text-ink-secondary"}`}>
+      <Phos name={icon} className="size-3.5" />
+    </span>
+  );
+}
+
+function Output({ first, title, meta, lead, icon, tone, file, format, sub, size, latest, read }: {
+  first?: boolean;
+  title: string;
+  meta: string;
+  lead: string;
+  icon: PhosName;
+  tone: string;
+  file?: string;
+  format?: string;
+  sub?: string;
+  size?: string;
+  latest?: boolean;
+  read?: boolean;
+}) {
+  return (
+    <>
+      <div className={`flex items-baseline gap-3 ${first ? "mt-4.5" : "mt-6.5"}`}>
+        <span className="font-display text-[19px] font-semibold text-ink">{title}</span>
+        <span className="text-[13px] text-ink-muted">{meta}</span>
+      </div>
+      <p className="mt-1.5 max-w-[56ch] text-[13px]/[1.5] text-ink-muted">{lead}</p>
+      {file ? (
+        <div className="mt-3 grid grid-cols-[40px_1fr_auto] items-center gap-3.5 rounded-lg border border-edge bg-raised px-3.5 py-3">
+          <span className={`flex size-10 items-center justify-center rounded-lg ${tone}`}>
+            <Phos name={icon} className="size-5" />
+          </span>
+          <span className="flex min-w-0 flex-col gap-[3px]">
+            <span className="flex min-w-0 items-center gap-2">
+              <span className="truncate text-sm font-semibold text-ink">{file}</span>
+              <span className="flex-none rounded border border-edge-strong px-1.5 py-px text-[10px] font-medium tracking-[0.05em] text-ink-secondary">
+                {format}
+              </span>
+            </span>
+            <span className="text-xs text-ink-muted">{sub}</span>
+          </span>
+          <span className="flex items-center gap-2.5">
+            {latest ? (
+              <span className="flex-none rounded-full bg-green/18 px-2 py-0.5 text-[10px] font-semibold text-green-bright">latest</span>
+            ) : null}
+            <span className="text-[13px] tabular-nums text-ink-secondary">{size}</span>
+            {read ? <Phos name="book" className="size-4.5 text-ember-bright" /> : null}
+            <Phos name="download" className="size-4.5 text-ember-bright" />
+            <Phos name="trash" className="size-4.5 text-[oklch(0.74_0.15_27)]" />
+          </span>
         </div>
       ) : null}
-      {ring && running ? (
-        <div
-          className={`pointer-events-none absolute inset-0 rounded-xl ${ring}`}
-          style={{ animation: "softpulse 2s ease-in-out infinite" }}
-        />
-      ) : null}
-      {children}
-    </div>
+    </>
   );
 }
 
@@ -87,6 +149,7 @@ export function Pipeline() {
   const listRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef);
   const reduced = useReducedMotion();
+  const appW = useAppWidth();
   const [running, setRunning] = useState(true);
   const [t, reset] = useLoopClock({ period: LOOP, start: START_AT, running: running && inView });
 
@@ -102,6 +165,9 @@ export function Pipeline() {
   const assembling = t >= NARR_END && !epubReady;
   const active = narrating ? Math.floor((t - NARR_START) / PER) : -1;
 
+  // The tab on show is the stage that is working, rather than all three panels stacked at once
+  const onChapters = !extracting && !m4bReady;
+
   // Once per change of active chapter: re-issuing a smooth scroll every frame restarts the
   // animation and the table never actually moves
   const scrolledTo = useRef(-2);
@@ -110,16 +176,6 @@ export function Pipeline() {
     scrolledTo.current = active;
     listRef.current?.scrollTo({ top: active < 0 ? 0 : Math.max(0, (active - 2) * 52), behavior: "smooth" });
   }, [active]);
-
-  const book = extracting
-    ? (["extracting", "extracting"] as const)
-    : t < NARR_START
-      ? (["pending", "ready to narrate"] as const)
-      : t < NARR_END
-        ? (["synthesizing", `synthesizing ${done}/${CHAPTERS.length}`] as const)
-        : t < ASSEMBLE_END
-          ? (["assembling", "assembling"] as const)
-          : (["done", "done"] as const);
 
   const caption = extracting
     ? "Extracting text and detecting chapters"
@@ -133,122 +189,148 @@ export function Pipeline() {
             ? "M4B assembled — the EPUB is still rendering"
             : "Done — an audiobook and an EPUB, both on disk";
 
-  const waiting = t < NARR_END ? "waiting for narration" : "rendering...";
-  const outputs = [
-    { key: "m4b", icon: "fileAudio", title: "M4B audiobook", meta: "9 chapters · 2:47:02 · 148 MB", ready: m4bReady },
-    { key: "epub", icon: "bookmark", title: "EPUB", meta: "9 chapters · read-along, audio inside", ready: epubReady },
-  ] as const;
+  const showHeadMeta = appW >= 1180;
+  const showWords = appW >= 1120;
+  const showDuration = appW >= 1000;
+  const showLabels = appW >= 1000;
+
+  const chapterCols = [
+    "28px 40px 44px minmax(140px,1fr) 168px",
+    showWords ? "88px" : "",
+    showDuration ? "96px" : "",
+    "228px",
+  ].filter(Boolean).join(" ");
+
+  const working = extracting || narrating || assembling;
 
   return (
     <div ref={sectionRef}>
-      <Window url="localhost:5544/books/frankenstein" tag="ON YOUR MACHINE">
-        <div className="flex flex-col gap-4 px-4 pt-4 pb-5 font-sans sm:px-5">
-          <div className="flex items-start gap-3.5">
-            <div className="flex min-w-0 flex-col gap-0.5">
-              <span className="text-[11.5px] text-ink-faint">‹ Library</span>
-              <div className="flex items-center gap-2.5">
-                <span className="font-display text-[23px] font-semibold tracking-tight text-ink">Frankenstein</span>
-                <Badge kind={book[0]}>{book[1]}</Badge>
-              </div>
-              <span className="text-[12.5px] text-ink-muted">
-                Mary Shelley · 294 pages · EN · Kokoro <span className="text-ink-faint">af_heart</span>
-              </span>
-            </div>
-            <div className="ml-auto flex items-center gap-2">
-              <span className="hidden items-center gap-1.5 rounded-md border border-edge-strong px-2.5 py-1 text-xs text-ink-secondary sm:flex">
-                <Icon name="chat" className="size-3.5" />
-                Ask this book
-              </span>
-              <span className="flex size-7 items-center justify-center rounded-md border border-edge text-ink-secondary">
-                <Icon name="gear" className="size-3.5" />
-              </span>
-            </div>
+      <Window url="localhost:5544/books/frankenstein" tag="ON YOUR MACHINE" wide>
+        <App>
+          <div className="flex h-12 items-center gap-3 border-b border-edge bg-raised px-4">
+            <span className="flex-none text-[13px] text-ember-bright">Home</span>
+            <span className="flex flex-none items-center gap-1">
+              <IconBtn><Phos name="arrowLeft" className="size-4" /></IconBtn>
+              {showHeadMeta ? <span className="text-xs tabular-nums text-ink-faint">5 of 5</span> : null}
+              <IconBtn><Phos name="arrowRight" className="size-4" /></IconBtn>
+            </span>
+            <Divider />
+            <span className="flex min-w-0 flex-1 items-baseline gap-3">
+              <span className="truncate font-display text-[18px] font-semibold tracking-[-0.01em] text-ink">Frankenstein</span>
+              {showHeadMeta ? (
+                <span className="flex-none text-xs whitespace-nowrap text-ink-muted">1 file · 9 chapters · 2:47:02</span>
+              ) : null}
+            </span>
+            <Btn>
+              <Phos name="chat" className="size-4" />
+              {showLabels ? "Chat" : null}
+              <span className="size-1.5 rounded-full bg-green-bright" />
+            </Btn>
+            <Btn><Phos name="sparkle" className="size-4" />{showLabels ? "Ask AI" : null}</Btn>
+            <Btn><Phos name="book" className="size-4" />{showLabels ? "Read" : null}</Btn>
+            <Btn>
+              <Phos name="translate" className="size-4" />
+              {showLabels ? "Original · EN" : null}
+              <Phos name="caretDown" className="size-3 text-ink-faint" />
+            </Btn>
+            <span className="ml-2 flex">
+              <Btn><ThemeGlyph /><Phos name="caretDown" className="size-3 text-ink-faint" /></Btn>
+            </span>
+            <IconBtn><Phos name="dots" className="size-4" /></IconBtn>
           </div>
 
-          <Stage accent="border-t-2 border-t-brass/80" running={extracting} bar="bg-ember-bright">
-            <div className="mb-2.5 flex items-center gap-3">
-              <h3 className="flex items-baseline gap-2 text-[15px] font-semibold whitespace-nowrap text-ink-secondary">
-                <span className="text-[10.5px] font-medium tracking-[0.08em] uppercase text-[oklch(0.82_0.11_78)]">1 · Input</span>
-                Source files
-              </h3>
-              {extracting ? (
-                <span className="flex items-center gap-1.5 text-[11.5px] font-medium text-ember-bright">
-                  <span className="size-[7px] rounded-full bg-ember-bright" style={{ animation: "softpulse 1.4s ease-in-out infinite" }} />
-                  Extracting 1 file...
-                </span>
+          <div className="flex h-11 items-stretch gap-1 border-b border-edge bg-raised px-4">
+            <Tab n={1} label="Source files" count={1} active={extracting} showLabel={showLabels || extracting} />
+            <Tab n={2} label="Chapters" count={CHAPTERS.length} active={onChapters} showLabel={showLabels || onChapters}>
+              {narrating ? (
+                <Working tone="bg-ember-bright/20 text-[oklch(0.8_0.15_50)]">{`${CHAPTERS.length - done} to synthesize`}</Working>
               ) : null}
-              <span className="ml-auto hidden text-[12.5px] text-ink-muted sm:inline">1 of 1 selected</span>
-            </div>
-            <div className="mb-2.5 flex gap-2">
-              <span className="rounded-[5px] bg-ember-bright px-2.5 py-1 text-[11.5px] font-medium text-[#2a1408]">Add files</span>
-              <span className="rounded-[5px] border border-edge-strong px-2.5 py-1 text-[11.5px] font-medium text-ink-secondary">Extract...</span>
-            </div>
-            <div className="overflow-x-auto rounded-[9px] border border-edge">
-              <div className={`grid ${FILE_ROW} min-w-[620px] items-center bg-inset text-[10.5px] font-medium tracking-[0.04em] uppercase text-ink-muted`}>
-                <span className="py-2 pl-3" />
-                <span className="py-2">#</span>
-                <span className="py-2">Filename</span>
-                <span className="py-2">Status</span>
-                <span className="py-2 text-right">Chapters</span>
-                <span className="py-2 pr-3 pl-4">Actions</span>
-              </div>
-              <div className={`grid ${FILE_ROW} min-w-[620px] h-11 items-center border-t border-edge`}>
-                <span className="pl-3 text-ember-bright"><Icon name="check" className="size-4" /></span>
-                <span className="font-mono text-[11.5px] text-ink-muted">1</span>
-                <span className="flex min-w-0 items-center gap-2.5">
-                  <span className="rounded-[5px] border border-edge-strong px-2 py-0.5 text-[10.5px] text-ink-secondary">PDF</span>
-                  <span className="truncate text-[13px] text-ink">shelley-1888-frankenstein.pdf</span>
-                </span>
-                <span className={`text-xs font-medium ${extracting ? "text-ember-bright" : "text-green-bright"}`}>
-                  {extracting ? "extracting" : "done"}
-                </span>
-                <span className="text-right text-[13px] tabular-nums text-ink-secondary">{CHAPTERS.length}</span>
-                <span className="flex gap-1.5 pl-4">
-                  <span className="flex size-6.5 items-center justify-center rounded-md bg-ember-bright/15 text-ember-bright"><Icon name="refresh" className="size-3.5" /></span>
-                  <span className="flex size-6.5 items-center justify-center rounded-md bg-[oklch(0.5771_0.2152_27.325_/_0.2)] text-[oklch(0.74_0.15_27)]"><Icon name="trash" className="size-3.5" /></span>
-                </span>
-              </div>
-            </div>
-          </Stage>
+            </Tab>
+            <Tab
+              n={3}
+              label="Outputs"
+              count={epubReady ? 3 : m4bReady ? 1 : 0}
+              active={m4bReady}
+              showLabel={showLabels || m4bReady}
+            >
+              {assembling ? (
+                <Working tone="bg-[oklch(0.5538_0.1207_66.44_/_0.24)] text-[oklch(0.8_0.11_66)]">assembling</Working>
+              ) : null}
+            </Tab>
+            <span className="ml-auto flex items-center text-[11.5px] text-ink-faint">
+              {onChapters && appW >= 1180 ? `${done} of ${CHAPTERS.length} chapters have audio` : ""}
+            </span>
+          </div>
 
-          <Stage
-            accent="border-t-2 border-t-ember-bright/80"
-            running={narrating}
-            bar="bg-ember-bright"
-            ring="inset-ring-2 inset-ring-ember-bright/30"
-          >
-            <div className="mb-2.5 flex items-center gap-2.5">
-              <h3 className="flex items-baseline gap-2 text-[15px] font-semibold whitespace-nowrap text-ink-secondary">
-                <span className="text-[10.5px] font-medium tracking-[0.08em] uppercase text-ember-bright">2 · Work</span>
-                Chapters
-              </h3>
-              <span className="hidden rounded-full bg-inset px-2.5 py-0.5 text-[11px] text-ink-muted sm:inline">LLM · ToC-matched</span>
-              <span className="ml-auto hidden text-[12.5px] text-ink-muted sm:inline">
-                {CHAPTERS.length} of {CHAPTERS.length} selected
-              </span>
-            </div>
-            <div className="mb-2.5 flex gap-2">
-              <span className="flex items-center gap-1.5 rounded-[5px] border border-edge-strong px-2.5 py-1 text-[11.5px] text-ink-secondary">
-                <Icon name="list" className="size-3.5 text-ember-bright" />
-                Structure
-              </span>
-              <span className="flex items-center gap-1.5 rounded-[5px] border border-edge-strong px-2.5 py-1 text-[11.5px] text-ink-secondary">
-                <Icon name="translate" className="size-3.5 text-ember-bright" />
-                Translate / Transform
-              </span>
-            </div>
-            <div className="overflow-x-auto rounded-[9px] border border-edge">
-              <div className={`grid ${ROW} min-w-[820px] items-center bg-inset text-[10.5px] font-medium tracking-[0.04em] uppercase text-ink-muted`}>
-                <span className="py-2.5 pl-2.5" />
-                <span className="py-2.5" />
-                <span className="py-2.5">#</span>
-                <span className="py-2.5">Title</span>
-                <span className="py-2.5">Status</span>
-                <span className="py-2.5 text-right">Words</span>
-                <span className="py-2.5 text-right">Duration</span>
-                <span className="py-2.5 pr-3 pl-4">Actions</span>
+          {extracting ? (
+            <div className="p-4">
+              <div className="rounded-lg border border-edge bg-raised p-4">
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <span className="font-display text-[17px] font-semibold text-ink">Source files</span>
+                  <span className="text-xs text-ink-muted">Chapters are numbered in file order — reorder them in the Chapters tab.</span>
+                  <span className="ml-auto text-xs text-ink-muted">1 of 1 selected</span>
+                </div>
+                <div className="mt-3.5 flex gap-2">
+                  <Btn>Add files</Btn>
+                  <Btn>Extract…</Btn>
+                </div>
+                <div className="mt-3 overflow-hidden rounded-lg border border-edge">
+                  <div className={`grid ${FILE_ROW} items-center bg-inset text-xs font-medium tracking-[0.05em] uppercase text-ink-muted`}>
+                    <span className="py-3 pl-3.5"><Check on /></span>
+                    <span className="py-3">#</span>
+                    <span className="py-3">Filename</span>
+                    <span className="py-3">Status</span>
+                    <span className="py-3 text-right">Chapters</span>
+                    <span className="py-3 pl-5">Actions</span>
+                  </div>
+                  <div className={`grid ${FILE_ROW} h-13 items-center border-t border-edge`}>
+                    <span className="pl-3.5"><Check on /></span>
+                    <span className="text-[13px] text-[#fdf1e4]/72">1</span>
+                    <span className="flex min-w-0 items-center gap-2.5">
+                      <span className="rounded border border-edge-strong px-2 py-0.5 text-[11px] font-medium text-ink-secondary">PDF</span>
+                      <span className="truncate text-sm text-ink">shelley-1888-frankenstein.pdf</span>
+                    </span>
+                    <span className="text-[13px] font-medium text-ember-bright">extracting</span>
+                    <span className="text-right text-[13px] tabular-nums text-ink-secondary">{CHAPTERS.length}</span>
+                    <span className="flex gap-2 pl-5 text-ember-bright">
+                      <Phos name="refresh" className="size-4.5" />
+                      <Phos name="trash" className="size-4.5 text-[oklch(0.74_0.15_27)]" />
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div ref={listRef} className="h-[286px] overflow-y-auto">
+            </div>
+          ) : null}
+
+          {onChapters ? (
+            <div className="p-4">
+              <div className="flex flex-wrap gap-2">
+                <Btn><Phos name="list" className="size-4 text-ember-bright" />Structure</Btn>
+                <Btn>Manual boundaries</Btn>
+              </div>
+              <div className="mt-3.5 flex flex-wrap items-center gap-2">
+                <Pill on>All {CHAPTERS.length}</Pill>
+                <Pill>Needs audio {CHAPTERS.length - done}</Pill>
+                <Pill>In flight {narrating ? 1 : 0}</Pill>
+                <Pill>Needs attention 0</Pill>
+                <span className="h-4 w-px bg-edge" />
+                <span className="block w-42 rounded-md border border-edge-strong bg-raised px-2.5 py-[5px] text-ink-faint">Filter titles…</span>
+                <span className="rounded-md border border-edge-strong px-2.5 py-[5px] font-semibold text-ink-secondary">Filters</span>
+              </div>
+              <div ref={listRef} className="mt-3 h-[352px] overflow-y-auto overscroll-contain rounded-lg border border-edge">
+                <div
+                  className="sticky top-0 z-10 grid items-center bg-[#272420] text-xs font-medium tracking-[0.05em] uppercase text-ink-muted"
+                  style={{ gridTemplateColumns: chapterCols }}
+                >
+                  <span className="py-3 pl-2" />
+                  <span className="py-3 pl-3"><Check on /></span>
+                  <span className="py-3">#</span>
+                  <span className="py-3">Title</span>
+                  <span className="py-3">Status</span>
+                  {showWords ? <span className="py-3 text-right">Words</span> : null}
+                  {showDuration ? <span className="py-3 pr-4 text-right">Duration</span> : null}
+                  <span className="px-4 py-3">Actions</span>
+                </div>
                 {CHAPTERS.map((chapter, i) => {
                   const start = NARR_START + i * PER;
                   const isDone = t >= start + PER;
@@ -258,19 +340,20 @@ export function Pipeline() {
                   return (
                     <div
                       key={chapter.title}
-                      className={`grid ${ROW} min-w-[820px] h-[52px] items-center transition-colors duration-300 ${
+                      className={`grid h-13 items-center transition-colors duration-300 ${
                         i === 0 ? "" : "border-t border-edge"
                       } ${isRunning ? "bg-ember-bright/5" : ""}`}
+                      style={{ gridTemplateColumns: chapterCols }}
                     >
-                      <span className="pl-2.5 text-ink-faint"><Icon name="grip" className="size-3.5" /></span>
-                      <span className="text-ember-bright"><Icon name="check" className="size-4" /></span>
-                      <span className="text-[12.5px] text-ink-secondary">{i + 1}</span>
-                      <span className="flex min-w-0 items-center gap-2 pr-3">
-                        <span className="truncate text-[13px] text-ink">{chapter.title}</span>
+                      <span className="pl-2 text-ink-faint"><Phos name="grip" className="size-4" /></span>
+                      <span className="pl-3"><Check on /></span>
+                      <span className="text-[13px] text-[#fdf1e4]/72">{i + 1}</span>
+                      <span className="flex min-w-0 items-center gap-2.5 pr-3">
+                        <span className="truncate text-sm font-semibold text-ink">{chapter.title}</span>
                         {chapter.edited ? (
-                          <span className="rounded bg-brass/15 px-1.5 py-px text-[9.5px] font-medium text-[oklch(0.82_0.11_78)]">edited</span>
+                          <span className="flex-none rounded bg-brass/15 px-[5px] py-0.5 text-[10px] font-medium text-[oklch(0.82_0.11_78)]">edited</span>
                         ) : null}
-                        <span className="text-[11px] tabular-nums whitespace-nowrap text-ember-bright">{chapter.pages}</span>
+                        <span className="flex-none text-xs tabular-nums whitespace-nowrap text-ember-bright">{chapter.pages}</span>
                       </span>
                       <span className="flex flex-col gap-1.5 pr-3.5">
                         <span className="flex items-center gap-2">
@@ -283,63 +366,100 @@ export function Pipeline() {
                           <span className="block h-full rounded-full bg-ember-bright" style={{ width: `${pct * 100}%` }} />
                         </span>
                       </span>
-                      <span className="text-right text-[12.5px] tabular-nums text-ink-secondary">{chapter.words.toLocaleString()}</span>
-                      <span className="text-right text-[12.5px] tabular-nums text-ink-secondary">{isDone ? chapter.duration : "—"}</span>
-                      <span className="flex gap-1.5 pl-4">
-                        <Action dim={!isDone}><PlayIcon className="size-3" /></Action>
-                        <Action><Icon name="expand" className="size-3" /></Action>
-                        <Action><Icon name="book" className="size-3" /></Action>
-                        <Action><Icon name="sparkle" className="size-3" /></Action>
-                        <Action dim={!isDone}><Icon name="download" className="size-3" /></Action>
+                      {showWords ? (
+                        <span className="text-right text-[13px] tabular-nums text-[#fdf1e4]/72">{chapter.words.toLocaleString()}</span>
+                      ) : null}
+                      {showDuration ? (
+                        <span className="pr-4 text-right text-[13px] tabular-nums text-[#fdf1e4]/72">{isDone ? chapter.duration : "—"}</span>
+                      ) : null}
+                      <span className="flex gap-1.5 px-4">
+                        <RowAction icon="expand" />
+                        <RowAction icon="play" dim={!isDone} />
+                        <RowAction icon="book" />
+                        <RowAction icon="sparkle" />
+                        <RowAction icon="refresh" />
+                        <RowAction icon="download" dim={!isDone} />
                       </span>
                     </div>
                   );
                 })}
               </div>
             </div>
-          </Stage>
+          ) : null}
 
-          <Stage
-            accent="border-t-2 border-t-green/80"
-            running={assembling}
-            bar="bg-green"
-            ring="inset-ring-2 inset-ring-green/30"
-          >
-            <div className="mb-2.5 flex items-center gap-3">
-              <h3 className="flex items-baseline gap-2 text-[15px] font-semibold whitespace-nowrap text-ink-secondary">
-                <span className="text-[10.5px] font-medium tracking-[0.08em] uppercase text-green-bright">3 · Output</span>
-                Assemblies and documents
-              </h3>
-              {t >= NARR_END && !epubReady ? (
-                <span className="flex items-center gap-1.5 text-[11.5px] font-medium text-green-bright">
-                  <span className="size-[7px] rounded-full bg-green" style={{ animation: "softpulse 1.4s ease-in-out infinite" }} />
-                  {m4bReady ? "rendering EPUB..." : "assembling M4B · rendering EPUB..."}
-                </span>
-              ) : null}
+          {m4bReady ? (
+            <div className="p-4">
+              <div className="flex justify-end"><Btn wide>Export…</Btn></div>
+              <Output
+                first
+                title="Audio + text"
+                meta={epubReady ? "1 file · 213 MB" : "rendering…"}
+                lead="Both formats in one file — the narration and the text locked together, so the words highlight as they are read."
+                icon="book"
+                tone="bg-ember-bright/16 text-ember-bright"
+                file={epubReady ? "Frankenstein_readaloud_20260904_131252.epub" : undefined}
+                format="EPUB"
+                sub="9 chapters · Sep 4, 13:12"
+                size="213 MB"
+                read
+              />
+              <Output
+                title="Audio only"
+                meta="1 file · 148 MB"
+                lead="Plain narration with chapter marks — plays in any audiobook app, in the car, or on a watch. BookPlayer is a good free one."
+                icon="play"
+                tone="bg-ember-bright/16 text-ember-bright"
+                file="Frankenstein_20260904_114031.m4b"
+                format="M4B"
+                sub="2:47:02 · 9 chapter marks · Sep 4, 11:40"
+                size="148 MB"
+                latest
+              />
+              <Output
+                title="Text only"
+                meta={epubReady ? "1 file · 165 KB" : "—"}
+                lead="No audio — small, and opens anywhere: EPUB in Apple Books, Kobo, Kindle or Calibre, PDF in anything."
+                icon="fileText"
+                tone="bg-inset text-ink-muted"
+                file={epubReady ? "Frankenstein_20260904_115436.epub" : undefined}
+                format="EPUB"
+                sub="9 chapters · Sep 4, 11:54"
+                size="165 KB"
+              />
             </div>
-            <div className="grid gap-2.5 sm:grid-cols-2">
-              {outputs.map((output) => (
-                <div
-                  key={output.key}
-                  className={`grid grid-cols-[38px_1fr_auto] items-center gap-3 rounded-[9px] px-3.5 py-3 transition-colors duration-500 ${
-                    output.ready
-                      ? "border border-green/45 bg-green/7"
-                      : "border border-dashed border-[#fdf1e4]/16"
-                  }`}
-                >
-                  <span className={`flex size-9.5 items-center justify-center rounded-lg ${output.ready ? "bg-green/18 text-green-bright" : "bg-inset text-ink-faint"}`}>
-                    <Icon name={output.icon} className="size-5" />
-                  </span>
-                  <span className="flex min-w-0 flex-col gap-0.5">
-                    <span className="text-[13.5px] font-semibold text-ink">{output.title}</span>
-                    <span className="text-[11.5px] tabular-nums text-ink-muted">{output.ready ? output.meta : waiting}</span>
-                  </span>
-                  <span className={`text-[11.5px] font-semibold text-green-bright ${output.ready ? "" : "invisible"}`}>Download</span>
-                </div>
-              ))}
-            </div>
-          </Stage>
-        </div>
+          ) : null}
+
+          {onChapters ? (
+            <Tray
+              title={`All ${CHAPTERS.length} selected`}
+              sub={narrating ? `${done} with audio · 1 in flight` : `${done} with audio`}
+            >
+              <Btn>Synthesize ({CHAPTERS.length})</Btn>
+              {showLabels ? <Btn dim>Translate (0)</Btn> : null}
+              {showLabels ? <Btn>Cleanup ({CHAPTERS.length})</Btn> : null}
+              {showLabels ? <Btn>Ask AI</Btn> : null}
+              {showLabels ? null : <Btn>More</Btn>}
+              <Btn variant="danger">Delete ({CHAPTERS.length})</Btn>
+              <Divider />
+              <Btn variant="solid" wide>Export…</Btn>
+            </Tray>
+          ) : null}
+
+          <div className="flex h-9 items-center gap-3 border-t border-[#fdf1e4]/15 bg-[#100e0a] px-4 font-mono text-xs text-ink">
+            <span className="flex flex-none items-center gap-1.5 font-sans font-medium text-[#fdf1e4]/50">
+              <span
+                className={`size-2 rounded-full ${working ? "bg-green" : "bg-[#fdf1e4]/50"}`}
+                style={working ? { animation: "softpulse 1.15s ease-in-out infinite" } : undefined}
+              />
+              Logs ({46 + done})
+            </span>
+            <span className="min-w-0 flex-1 truncate">
+              <span className="mr-2 text-[#fdf1e4]/50">{`13:2${done % 10}:1${(done * 3) % 10}`}</span>
+              {caption}
+            </span>
+            <Phos name="caretUp" className="size-3 flex-none text-[#fdf1e4]/50" />
+          </div>
+        </App>
       </Window>
 
       <div className="mt-4 flex items-center gap-4 text-[0.95rem] text-ink-faint">

@@ -2,6 +2,7 @@ import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { AUDIO_SRC, CUES } from "./cues.ts";
 import { Icon, PauseIcon, PlayIcon } from "./Icon.tsx";
 import { Notes, useInView, useReducedMotion, Window } from "./demo.tsx";
+import { CUE_END, Highlight, SENTENCES, useWordRects } from "./highlight.tsx";
 
 const CHAPTER_OFFSET_MS = 312_000;
 const CHAPTER_LENGTH = "24:58";
@@ -12,19 +13,6 @@ const NOTES = [
   { title: "Where the type is too small", body: "Column crops the margins away, Page shows the whole sheet, and Text reflows the spoken words at your own size. The reader measures the book's body type and says which one you want." },
 ];
 
-type Rect = { x: number; y: number; w: number; h: number };
-
-type Span = { start: number; from: number; to: number };
-
-const SENTENCES: Span[] = [];
-CUES.forEach(([, a, , s], i) => {
-  const span = SENTENCES[s];
-  if (span) span.to = i;
-  else SENTENCES[s] = { start: a, from: i, to: i };
-});
-
-// Where the wall clock wraps until the clip's own duration is known
-const CUE_END = CUES[CUES.length - 1]?.[2] ?? 0;
 const HAVE_CURRENT_DATA = 2;
 
 function timestamp(ms: number) {
@@ -32,33 +20,7 @@ function timestamp(ms: number) {
   return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
 }
 
-function activeSentence(ms: number) {
-  for (let i = SENTENCES.length - 1; i >= 0; i--) {
-    const span = SENTENCES[i];
-    if (span && ms >= span.start) return i;
-  }
-  return -1;
-}
-
-/** One rect per visual line, so a sentence wrapping mid-page is lit as the reader sees it. */
-function lineRects(rects: Rect[], from: number, to: number) {
-  const lines = new Map<number, { x1: number; x2: number; y: number; h: number }>();
-  for (let i = from; i <= to; i++) {
-    const r = rects[i];
-    if (!r) continue;
-    const key = Math.round(r.y / 4);
-    const line = lines.get(key);
-    if (!line) lines.set(key, { x1: r.x, x2: r.x + r.w, y: r.y, h: r.h });
-    else {
-      line.x1 = Math.min(line.x1, r.x);
-      line.x2 = Math.max(line.x2, r.x + r.w);
-      line.y = Math.min(line.y, r.y);
-    }
-  }
-  return [...lines.values()];
-}
-
-export function Reader() {
+export function ReadAlong() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -73,34 +35,13 @@ export function Reader() {
   const wallClock = useRef<{ stamp: number; from: number } | null>(null);
   const [playing, setPlaying] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
-  const [rects, setRects] = useState<Rect[]>([]);
   const [visible, setVisible] = useState(true);
+  const rects = useWordRects(pageRef);
 
   // Playing is what the reader asked for. Scrolling past does not stop the narration, it silences
   // it — coming back to a paused reader mid-sentence was worse than coming back to a live one.
   const audible = soundOn && inView && visible;
   const shouldPlay = playing && visible;
-
-  // The app draws these from cues.json; here they are measured off the rendered words, so the
-  // geometry is the real page geometry rather than numbers typed by hand
-  useEffect(() => {
-    const page = pageRef.current;
-    if (!page) return;
-    const measure = () => {
-      const base = page.getBoundingClientRect();
-      const next = [...page.querySelectorAll("[data-word]")].map((node) => {
-        const r = node.getBoundingClientRect();
-        return { x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height };
-      });
-      setRects(next);
-    };
-    measure();
-    // The body serif swaps in after first paint and every word moves with it
-    document.fonts?.ready.then(measure).catch(() => {});
-    const observer = new ResizeObserver(measure);
-    observer.observe(page);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const onChange = () => setVisible(!document.hidden);
@@ -193,12 +134,6 @@ export function Reader() {
     setPlaying(true);
   }, []);
 
-  const measured = rects.length === CUES.length;
-  const sentence = activeSentence(ms);
-  const range = sentence >= 0 ? SENTENCES[sentence] : undefined;
-  const wordIndex = CUES.findIndex(([, a, b]) => ms >= a && ms < b);
-  const word = measured && wordIndex >= 0 ? rects[wordIndex] : undefined;
-
   return (
     <div ref={sectionRef} className="grid gap-9 lg:grid-cols-[1fr_320px] lg:items-start">
       <Window url="localhost:5544/read/book/frankenstein?chapter=4" tag="READ-ALONG">
@@ -255,28 +190,7 @@ export function Reader() {
               ref={pageRef}
               className="relative isolate text-left font-body text-[15.5px]/[1.66] text-[#14120e]"
             >
-              <div className="pointer-events-none absolute inset-0 z-[2]">
-                {measured && range
-                  ? lineRects(rects, range.from, range.to).map((line, i) => (
-                      <span
-                        key={i}
-                        className="absolute rounded-[2px] bg-[rgba(226,96,31,0.35)] mix-blend-multiply"
-                        style={{ left: line.x1 - 2, top: line.y - 1, width: line.x2 - line.x1 + 4, height: line.h + 2 }}
-                      />
-                    ))
-                  : null}
-                <span
-                  className="absolute rounded-[2px] bg-[rgba(226,96,31,0.62)] mix-blend-multiply"
-                  style={{
-                    left: word ? word.x - 1 : 0,
-                    top: word ? word.y : 0,
-                    width: word ? word.w + 2 : 0,
-                    height: word ? word.h : 0,
-                    opacity: word ? 1 : 0,
-                    transition: "left 140ms ease-out, top 140ms ease-out, width 140ms ease-out, opacity 120ms linear",
-                  }}
-                />
-              </div>
+              <Highlight rects={rects} ms={ms} line="rgba(226,96,31,0.35)" word="rgba(226,96,31,0.62)" />
               {CUES.map(([text, , , s], i) => (
                 // The space between the spans is the only place the browser may break the line
                 <Fragment key={i}>

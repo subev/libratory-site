@@ -16,3 +16,7 @@
 # Committed, not content-hashed — it changes only when the passage or the voice does
 /audio/*
   Cache-Control: public, max-age=86400
+
+# Committed, not content-hashed — they change only when the app's screens do
+/reader/screens/*
+  Cache-Control: public, max-age=86400
