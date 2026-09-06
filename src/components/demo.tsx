@@ -146,11 +146,17 @@ export function Window({ url, tag, wide, children }: {
   );
 }
 
-/** Narrower than the smallest column layout the app degrades to, the chrome pans instead of clipping. */
-export function App({ children }: { children: ReactNode }) {
+/**
+ * Narrower than the smallest column layout the app degrades to, the chrome pans instead of clipping.
+ * A `frame` height class makes it a fixed window: the children stack as a column and whichever one
+ * is the body takes `flex-1`, so a demo whose panels differ in height stays put.
+ */
+export function App({ frame, children }: { frame?: string; children: ReactNode }) {
   return (
     <div className="overflow-x-auto">
-      <div className="min-w-[680px] font-sans text-xs">{children}</div>
+      <div className={`min-w-[680px] font-sans text-xs ${frame ? `flex ${frame} flex-col` : ""}`}>
+        {children}
+      </div>
     </div>
   );
 }

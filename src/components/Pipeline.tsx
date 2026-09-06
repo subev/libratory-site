@@ -35,6 +35,11 @@ const START_AT = 7500;
 
 const FILE_ROW = "grid-cols-[44px_48px_minmax(200px,1fr)_200px_110px_130px]";
 
+// The three tabs have very different natural heights, and the loop walks through all of them, so the
+// window is held at the tallest — Outputs, with all three files listed — and the body fills whatever
+// the chrome leaves. Switching tabs mid-loop must not move the page under it.
+const FRAME = "h-[720px]";
+
 const BADGES = {
   pending: "bg-[#fdf1e4]/8 text-ink-secondary",
   synthesizing: "bg-ember-bright/20 text-[oklch(0.8_0.15_50)]",
@@ -206,8 +211,8 @@ export function Pipeline() {
   return (
     <div ref={sectionRef}>
       <Window url="localhost:5544/books/frankenstein" tag="ON YOUR MACHINE" wide>
-        <App>
-          <div className="flex h-12 items-center gap-3 border-b border-edge bg-raised px-4">
+        <App frame={FRAME}>
+          <div className="flex h-12 flex-none items-center gap-3 border-b border-edge bg-raised px-4">
             <span className="flex-none text-[13px] text-ember-bright">Home</span>
             <span className="flex flex-none items-center gap-1">
               <IconBtn><Phos name="arrowLeft" className="size-4" /></IconBtn>
@@ -239,7 +244,7 @@ export function Pipeline() {
             <IconBtn><Phos name="dots" className="size-4" /></IconBtn>
           </div>
 
-          <div className="flex h-11 items-stretch gap-1 border-b border-edge bg-raised px-4">
+          <div className="flex h-11 flex-none items-stretch gap-1 border-b border-edge bg-raised px-4">
             <Tab n={1} label="Source files" count={1} active={extracting} showLabel={showLabels || extracting} />
             <Tab n={2} label="Chapters" count={CHAPTERS.length} active={onChapters} showLabel={showLabels || onChapters}>
               {narrating ? (
@@ -263,7 +268,7 @@ export function Pipeline() {
           </div>
 
           {extracting ? (
-            <div className="p-4">
+            <div className="min-h-0 flex-1 overflow-y-auto p-4">
               <div className="rounded-lg border border-edge bg-raised p-4">
                 <div className="flex flex-wrap items-baseline gap-3">
                   <span className="font-display text-[17px] font-semibold text-ink">Source files</span>
@@ -303,12 +308,12 @@ export function Pipeline() {
           ) : null}
 
           {onChapters ? (
-            <div className="p-4">
-              <div className="flex flex-wrap gap-2">
+            <div className="flex min-h-0 flex-1 flex-col p-4">
+              <div className="flex flex-none flex-wrap gap-2">
                 <Btn><Phos name="list" className="size-4 text-ember-bright" />Structure</Btn>
                 <Btn>Manual boundaries</Btn>
               </div>
-              <div className="mt-3.5 flex flex-wrap items-center gap-2">
+              <div className="mt-3.5 flex flex-none flex-wrap items-center gap-2">
                 <Pill on>All {CHAPTERS.length}</Pill>
                 <Pill>Needs audio {CHAPTERS.length - done}</Pill>
                 <Pill>In flight {narrating ? 1 : 0}</Pill>
@@ -317,7 +322,7 @@ export function Pipeline() {
                 <span className="block w-42 rounded-md border border-edge-strong bg-raised px-2.5 py-[5px] text-ink-faint">Filter titles…</span>
                 <span className="rounded-md border border-edge-strong px-2.5 py-[5px] font-semibold text-ink-secondary">Filters</span>
               </div>
-              <div ref={listRef} className="mt-3 h-[352px] overflow-y-auto overscroll-contain rounded-lg border border-edge">
+              <div ref={listRef} className="mt-3 min-h-0 flex-1 overflow-y-auto overscroll-contain rounded-lg border border-edge">
                 <div
                   className="sticky top-0 z-10 grid items-center bg-[#272420] text-xs font-medium tracking-[0.05em] uppercase text-ink-muted"
                   style={{ gridTemplateColumns: chapterCols }}
@@ -388,7 +393,7 @@ export function Pipeline() {
           ) : null}
 
           {m4bReady ? (
-            <div className="p-4">
+            <div className="min-h-0 flex-1 overflow-y-auto p-4">
               <div className="flex justify-end"><Btn wide>Export…</Btn></div>
               <Output
                 first
@@ -445,7 +450,7 @@ export function Pipeline() {
             </Tray>
           ) : null}
 
-          <div className="flex h-9 items-center gap-3 border-t border-[#fdf1e4]/15 bg-[#100e0a] px-4 font-mono text-xs text-ink">
+          <div className="flex h-9 flex-none items-center gap-3 border-t border-[#fdf1e4]/15 bg-[#100e0a] px-4 font-mono text-xs text-ink">
             <span className="flex flex-none items-center gap-1.5 font-sans font-medium text-[#fdf1e4]/50">
               <span
                 className={`size-2 rounded-full ${working ? "bg-green" : "bg-[#fdf1e4]/50"}`}
