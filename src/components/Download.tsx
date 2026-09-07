@@ -42,8 +42,8 @@ export function Download() {
           Download the DMG
         </a>
         <p className="mt-4 text-sm text-ink-faint">
-          Signed and notarised, so it just opens. Apple Silicon only — the Metal narrators would
-          have nothing to run on an Intel Mac.
+          Signed and notarised, so it just opens. Apple Silicon only — the Metal narrators need an
+          Apple GPU.
         </p>
       </Card>
 

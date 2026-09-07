@@ -85,6 +85,15 @@ html {
   display: inline;
 }
 
+[data-platform] {
+  display: none;
+}
+
+:root[data-os="mac"] [data-platform="mac"],
+:root:not([data-os="mac"]) [data-platform="other"] {
+  display: inline-flex;
+}
+
 :root[data-os="mac"] [data-card="mac"],
 :root[data-os="linux"] [data-card="linux"],
 :root[data-os="win"] [data-card="win"] {

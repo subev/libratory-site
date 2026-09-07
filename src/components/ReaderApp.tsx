@@ -20,13 +20,13 @@ export function ReaderApp() {
             </h2>
             <p className="mt-5 max-w-[34rem] text-lg text-ink-secondary">
               <strong className="font-semibold text-ink">Libratory Reader</strong> opens the synced
-              EPUB the Mac app exports and plays it over the real pages — the spoken sentence lit on
+              EPUB the desktop app exports and plays it over the real pages — the spoken sentence lit on
               the print, the word moving inside it, exactly as the desktop reader does. Nothing
               streams, nothing signs in, and the file is the whole backend.
             </p>
             <p className="mt-4 max-w-[34rem] text-ink-muted">
-              It is a companion, not a requirement. The same read-along already runs in the Mac app;
-              the Reader is for the half-hour on the train where the Mac is not.
+              It is a companion, not a requirement. The same read-along already runs in the desktop app;
+              the Reader is for the half-hour on the train where the desktop is not.
             </p>
 
             <div className="mt-8 grid gap-x-8 gap-y-5 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]">

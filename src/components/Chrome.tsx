@@ -140,15 +140,26 @@ export function BetaCta({ href, label, note }: { href: string; label: string; no
   );
 }
 
-export function Button({ href, children, variant = "primary" }: {
+export function Button({ href, children, variant = "primary", platform }: {
   href: string;
   children: ReactNode;
   variant?: "primary" | "ghost";
+  platform?: "mac" | "other";
 }) {
   const base = "inline-flex h-12 items-center justify-center rounded-sm px-7 text-[0.95rem] tracking-wide transition-colors";
   const styles = variant === "primary"
     ? "bg-ember text-[#16140f] hover:bg-ember-bright"
     : "border border-edge-strong text-ink-secondary hover:border-brass hover:text-brass";
 
-  return <a href={href} className={`${base} ${styles}`}>{children}</a>;
+  return <a href={href} data-platform={platform} className={`${base} ${styles}`}>{children}</a>;
+}
+
+/** Both render; CSS keeps the one that matches the OS the inline script detected */
+export function DownloadButton() {
+  return (
+    <>
+      <Button href={DOWNLOAD} platform="mac">Download the DMG</Button>
+      <Button href="/#download" platform="other">Get the desktop app</Button>
+    </>
+  );
 }

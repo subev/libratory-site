@@ -1,16 +1,16 @@
 import { Fragment, type ReactNode } from "react";
-import { BetaCta, DOWNLOAD, Eyebrow, Footer, Nav, REPO, Section } from "../components/Chrome.tsx";
+import { BetaCta, Eyebrow, Footer, Nav, REPO, Section } from "../components/Chrome.tsx";
 import { ReadAlongPhone } from "../components/phone.tsx";
 import { M4bPhone, MarksPhone, PlainEpubPhone } from "../components/ReaderScreens.tsx";
 
 const NAV = [
-  { href: "/#features", label: "The Mac app" },
+  { href: "/#features", label: "The desktop app" },
   { href: "/reader/", label: "Reader", current: true },
   { href: "#beta", label: "Get the beta" },
 ];
 
 const FOOT = [
-  { href: "/", label: "The Mac app" },
+  { href: "/", label: "The desktop app" },
   { href: REPO, label: "Source" },
   { href: "/reader/privacy/", label: "Privacy" },
 ];
@@ -18,7 +18,7 @@ const FOOT = [
 const STEPS = [
   {
     step: "Step one",
-    title: "Narrate it on the Mac",
+    title: "Narrate it on the desktop",
     body: <>The desktop app's Output stage writes a <Strong>synced EPUB</Strong> beside the M4B: the pages, the audio, and the cue file that says which rectangle each spoken word sits in.</>,
   },
   {
@@ -44,7 +44,7 @@ const KINDS = [
     title: "Synced EPUB",
     tag: "Read + listen",
     lead: true,
-    body: "The one the Mac app makes, and the only one that can light a word on a page. Pages, audio and cues in one file: read-along, double-tap to seek, follow-scroll, marks and search over the narration.",
+    body: "The one the desktop app makes, and the only one that can light a word on a page. Pages, audio and cues in one file: read-along, double-tap to seek, follow-scroll, marks and search over the narration.",
   },
   {
     title: "Plain EPUB",
@@ -123,7 +123,7 @@ export function Reader() {
                 The audiobook plays over the page it came from.
               </h1>
               <p className="mt-6 max-w-[34rem] text-lg text-ink-secondary">
-                Make the book on the Mac, export the synced EPUB, open it here. The narration plays
+                Make the book on the desktop, export the synced EPUB, open it here. The narration plays
                 over the real print — the spoken sentence lit, the word moving inside it — and a
                 double tap on any sentence sends the voice there.
               </p>
@@ -131,7 +131,7 @@ export function Reader() {
                 Offline, and no account. The file is the whole backend: nothing is uploaded, and
                 nothing about the book lives anywhere but on the phone it was copied to.
               </p>
-              <BetaCta href={DOWNLOAD} label="Get the Mac app first" note="a public link, no invitation to collect" />
+              <BetaCta href="/#download" label="Get the desktop app first" note="a public link, no invitation to collect" />
             </div>
 
             <ReadAlongPhone />
@@ -316,12 +316,12 @@ export function Reader() {
             </div>
 
             <p className="mt-10 max-w-2xl text-ink-muted">
-              Then bring a book of your own from the Mac tool and spend a real half-hour in it. That is
+              Then bring a book of your own from the desktop app and spend a real half-hour in it. That is
               the part that cannot be tested from here: whether the highlighted word keeps up with the
               voice through a long chapter, whether the page is legible at your size on your phone, and
               whether closing the app mid-sentence puts you back an hour later.
             </p>
-            <BetaCta href="/#download" label="Get the Mac app" note="4 MB · builds expire after 90 days and are replaced" />
+            <BetaCta href="/#download" label="Get the desktop app" note="4 MB · builds expire after 90 days and are replaced" />
           </div>
         </section>
       </main>

@@ -37,11 +37,13 @@
       var p = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
       var ua = navigator.userAgent;
       if (!/iPhone|iPad|Android/i.test(ua)) {
-        var os = /Mac/i.test(p) ? "mac" : /Win/i.test(p) ? "win" : /Linux|X11|CrOS/i.test(p) ? "linux" : "";
+        // iPadOS reports a desktop UA and MacIntel; only a real Mac has no touch screen
+        var mac = /Mac/i.test(p) && !navigator.maxTouchPoints;
+        var os = mac ? "mac" : /Win/i.test(p) ? "win" : /Linux|X11|CrOS/i.test(p) ? "linux" : "";
         if (os) document.documentElement.dataset.os = os;
       }
     </script>
     <div id="root"></div>
-    <script type="module" src="/src/mac.tsx"></script>
+    <script type="module" src="/src/home.tsx"></script>
   </body>
 </html>

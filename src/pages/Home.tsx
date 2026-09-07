@@ -1,4 +1,4 @@
-import { Button, DOWNLOAD, Eyebrow, Footer, GitHubIcon, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
+import { Button, DownloadButton, Eyebrow, Footer, GitHubIcon, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
 import { Download } from "../components/Download.tsx";
 import { Flow } from "../components/Flow.tsx";
 import { Library } from "../components/Library.tsx";
@@ -19,7 +19,7 @@ const FEATURES = [
 
 const NAV = [
   { href: "#features", label: "What it does", wide: true },
-  { href: "#reader", label: "Reader" },
+  { href: "/reader/", label: "Reader" },
   { href: "#download", label: "Get it" },
 ];
 
@@ -32,12 +32,12 @@ const FOOT = [
 
 const VOICES = [
   { title: "Local, on the GPU", body: "Kokoro for English, French, Spanish, Italian, Portuguese, Hindi and Mandarin. KugelAudio covers 24 European languages, and there are three Bulgarian narrators." },
-  { title: "Local, on the CPU", body: "Pocket TTS runs at about 12× realtime with no GPU at all, and can clone a voice from a twenty-second sample. Every macOS system voice you have installed works too." },
+  { title: "Local, on the CPU", body: "Pocket TTS runs at about 12× realtime with no GPU at all, and can clone a voice from a twenty-second sample. Every system voice you have installed works too." },
   { title: "Cloud, if you want it", body: "Cartesia and ElevenLabs are one API key away, for the languages the local models do not reach. Optional, and never required." },
 ];
 
 
-export function Mac() {
+export function Home() {
   return (
     <>
       <Nav links={NAV} source />
@@ -56,7 +56,7 @@ export function Mac() {
               every word you own. The models run on your machine. Nothing is uploaded anywhere.
             </p>
             <div className="mt-12 flex flex-wrap justify-center gap-4">
-              <Button href={DOWNLOAD}>Download for macOS</Button>
+              <DownloadButton />
               <Button href={REPO} variant="ghost"><GitHubIcon className="mr-2.5 size-[1.05em]" />Read the source</Button>
             </div>
             <p className="mt-6 text-[0.95rem] text-ink-faint">
@@ -142,7 +142,7 @@ export function Mac() {
         <Section
           id="download"
           title="Get it"
-          lead="A Mac gets an app. Everywhere else gets the same server in one container."
+          lead="An installer on macOS, the same server in one container everywhere else."
         >
           <Download />
         </Section>
@@ -159,7 +159,7 @@ export function Mac() {
               Drop in the PDF and hear the first chapter.
             </p>
             <div className="mt-12 flex flex-wrap justify-center gap-4">
-              <Button href={DOWNLOAD}>Download for macOS</Button>
+              <DownloadButton />
               <Button href={`${REPO}#how-it-works`} variant="ghost">See how it is built</Button>
             </div>
           </div>

@@ -1,10 +1,10 @@
 import { readFile, rm, writeFile } from "node:fs/promises";
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
-import { Mac, Reader } from "../dist-ssr/entry-server.js";
+import { Home, Reader } from "../dist-ssr/entry-server.js";
 
 const PAGES = [
-  { file: "dist/index.html", page: Mac },
+  { file: "dist/index.html", page: Home },
   { file: "dist/reader/index.html", page: Reader },
 ];
 
