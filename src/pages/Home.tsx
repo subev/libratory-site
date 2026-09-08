@@ -1,6 +1,5 @@
-import { Button, DownloadButton, Eyebrow, Footer, GitHubIcon, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
+import { Button, DownloadButton, Eyebrow, Footer, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
 import { Download } from "../components/Download.tsx";
-import { Flow } from "../components/Flow.tsx";
 import { Library } from "../components/Library.tsx";
 import { LibraryChat } from "../components/LibraryChat.tsx";
 import { Pipeline } from "../components/Pipeline.tsx";
@@ -9,163 +8,123 @@ import { ReaderApp } from "../components/ReaderApp.tsx";
 import { Transform } from "../components/Transform.tsx";
 
 const FEATURES = [
-  { title: "Local by default, cloud if you ask", body: "Every narrator and every AI feature has a local option — a running Ollama or LM Studio is found without configuration. Add a cloud key if you want one; add none and nothing leaves the machine." },
-  { title: "Cleanup that reads", body: "An AI pass strips OCR artifacts, running heads and hyphen breaks before the voice ever sees them." },
-  { title: "Read along on the train, too", body: "A synced EPUB carries the audio and the highlighting with it, so the same read-along plays offline on a phone." },
-  { title: "Digests", body: "Pick ten books, get one audiobook with a summary chapter for each." },
-  { title: "A library, not a converter", body: "Nested folders, drag and drop, cross-folder search, and separate workspaces for separate people." },
-  { title: "A JSON API, and what it invites", body: "POST a book and get it back as audio. The bundled script turns a day of Hacker News into a podcast that way." },
+  { title: "Listen to your books", body: "Turn a PDF into an audiobook. Listen while you walk, cook, or rest." },
+  { title: "Read and listen together", body: "Follow the words as they light up on the page." },
+  { title: "Make hard books easier", body: "Translate a chapter, use simpler words, or get a short summary." },
+  { title: "Ask your books questions", body: "Get an answer and see the pages it came from." },
+  { title: "Find what you need", body: "Search all your books at once. Keep them tidy in folders." },
+  { title: "Keep your books private", body: "Use voices and AI on your computer, so your books stay with you." },
+];
+
+const STEPS = [
+  { title: "Get the words out", body: "Add a PDF, even a scanned book. Libratory pulls the text off the pages." },
+  { title: "Sort out the chapters", body: "It finds the chapters and puts them in order. You can check and change them." },
+  { title: "Pick a voice and listen", body: "Save an audiobook with chapters you can skip to." },
 ];
 
 const NAV = [
-  { href: "#features", label: "What it does", wide: true },
-  { href: "/reader/", label: "Reader" },
-  { href: "#download", label: "Get it" },
+  { href: "#features", label: "What you get", wide: true },
+  { href: "/reader/", label: "iPhone" },
+  { href: "#download", label: "Download" },
 ];
 
 const FOOT = [
-  { href: REPO, label: "Source" },
-  { href: `${REPO}/releases`, label: "Releases" },
-  { href: "/reader/", label: "Reader" },
+  { href: REPO, label: "GitHub" },
+  { href: `${REPO}/releases`, label: "Updates" },
+  { href: "/reader/", label: "iPhone app" },
   { href: `${REPO}/blob/main/LICENSE.md`, label: "Licence" },
 ];
-
-const VOICES = [
-  { title: "Local, on the GPU", body: "Kokoro for English, French, Spanish, Italian, Portuguese, Hindi and Mandarin. KugelAudio covers 24 European languages, and there are three Bulgarian narrators." },
-  { title: "Local, on the CPU", body: "Pocket TTS runs at about 12× realtime with no GPU at all, and can clone a voice from a twenty-second sample. Every system voice you have installed works too." },
-  { title: "Cloud, if you want it", body: "Cartesia and ElevenLabs are one API key away, for the languages the local models do not reach. Optional, and never required." },
-];
-
 
 export function Home() {
   return (
     <>
       <Nav links={NAV} source />
-
       <main>
         <section className="lamplight border-b border-edge">
-          <div className="mx-auto max-w-5xl px-6 pt-24 pb-28 text-center sm:pt-32 sm:pb-36">
-            <Mark className="mx-auto size-16" />
-            <Wordmark className="mt-8 block text-4xl text-ink sm:text-6xl" />
-            <p className="mt-6 font-display text-xl tracking-wide text-brass sm:text-2xl">
-              Your free book and audiobook laboratory
+          <div className="mx-auto max-w-5xl px-6 pt-16 pb-20 text-center sm:pt-20 sm:pb-24">
+            <Mark className="mx-auto size-14" />
+            <Wordmark className="mt-6 block text-2xl text-ink sm:text-3xl" />
+            <h1 className="mx-auto mt-8 max-w-3xl text-4xl tracking-tight sm:text-6xl">
+              Turn your books into audiobooks. For free.
+            </h1>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-ink-secondary">
+              Add a PDF. Pick a voice. Listen and follow the words on the page.
+              You can ask questions, translate, and make hard parts easier, too.
             </p>
-            <p className="mx-auto mt-10 max-w-2xl text-lg text-ink-secondary">
-              Libratory turns a shelf of PDFs into chapter-marked audiobooks — and then keeps them,
-              so you can clean up a bad scan, translate a chapter, ask a book a question, or search
-              every word you own. The models run on your machine. Nothing is uploaded anywhere.
-            </p>
-            <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
               <DownloadButton />
-              <Button href={REPO} variant="ghost"><GitHubIcon className="mr-2.5 size-[1.05em]" />Read the source</Button>
+              <Button href="#listen" variant="ghost">Hear a sample</Button>
             </div>
-            <p className="mt-6 text-[0.95rem] text-ink-faint">
-              Free · source on GitHub ·{" "}
-              <a href="#download" className="text-brass hover:text-ember-bright">
-                Linux and Windows run the same thing in Docker
-              </a>
+            <p className="mt-5 text-[0.95rem] text-ink-muted">
+              Free for personal use · Works on your computer
             </p>
           </div>
         </section>
 
-        <Section
-          title="How it works"
-          lead="Two ways in, a loop in the middle, and more than one way out. You can stop anywhere along it."
-        >
-          <Flow />
-        </Section>
-
-        <Section
-          id="features"
-          title="Take a book apart. Put it back together."
-          lead="The workbench itself. Edit a chapter, swap a voice, re-synthesize that one — and leave the rest alone."
-        >
-          <Pipeline />
-        </Section>
-
-        <Section
-          title="And then you read along with it"
-          lead="The narration comes back to the book it came from: the sentence being spoken is lit on the real print, and the word inside it moves as the voice reaches it."
-        >
-          <ReadAlong />
-        </Section>
-
-        <Section
-          title="One book is the demo. The shelf is the point."
-          lead="Add as many as you like and keep them tidy: folders you can drag rows into, sorting on every column, and one line per book telling you what it has. Four shelves, four ways people actually use it."
-        >
-          <Library />
-        </Section>
-
-        <Section
-          title="Voices"
-          lead="That was Kokoro. Pick the language first and you get every voice that can read it, grouped by engine, each with a preview."
-        >
-          <div className="grid gap-10 sm:grid-cols-3">
-            {VOICES.map((voice) => (
-              <div key={voice.title}>
-                <h3 className="text-xl">{voice.title}</h3>
-                <p className="mt-2 text-ink-muted">{voice.body}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        <Section
-          title="Read it in another language, or in plainer words"
-          lead="A translation, or a rewrite — explain it like I'm five, shorten it, or any prompt you write — from whichever model you have."
-        >
-          <Transform />
-        </Section>
-
-        <Section
-          title="Ask the shelf, not the search box"
-          lead="Ask a question and the assistant searches the content of every book, then answers with the passages it actually used."
-        >
-          <LibraryChat />
-        </Section>
-
-        <Section
-          title="What you get after the audiobook"
-          lead="The conversion is the easy half. The rest is what makes a messy PDF collection worth keeping."
-        >
-          <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        <Section id="features" title="All of this. Free." lead="Use the books you already have. The voices and AI can run on your own computer.">
+          <div className="grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((feature) => (
-              <div key={feature.title} className="border-l border-edge pl-6">
+              <div key={feature.title} className="border-l border-edge pl-5">
                 <h3 className="text-xl">{feature.title}</h3>
                 <p className="mt-2 text-ink-muted">{feature.body}</p>
               </div>
             ))}
           </div>
+          <p className="mt-8 text-sm text-ink-muted">Online AI and voice services are optional and may charge fees.</p>
         </Section>
 
-        <Section
-          id="download"
-          title="Get it"
-          lead="An installer on macOS, the same server in one container everywhere else."
-        >
-          <Download />
+        <Section id="listen" title="Hear it. Follow every word." lead="Turn the sound on to try it. The words light up as the voice reads.">
+          <ReadAlong />
+        </Section>
+
+        <Section title="From PDF to play" lead="No copying text page by page. No splitting chapters by hand. Libratory does that work for you.">
+          <ol className="grid gap-8 sm:grid-cols-3">
+            {STEPS.map((step, i) => (
+              <li key={step.title} className="border-l border-edge pl-5">
+                <h3 className="text-xl"><span className="text-brass">{i + 1}.</span> {step.title}</h3>
+                <p className="mt-2 text-ink-muted">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-10"><Pipeline /></div>
+        </Section>
+
+        <Section title="Hard to read? Make it easier." lead="Translate a chapter, ask for simpler words, or turn a long book into a short summary.">
+          <Transform />
+        </Section>
+
+        <Section title="Ask a question. Find the page." lead="Search your whole library with a question. The AI shows the passages behind its answer.">
+          <LibraryChat />
+        </Section>
+
+        <Section title="All your books. Easy to find." lead="Keep books in folders, search them together, or make one audio summary from several books.">
+          <Library />
         </Section>
 
         <ReaderApp />
 
-        <section className="lamplight border-t border-edge">
-          <div className="mx-auto max-w-5xl px-6 py-24 text-center">
-            <Eyebrow>Start with one book</Eyebrow>
-            <h2 className="mt-5 text-3xl tracking-tight sm:text-4xl">
-              The one that has been sitting unread the longest.
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-ink-muted">
-              Drop in the PDF and hear the first chapter.
-            </p>
-            <div className="mt-12 flex flex-wrap justify-center gap-4">
-              <DownloadButton />
-              <Button href={`${REPO}#how-it-works`} variant="ghost">See how it is built</Button>
+        <Section id="download" title="Get Libratory for free" lead="Choose your computer to get started.">
+          <Download />
+          <details className="mt-8 text-ink-muted">
+            <summary className="cursor-pointer text-brass hover:text-ember-bright">Voices and AI setup</summary>
+            <div className="mt-4 max-w-2xl space-y-3">
+              <p>Pick a language and preview a voice. Free options include Kokoro, KugelAudio, Pocket TTS, and your computer's built-in voices. Some need a graphics chip; Pocket TTS does not.</p>
+              <p>For questions, summaries, and translations, run Ollama or LM Studio on your computer. Libratory finds them automatically.</p>
+              <p>You can also connect online services with an API key. They receive the text you send and may charge fees.</p>
+              <a href={`${REPO}#readme`} className="inline-block text-brass hover:text-ember-bright">Read the setup guide →</a>
             </div>
+          </details>
+        </Section>
+
+        <section className="lamplight border-t border-edge">
+          <div className="mx-auto max-w-5xl px-6 py-20 text-center">
+            <Eyebrow>Start with one book</Eyebrow>
+            <h2 className="mt-5 text-3xl tracking-tight sm:text-4xl">That book you keep meaning to read?</h2>
+            <p className="mt-5 text-lg text-ink-muted">Now you can listen to it.</p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4"><DownloadButton /></div>
           </div>
         </section>
       </main>
-
       <Footer links={FOOT} />
     </>
   );

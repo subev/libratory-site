@@ -30,10 +30,10 @@ type Shelf = {
 
 const SHELVES: Shelf[] = [
   {
-    tab: "Everything in one pile",
+    tab: "Your books",
     profile: "Me",
     stats: [["500", "books"], ["1", "folder"], ["46 GB", "on disk"]],
-    note: "The laziest setup, and a perfectly good one: one folder, every PDF you own, sorted by last activity so whatever is still working sits on top.",
+    note: "One folder for all your books. The ones you used last are at the top.",
     rows: [
       { folder: true, title: "Everything", count: "500", countSub: "books", acts: [["6 active", "run"]], size: "46.1 GB", last: "1 min ago" },
       { title: "The Making of the Atomic Bomb", count: "41", countSub: "12 audio", acts: [["synthesizing 3", "run"]], langs: ["EN 41/41"], size: "1.4 GB", last: "just now" },
@@ -44,10 +44,10 @@ const SHELVES: Shelf[] = [
     ],
   },
   {
-    tab: "A folder per course",
+    tab: "School",
     profile: "Uni",
     stats: [["7", "folders"], ["148", "books"], ["39", "digests"]],
-    note: "One folder per course, and at the end of each week two clicks turn the readings into a single digest book you listen to on the way in.",
+    note: "Keep a folder for each class. Turn the week's reading into a short audiobook.",
     rows: [
       { folder: true, title: "CS229 · Machine Learning", count: "34", countSub: "books", acts: [["2 active", "run"]], size: "6.2 GB", last: "20 min ago" },
       { folder: true, title: "Neuro 101", count: "22", countSub: "books", size: "3.8 GB", last: "yesterday" },
@@ -58,10 +58,10 @@ const SHELVES: Shelf[] = [
     ],
   },
   {
-    tab: "One shelf, many languages",
+    tab: "Family",
     profile: "Family",
     stats: [["9", "languages"], ["84", "books translated"], ["3×", "the same book"]],
-    note: "A household shelf: the same book kept in the languages the people in the house read, each variant with its own narration, all of it in one search index.",
+    note: "Keep books in the languages your family reads. Find them all in one search.",
     rows: [
       { folder: true, title: "Български", count: "37", countSub: "books", acts: [["3 active", "run"]], size: "9.1 GB", last: "12 min ago" },
       { folder: true, title: "Kids · bedtime", count: "48", countSub: "books", size: "5.5 GB", last: "yesterday" },
@@ -72,10 +72,10 @@ const SHELVES: Shelf[] = [
     ],
   },
   {
-    tab: "A shelf that fills itself",
+    tab: "News",
     profile: "Feed",
     stats: [["06:40", "every morning"], ["214", "arrived on their own"], ["0", "clicks"]],
-    note: "Point the HN digest at yesterday's front page, or post PDFs from a script through the API — by breakfast there is a fresh episode waiting on the shelf.",
+    note: "Use scripts to turn news and articles into something you can listen to.",
     rows: [
       { folder: true, title: "Hacker News", count: "214", countSub: "books", acts: [["1 active", "run"]], size: "18.9 GB", last: "6 min ago" },
       { folder: true, title: "arXiv · cs.CL", count: "96", countSub: "books", size: "7.7 GB", last: "today" },
@@ -310,8 +310,7 @@ export function Library() {
       </div>
 
       <p className="mt-4 text-[0.95rem] text-ink-faint">
-        Drag rows onto a folder to move them, shift-click to take a range, select two books and the
-        digest button wakes up. These are sample libraries, not anyone's real one.
+        Example libraries: your books, schoolwork, family reading, and news.
       </p>
     </div>
   );

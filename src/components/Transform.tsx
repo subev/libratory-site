@@ -98,8 +98,7 @@ export function Transform() {
       </div>
 
       <p className="mt-4 text-[0.95rem] text-ink-faint">
-        The original is never overwritten — each variant carries its own text, its own narration and
-        its own M4B.
+        Keep the original. Read or listen to the new version, too.
       </p>
     </div>
   );

@@ -12,10 +12,10 @@ function Card({ os, title, sub, children }: {
   children: ReactNode;
 }) {
   return (
-    <div data-card={os} className="platform-card rounded-sm border border-edge p-6">
-      <div className="flex items-baseline gap-3">
+    <div data-card={os} className="platform-card min-w-0 rounded-sm border border-edge p-6">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <h3 className="text-xl">{title}</h3>
-        <span className="platform-yours text-sm text-brass">you're on this</span>
+        <span className="platform-yours text-sm text-brass">your computer</span>
       </div>
       <p className="mt-1 text-ink-muted">{sub}</p>
       <div className="mt-5">{children}</div>
@@ -33,34 +33,31 @@ function Command() {
 
 export function Download() {
   return (
-    <div className="grid gap-6 lg:grid-cols-3">
-      <Card os="mac" title="macOS" sub="Apple Silicon. A DMG that installs its own runtime — no checkout, no terminal.">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <Card os="mac" title="Mac" sub="For Macs with an Apple M-series chip.">
         <a
           href={DOWNLOAD}
           className="inline-flex h-11 items-center rounded-sm bg-ember px-6 text-[0.95rem] tracking-wide text-[#16140f] transition-colors hover:bg-ember-bright"
         >
-          Download the DMG
+          Download for Mac
         </a>
         <p className="mt-4 text-sm text-ink-faint">
-          Signed and notarised, so it just opens. Apple Silicon only — the Metal narrators need an
-          Apple GPU.
+          Open the download and install the app.
         </p>
       </Card>
 
-      <Card os="linux" title="Linux" sub="x86_64 or arm64. One container holds the server, the UI and both Python environments.">
+      <Card os="linux" title="Linux" sub="Requires Git and Docker. Supports x86_64 and arm64.">
         <Command />
         <p className="mt-4 text-sm text-ink-faint">
-          Then open <code className="text-ink-muted">localhost:3034</code>. A CPU is enough; no GPU
-          required.
+          Then open <code className="text-ink-muted">localhost:3034</code>. No graphics card needed.
         </p>
       </Card>
 
-      <Card os="win" title="Windows" sub="The same container, through Docker Desktop and WSL2.">
+      <Card os="win" title="Windows" sub="Requires Git and Docker Desktop with WSL2.">
         <Command />
         <p className="mt-4 text-sm text-ink-faint">
-          There is no native Windows app yet. This route is new, so if something does not work,{" "}
-          <a href={`${REPO}/issues/new`} className="text-brass hover:text-ember-bright">let us know</a>{" "}
-          and it will get fixed.
+          Run the commands, then open <code className="text-ink-muted">localhost:3034</code>. Need help?{" "}
+          <a href={`${REPO}/issues/new`} className="text-brass hover:text-ember-bright">Report a problem</a>.
         </p>
       </Card>
     </div>

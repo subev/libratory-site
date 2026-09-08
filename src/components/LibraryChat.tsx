@@ -2,10 +2,10 @@ import { useRef } from "react";
 import { Icon } from "./Icon.tsx";
 import { Caret, Notes, reveal, useInView, useLoopClock, useReducedMotion, Window } from "./demo.tsx";
 
-const QUESTION = "Which of my books explain why a system pushes back when you try to fix it?";
+const QUESTION = "Why can trying to fix a problem make it worse?";
 
 const ANSWER =
-  "Three of your books circle this. Donella Meadows calls it policy resistance: a system pulled by several actors toward different goals snaps back the moment any one of them lets go, so the fix has to change the goals rather than pull harder [1]. She lists the places where a small push does move it — rules, information flows, and the paradigm underneath them [2]. Захари Стоянов describes the same shape socially: a village that appears to comply and quietly restores itself the week after [3].";
+  "People may want different things, so one person's fix can get in another's way [1]. Changing the rules or sharing better information can help [2]. Another book describes a village that seems to accept a change, then quietly goes back to its old ways [3].";
 
 const SOURCES = [
   { label: "Thinking in Systems — Policy resistance — p. 112", badge: "" },
@@ -16,7 +16,7 @@ const SOURCES = [
 const TOOLS = [
   { at: 1900, label: "Searched: why systems resist change" },
   { at: 2900, label: "Searched: policy resistance feedback loops" },
-  { at: 3900, label: "Read more around c_7" },
+  { at: 3900, label: "Read the matching pages" },
 ];
 
 const ASKED = 1500;
@@ -24,12 +24,12 @@ const FROM = 4600;
 const TO = 13_500;
 const LOOP = 21_000;
 
-const PLACEHOLDER = "Ask your library… (Enter to send, Shift+Enter for newline)";
+const PLACEHOLDER = "Ask about your books…";
 
 const NOTES = [
-  { title: "It reads, then answers", body: "The assistant runs its own searches over the index and shows you each one. An answer that cites nothing is an answer you can see was never grounded." },
-  { title: "Across languages", body: "Ask in English and it finds the Bulgarian passage, and the other way round — originals and translations sit in the same index." },
-  { title: "Answers become material", body: "Save one as a note, and a note can be appended to a book as a chapter of its own — reordered, narrated, and carried into the next M4B." },
+  { title: "Check the answer", body: "See which pages the AI used, so you can read them yourself." },
+  { title: "Search across languages", body: "Ask in English and find passages in other languages, too." },
+  { title: "Keep useful answers", body: "Save an answer as a note. Add it to a book and listen to it later." },
 ];
 
 export function LibraryChat() {
@@ -47,7 +47,7 @@ export function LibraryChat() {
 
   return (
     <div ref={sectionRef} className="grid gap-9 lg:grid-cols-[1fr_320px] lg:items-start">
-      <Window url="localhost:5544/chat" tag="12 BOOKS INDEXED">
+      <Window url="localhost:5544/chat" tag="12 BOOKS">
         <div className="flex min-h-[430px] flex-col gap-3 px-4 pt-3.5 pb-4 font-sans sm:px-5">
           <div className="flex items-center gap-2.5 border-b border-edge pb-3">
             <span className="hidden text-[11.5px] text-ink-faint sm:inline">‹ Library</span>

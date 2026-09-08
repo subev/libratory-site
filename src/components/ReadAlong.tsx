@@ -8,9 +8,9 @@ const CHAPTER_OFFSET_MS = 312_000;
 const CHAPTER_LENGTH = "24:58";
 
 const NOTES = [
-  { title: "The M4B", body: "Real chapter markers, cover, and the book's own metadata. It plays in any audiobook app, offline, and it is a file on your disk — not an entry in someone's catalogue." },
-  { title: "The highlight is on the print", body: "Narration writes a cue file beside the audio: for every sentence, and — where the voice engine reports word timings, which not all of them do — for every word, the page it sits on and its rectangle. The reader draws those over the rendered page, so the words lighting up are the book's own." },
-  { title: "Where the type is too small", body: "Column crops the margins away, Page shows the whole sheet, and Text reflows the spoken words at your own size. The reader measures the book's body type and says which one you want." },
+  { title: "Listen anywhere", body: "Save an M4B audiobook with chapters. Play it offline in an app that supports M4B." },
+  { title: "Follow the words", body: "See the sentence being read on the original page. Voices with word timing can highlight each word, too." },
+  { title: "Make the text bigger", body: "Zoom in on the page or switch to text at a size you choose." },
 ];
 
 const HAVE_CURRENT_DATA = 2;
@@ -205,8 +205,8 @@ export function ReadAlong() {
 
           <p className="mt-3 text-center text-[11.5px] text-ink-faint">
             {soundOn
-              ? "Click any sentence to hear it — the audio moves there."
-              : "Turn the sound on — the highlight is following the real narration."}
+              ? "Tap a sentence to hear it."
+              : "Turn the sound on to hear this page."}
           </p>
 
           <audio ref={audioRef} src={AUDIO_SRC} preload="none" loop className="hidden" />
@@ -215,9 +215,7 @@ export function ReadAlong() {
 
       <Notes items={NOTES}>
         <p className="border-t border-edge pt-4 font-mono text-[11.5px]/[1.6] text-ink-faint">
-          This one is not a mock-up of the timing: the voice you hear is Kokoro
-          <span className="text-ink-muted"> af_heart</span>, run through the app's own narration
-          script, and the cursor is driven by the word timings it wrote out.
+          Made with Kokoro, one of the free voices in Libratory.
         </p>
       </Notes>
     </div>

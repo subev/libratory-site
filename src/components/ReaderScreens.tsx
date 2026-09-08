@@ -50,11 +50,8 @@ export function PlainEpubPhone() {
           <span className={`text-[10px] tabular-nums ${INK_DIM} ${IOS}`}>Chapter 4 of 62 · 38% through</span>
         </div>
       </PhoneFrame>
-      <Caption lead="Plain EPUB.">
-        Six controls become three. No transport, so no capsule and no glass circles — and the tap that
-        used to take the chrome away now leaves the screen literally empty. What replaces the scrubber
-        is the only thing an ordinary ebook knows: which chapter you are in and how far through it you
-        are. Not minutes — a reading pace is a guess, and a share of the text is countable.
+      <Caption lead="Ebook.">
+        Read at your own text size. Your chapter and place are saved.
       </Caption>
     </div>
   );
@@ -126,12 +123,8 @@ export function M4bPhone() {
           </div>
         </div>
       </PhoneFrame>
-      <Caption lead="M4B audiobook.">
-        One bar that is the coverage ribbon and the scrubber at once — the darker blocks are what you
-        have heard, the tangerine notch is where the voice is — with the words under it saying how much
-        of the chapter that is and what is missing. Merging this into the reader's shell was built,
-        tried and reverted the same day: it read as a book with a cover in it rather than as a player,
-        and the bar shrank to a rail sharing a row.
+      <Caption lead="Audiobook.">
+        Pick a chapter and press play. The bar shows what you have heard and what you skipped.
       </Caption>
     </div>
   );

@@ -399,7 +399,7 @@ export function Pipeline() {
                 first
                 title="Audio + text"
                 meta={epubReady ? "1 file · 213 MB" : "rendering…"}
-                lead="Both formats in one file — the narration and the text locked together, so the words highlight as they are read."
+                lead="Read and listen together. The words light up as they are read."
                 icon="book"
                 tone="bg-ember-bright/16 text-ember-bright"
                 file={epubReady ? "Frankenstein_readaloud_20260904_131252.epub" : undefined}
@@ -411,7 +411,7 @@ export function Pipeline() {
               <Output
                 title="Audio only"
                 meta="1 file · 148 MB"
-                lead="Plain narration with chapter marks — plays in any audiobook app, in the car, or on a watch. BookPlayer is a good free one."
+                lead="An audiobook with chapters. Open it in a player that supports M4B."
                 icon="play"
                 tone="bg-ember-bright/16 text-ember-bright"
                 file="Frankenstein_20260904_114031.m4b"
@@ -423,7 +423,7 @@ export function Pipeline() {
               <Output
                 title="Text only"
                 meta={epubReady ? "1 file · 165 KB" : "—"}
-                lead="No audio — small, and opens anywhere: EPUB in Apple Books, Kobo, Kindle or Calibre, PDF in anything."
+                lead="Save an ebook as EPUB or PDF."
                 icon="fileText"
                 tone="bg-inset text-ink-muted"
                 file={epubReady ? "Frankenstein_20260904_115436.epub" : undefined}

@@ -46,16 +46,16 @@ export function Wordmark({ className = "" }: { className?: string }) {
 type Link = { href: string; label: string; current?: boolean; wide?: boolean };
 
 export function Nav({ links, source }: { links: Link[]; source?: boolean }) {
-  const style = "text-[0.95rem] whitespace-nowrap transition-colors";
+  const style = "text-sm whitespace-nowrap transition-colors sm:text-[0.95rem]";
 
   return (
     <header className="sticky top-0 z-20 border-b border-edge bg-page">
-      <nav className="mx-auto flex h-16 max-w-5xl items-center gap-4 px-6 sm:gap-6">
+      <nav className="mx-auto flex h-16 max-w-5xl items-center gap-4 px-4 sm:gap-6 sm:px-6">
         <a href="/" className="flex items-center gap-2.5 sm:gap-3">
           <Mark className="size-6 sm:size-7" />
-          <Wordmark className="text-base sm:text-lg" />
+          <Wordmark className="text-sm sm:text-lg" />
         </a>
-        <div className="ml-auto flex items-center gap-5 sm:gap-7">
+        <div className="ml-auto flex items-center gap-4 sm:gap-7">
           {links.map((link) => link.current ? (
             <span key={link.label} className={`${style} text-brass`}>{link.label}</span>
           ) : (
@@ -68,7 +68,7 @@ export function Nav({ links, source }: { links: Link[]; source?: boolean }) {
             </a>
           ))}
           {source ? (
-            <a href={REPO} className={`${style} text-ink-muted hover:text-brass`} aria-label="Source on GitHub" title="Source on GitHub">
+            <a href={REPO} className={`${style} hidden text-ink-muted hover:text-brass sm:inline-flex`} aria-label="Source on GitHub" title="Source on GitHub">
               <GitHubIcon />
             </a>
           ) : null}
@@ -113,12 +113,12 @@ export function Section({ id, title, lead, sub, children }: {
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-5xl px-6 py-20">
+    <section id={id} className="mx-auto max-w-5xl px-6 py-12 sm:py-16">
       <div className="rule-double pt-10">
         <h2 className="text-3xl tracking-tight sm:text-4xl">{title}</h2>
         {lead ? <p className="mt-4 max-w-2xl text-lg text-ink-muted">{lead}</p> : null}
         {sub ? <p className="mt-4 max-w-2xl text-ink-muted">{sub}</p> : null}
-        <div className="mt-12">{children}</div>
+        <div className="mt-8">{children}</div>
       </div>
     </section>
   );
@@ -129,9 +129,12 @@ export function BetaCta({ href, label, note }: { href: string; label: string; no
   return (
     <>
       <div className="mt-9 flex flex-wrap gap-4">
-        <Button href={TESTFLIGHT}>Join the TestFlight beta</Button>
+        <Button href={TESTFLIGHT}>Try the iPhone beta</Button>
         <Button href={href} variant="ghost">{label}</Button>
       </div>
+      <p className="mt-4 max-w-xl text-sm text-ink-muted">
+        New to TestFlight? Install it, then come back here and tap “Try the iPhone beta” again to get Libratory.
+      </p>
       <p className="mt-6 text-[0.95rem] text-ink-faint">
         iPhone, iOS 26 · {note} ·{" "}
         <a href="/reader/privacy/" className="text-brass hover:text-ember-bright">privacy policy</a>
@@ -158,8 +161,8 @@ export function Button({ href, children, variant = "primary", platform }: {
 export function DownloadButton() {
   return (
     <>
-      <Button href={DOWNLOAD} platform="mac">Download the DMG</Button>
-      <Button href="/#download" platform="other">Get the desktop app</Button>
+      <Button href={DOWNLOAD} platform="mac">Download for Mac</Button>
+      <Button href="/#download" platform="other">Get Libratory free</Button>
     </>
   );
 }
