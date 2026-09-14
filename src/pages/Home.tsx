@@ -59,7 +59,7 @@ export function Home() {
               or <code className="rounded-sm border border-edge bg-inset px-2 py-1 text-ink-secondary">{BREW}</code>
             </p>
             <p className="mt-5 text-[0.95rem] text-ink-muted">
-              Free for personal use · Works on your computer
+              Free for personal use · Mac, <a href="#download" className="text-brass hover:text-ember-bright">Linux and Windows</a>
             </p>
           </div>
         </section>
