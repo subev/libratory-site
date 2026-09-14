@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 export const REPO = "https://github.com/subev/libratory";
 export const DOWNLOAD = "https://get.libratory.dev/mac";
+export const BREW = "brew install --cask subev/libratory/libratory";
 export const TESTFLIGHT = "https://testflight.apple.com/join/WNENBXzM";
 
 export function Mark({ className = "size-8" }: { className?: string }) {

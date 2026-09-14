@@ -1,4 +1,4 @@
-import { Button, DownloadButton, Eyebrow, Footer, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
+import { BREW, Button, DownloadButton, Eyebrow, Footer, Mark, Nav, REPO, Section, Wordmark } from "../components/Chrome.tsx";
 import { Download } from "../components/Download.tsx";
 import { Library } from "../components/Library.tsx";
 import { LibraryChat } from "../components/LibraryChat.tsx";
@@ -55,6 +55,9 @@ export function Home() {
               <DownloadButton />
               <Button href="#listen" variant="ghost">Hear a sample</Button>
             </div>
+            <p data-platform="mac" className="mt-5 items-baseline gap-2 text-sm text-ink-muted">
+              or <code className="rounded-sm border border-edge bg-inset px-2 py-1 text-ink-secondary">{BREW}</code>
+            </p>
             <p className="mt-5 text-[0.95rem] text-ink-muted">
               Free for personal use · Works on your computer
             </p>

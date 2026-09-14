@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { DOWNLOAD, REPO } from "./Chrome.tsx";
+import { BREW, DOWNLOAD, REPO } from "./Chrome.tsx";
 
 const COMMAND = `git clone ${REPO}.git
 cd libratory
@@ -23,10 +23,10 @@ function Card({ os, title, sub, children }: {
   );
 }
 
-function Command() {
+function Command({ text = COMMAND }: { text?: string }) {
   return (
     <pre className="rounded-sm border border-edge bg-inset p-4 text-xs leading-relaxed whitespace-pre-wrap break-words text-ink-secondary">
-      <code>{COMMAND}</code>
+      <code>{text}</code>
     </pre>
   );
 }
@@ -42,8 +42,9 @@ export function Download() {
           Download for Mac
         </a>
         <p className="mt-4 text-sm text-ink-faint">
-          Open the download and install the app.
+          Open the download and install the app. Or, with Homebrew:
         </p>
+        <div className="mt-3"><Command text={BREW} /></div>
       </Card>
 
       <Card os="linux" title="Linux" sub="Requires Git and Docker. Supports x86_64 and arm64.">
