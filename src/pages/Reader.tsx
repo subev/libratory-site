@@ -1,11 +1,11 @@
-import { BetaCta, Eyebrow, Footer, Nav, REPO, Section } from "../components/Chrome.tsx";
+import { Eyebrow, Footer, Nav, REPO, Section, StoreCta } from "../components/Chrome.tsx";
 import { ReadAlongPhone } from "../components/phone.tsx";
 import { M4bPhone, MarksPhone, PlainEpubPhone } from "../components/ReaderScreens.tsx";
 
 const NAV = [
   { href: "/#features", label: "Desktop app", wide: true },
   { href: "/reader/", label: "iPhone", current: true },
-  { href: "#beta", label: "Get the app" },
+  { href: "#get", label: "Get the app" },
 ];
 
 const FOOT = [
@@ -49,7 +49,7 @@ export function Reader() {
                 Double-tap a sentence to hear it again.
               </p>
               <p className="mt-4 text-ink-muted">Works offline. No account. Free.</p>
-              <BetaCta href="/#download" label="Get the desktop app" note="Currently in beta" />
+              <StoreCta href="/#download" label="Get the desktop app" />
             </div>
             <ReadAlongPhone />
           </div>
@@ -102,15 +102,14 @@ export function Reader() {
           <div className="mt-12"><MarksPhone /></div>
         </Section>
 
-        <section id="beta" className="lamplight-beta border-y border-t-edge-strong border-b-edge bg-raised">
+        <section id="get" className="lamplight-get border-y border-t-edge-strong border-b-edge bg-raised">
           <div className="mx-auto max-w-5xl px-6 py-20">
             <Eyebrow>Free on iPhone</Eyebrow>
             <h2 className="mt-5 text-3xl tracking-tight sm:text-4xl">Your first book is already there.</h2>
             <p className="mt-5 max-w-2xl text-lg text-ink-secondary">
               Reader comes with a short sample book. Open it and press play.
             </p>
-            <p className="mt-4 max-w-2xl text-ink-muted">The app is still being tested. Try your own book and tell us how it goes.</p>
-            <BetaCta href="/#download" label="Get the desktop app" note="Beta versions last 90 days; update in TestFlight" />
+            <StoreCta href="/#download" label="Get the desktop app" />
           </div>
         </section>
       </main>

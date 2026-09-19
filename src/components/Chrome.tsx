@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 export const REPO = "https://github.com/subev/libratory";
 export const DOWNLOAD = "https://get.libratory.dev/mac";
 export const BREW = "brew install --cask subev/libratory/libratory";
-export const TESTFLIGHT = "https://testflight.apple.com/join/WNENBXzM";
+export const APP_STORE = "https://apps.apple.com/app/id6806798591";
 
 export function Mark({ className = "size-8" }: { className?: string }) {
   return (
@@ -125,19 +125,16 @@ export function Section({ id, title, lead, sub, children }: {
   );
 }
 
-/** The TestFlight pitch, three times over: the same pair of buttons under a different note each time */
-export function BetaCta({ href, label, note }: { href: string; label: string; note: string }) {
+/** The App Store pitch, three times over: the same pair of buttons each time */
+export function StoreCta({ href, label }: { href: string; label: string }) {
   return (
     <>
       <div className="mt-9 flex flex-wrap gap-4">
-        <Button href={TESTFLIGHT}>Try the iPhone beta</Button>
+        <Button href={APP_STORE}>Download on the App Store</Button>
         <Button href={href} variant="ghost">{label}</Button>
       </div>
-      <p className="mt-4 max-w-xl text-sm text-ink-muted">
-        New to TestFlight? Install it, then come back here and tap “Try the iPhone beta” again to get Libratory.
-      </p>
       <p className="mt-6 text-[0.95rem] text-ink-faint">
-        iPhone, iOS 26 · {note} ·{" "}
+        iPhone, iOS 26 · Free ·{" "}
         <a href="/reader/privacy/" className="text-brass hover:text-ember-bright">privacy policy</a>
       </p>
     </>

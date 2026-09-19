@@ -119,7 +119,7 @@ h1, h2, h3 {
 .lamplight,
 .lamplight-pitch,
 .lamplight-hero,
-.lamplight-beta {
+.lamplight-get {
   position: relative;
   isolation: isolate;
 }
@@ -127,7 +127,7 @@ h1, h2, h3 {
 .lamplight::before,
 .lamplight-pitch::before,
 .lamplight-hero::before,
-.lamplight-beta::before {
+.lamplight-get::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -154,7 +154,7 @@ h1, h2, h3 {
     radial-gradient(46rem 30rem at 92% 30%, --alpha(var(--ember)/10%), transparent 72%);
 }
 
-.lamplight-beta::before {
+.lamplight-get::before {
   background: radial-gradient(52rem 30rem at 50% -4rem, --alpha(var(--ember)/12%), transparent 70%);
 }
 

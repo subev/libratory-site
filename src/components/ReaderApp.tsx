@@ -1,4 +1,4 @@
-import { BetaCta, Eyebrow } from "./Chrome.tsx";
+import { Eyebrow, StoreCta } from "./Chrome.tsx";
 import { ReadAlongPhone } from "./phone.tsx";
 
 export function ReaderApp() {
@@ -15,7 +15,7 @@ export function ReaderApp() {
               Listen and follow the words wherever you go. It works offline, with no account.
             </p>
             <p className="mt-4 max-w-[34rem] text-ink-muted">Your own EPUB ebooks and M4B audiobooks work here, too.</p>
-            <BetaCta href="/reader/" label="See the iPhone app" note="Free · currently in beta" />
+            <StoreCta href="/reader/" label="See the iPhone app" />
           </div>
         </div>
       </div>
