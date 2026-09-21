@@ -36,6 +36,7 @@ export function ReadAlong() {
   const [playing, setPlaying] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [visible, setVisible] = useState(true);
+  const [src, setSrc] = useState<string | null>(null);
   const rects = useWordRects(pageRef);
 
   // Playing is what the reader asked for. Scrolling past does not stop the narration, it silences
@@ -74,8 +75,9 @@ export function ReadAlong() {
     // A refusal is not fatal: the tick below falls back to a wall clock and the demo still runs.
     // soundOn is a dep because turning the sound on is a gesture, and a gesture is the one thing
     // that can start audio a refused autoplay never got.
+    // src is a dep because a new source resets the element to paused.
     audio.play().catch(() => {});
-  }, [shouldPlay, soundOn]);
+  }, [shouldPlay, soundOn, src]);
 
   // Sound is an upgrade, never a gamble: take it only where the browser says the visitor has
   // really interacted, because unmuting without that is what gets the whole thing stopped
@@ -84,11 +86,19 @@ export function ReadAlong() {
     if (navigator.userActivation?.hasBeenActive) setSoundOn(true);
   }, [shouldPlay, inView, soundOn]);
 
+  // Cloudflare Pages answers a Range request with a plain 200, and an element streaming from a
+  // server like that cannot seek. A blob seeks everywhere, and the clip is small enough to take whole.
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio || !inView) return;
-    audio.preload = "auto";
-  }, [inView]);
+    if (!inView || src) return;
+    let cancelled = false;
+    fetch(AUDIO_SRC)
+      .then((res) => (res.ok ? res.blob() : Promise.reject(new Error(String(res.status)))))
+      .then((blob) => !cancelled && setSrc(URL.createObjectURL(blob)))
+      .catch(() => !cancelled && setSrc(AUDIO_SRC));
+    return () => {
+      cancelled = true;
+    };
+  }, [inView, src]);
 
   useEffect(() => {
     if (!shouldPlay || !inView) return;
@@ -209,7 +219,7 @@ export function ReadAlong() {
               : "Turn the sound on to hear this page."}
           </p>
 
-          <audio ref={audioRef} src={AUDIO_SRC} preload="none" loop className="hidden" />
+          <audio ref={audioRef} src={src ?? undefined} loop className="hidden" />
         </div>
       </Window>
 
