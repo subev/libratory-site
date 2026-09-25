@@ -1,0 +1,38 @@
+# Libratory
+
+> Libratory turns the PDFs you own into chapter-marked audiobooks and read-along books on your own machine. Voices, OCR and search run locally; the narration is highlighted on the original printed page, word by word where the voice reports timings. Free. Source available under PolyForm Noncommercial (not OSI open source). Apple Silicon Mac app, Linux, or one Docker container.
+
+Facts that answer most questions:
+
+- Input: PDF, including scanned books (OCR by Tesseract, Surya, or a vision model). Text can also be sent through a JSON API.
+- Output: M4B with chapter markers and cover; PDF; EPUB; a synced EPUB (EPUB 3 media overlays) that carries text, audio and sentence-level sync in one file.
+- Voices, all local: Kokoro (Metal on a Mac), Pocket TTS (CPU, clones a voice from a 20-second sample), KugelAudio (24 European languages incl. Bulgarian), every macOS system voice. Cartesia and ElevenLabs are optional with the user's own key.
+- Read-along: the spoken sentence is lit on the book's own page and the spoken word marked inside it; word level with Kokoro English, Cartesia and ElevenLabs, sentence or chunk level otherwise.
+- Library: full-text plus BGE-M3 embedding search over every book; a chat that answers with citations opening the PDF page. AI features use Ollama or LM Studio (auto-discovered) or DeepSeek, OpenAI, Anthropic, Gemini with a key.
+- Per chapter: edit text, translate, rewrite (simplify, shorten, summarise, custom prompt), AI cleanup of OCR mistakes, re-narrate, include or exclude.
+- Agents: an MCP server over Streamable HTTP with about 20 tools (upload a PDF path, wait for a stage, get an audiobook, save notes) and a JSON API for creating books from text.
+- Platforms: signed, notarised Apple Silicon Mac app (needs Docker for its Postgres database); Linux x86_64 or arm64 from source; Docker image ghcr.io/subev/libratory for Linux, headless servers and Windows through Docker Desktop.
+- Companion: Libratory Reader for iPhone plays the synced EPUB with word highlighting. Free, no account.
+- Privacy: nothing leaves the machine unless a cloud key is added. The site has no analytics.
+
+## Get it
+
+- [Download for Mac](https://get.libratory.dev/mac): the newest DMG
+- Homebrew: `brew install --cask subev/libratory/libratory`
+- [Releases](https://github.com/subev/libratory/releases): every version, with notes
+- [Libratory Reader on the App Store](https://apps.apple.com/app/id6806798591)
+
+## Docs
+
+- [README](https://github.com/subev/libratory#readme): what it does, in detail, with install for every platform
+- [MCP server](https://github.com/subev/libratory/blob/main/docs/mcp.md): the tool set for agents
+- [JSON API](https://github.com/subev/libratory/blob/main/docs/synthetic-books-api.md): creating books from text
+- [Read-along format](https://github.com/subev/libratory/blob/main/docs/read-along.md): how cues, sync maps and the synced EPUB fit together
+- [Voice licensing](https://github.com/subev/libratory/blob/main/docs/tts-licensing.md): which voices are non-commercial
+
+## Pages
+
+- [Home](https://libratory.dev/): overview with an interactive read-along demo
+- [PDF to audiobook on a Mac](https://libratory.dev/pdf-to-audiobook-mac/): the five steps
+- [Compared with other free tools](https://libratory.dev/compare/): ebook2audiobook, Audiblez, Abogen, Storyteller
+- [iPhone Reader](https://libratory.dev/reader/)

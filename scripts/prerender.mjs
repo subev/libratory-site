@@ -1,11 +1,13 @@
 import { readFile, rm, writeFile } from "node:fs/promises";
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
-import { Home, Reader } from "../dist-ssr/entry-server.js";
+import { Compare, GuideMac, Home, Reader } from "../dist-ssr/entry-server.js";
 
 const PAGES = [
   { file: "dist/index.html", page: Home },
   { file: "dist/reader/index.html", page: Reader },
+  { file: "dist/compare/index.html", page: Compare },
+  { file: "dist/pdf-to-audiobook-mac/index.html", page: GuideMac },
 ];
 
 for (const { file, page } of PAGES) {

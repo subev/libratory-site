@@ -32,6 +32,8 @@ const FOOT = [
   { href: REPO, label: "GitHub" },
   { href: `${REPO}/releases`, label: "Updates" },
   { href: "/reader/", label: "iPhone app" },
+  { href: "/pdf-to-audiobook-mac/", label: "Mac guide" },
+  { href: "/compare/", label: "Compare" },
   { href: `${REPO}/blob/main/LICENSE.md`, label: "Licence" },
 ];
 
