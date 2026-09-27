@@ -3,7 +3,8 @@ import { BREW, DOWNLOAD, REPO } from "./Chrome.tsx";
 
 const COMMAND = `git clone ${REPO}.git
 cd libratory
-docker compose --profile app up -d --build`;
+docker compose --profile app pull
+docker compose --profile app up -d`;
 
 function Card({ os, title, sub, children }: {
   os: string;
