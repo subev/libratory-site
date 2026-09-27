@@ -1,10 +1,7 @@
 import type { ReactNode } from "react";
 import { BREW, DOWNLOAD, REPO } from "./Chrome.tsx";
 
-const COMMAND = `git clone ${REPO}.git
-cd libratory
-docker compose --profile app pull
-docker compose --profile app up -d`;
+const COMMAND = "docker compose -f oci://ghcr.io/subev/libratory-compose up -d --pull always";
 
 function Card({ os, title, sub, children }: {
   os: string;
@@ -48,17 +45,17 @@ export function Download() {
         <div className="mt-3"><Command text={BREW} /></div>
       </Card>
 
-      <Card os="linux" title="Linux" sub="Requires Git and Docker. Supports x86_64 and arm64.">
+      <Card os="linux" title="Linux" sub="Requires Docker. Supports x86_64 and arm64.">
         <Command />
         <p className="mt-4 text-sm text-ink-faint">
-          Then open <code className="text-ink-muted">localhost:3034</code>. No graphics card needed.
+          Then open <code className="text-ink-muted">localhost:3034</code>. Run it again to update. No graphics card needed.
         </p>
       </Card>
 
-      <Card os="win" title="Windows" sub="Requires Git and Docker Desktop with WSL2.">
+      <Card os="win" title="Windows" sub="Requires Docker Desktop with WSL2.">
         <Command />
         <p className="mt-4 text-sm text-ink-faint">
-          Run the commands, then open <code className="text-ink-muted">localhost:3034</code>. Need help?{" "}
+          Run it, then open <code className="text-ink-muted">localhost:3034</code>; run it again to update. Need help?{" "}
           <a href={`${REPO}/issues/new`} className="text-brass hover:text-ember-bright">Report a problem</a>.
         </p>
       </Card>
