@@ -1,7 +1,7 @@
 import { Eyebrow, Footer, Nav, REPO, Section, StoreCta } from "../components/Chrome.tsx";
 import { ReadAlongPhone } from "../components/phone.tsx";
 import { M4bPhone, MarksPhone, PlainEpubPhone } from "../components/ReaderScreens.tsx";
-import { NarratingPhone, TwoLanguages } from "../components/TwoLanguages.tsx";
+import { ListeningPhone, TwoLanguages } from "../components/TwoLanguages.tsx";
 
 const NAV = [
   { href: "/#features", label: "Desktop app", wide: true },
@@ -55,7 +55,7 @@ export function Reader() {
                 Also new: folders, tags, and a search across your whole library.
               </p>
             </div>
-            <NarratingPhone narration="alternate" caption="Alternate sentences" />
+            <ListeningPhone />
           </div>
         </section>
 

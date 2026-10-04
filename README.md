@@ -48,6 +48,13 @@ cache. Regenerating needs a libratory checkout with its `.venv` set up —
 `LIBRATORY_DIR=~/repos/libratory pnpm narrate` — and it fails loudly if a sentence does not come
 back word for word.
 
+The two-language demo on `/reader/` has its own clips, `public/audio/two-languages-*.m4a`, and
+timings in `src/components/twoLanguagesCues.ts`, from `pnpm narrate:two`. English is Kokoro and
+German is Cartesia, called the way the app calls it; both report a time for every word. It reads the
+demo's text straight from `twoLanguagesText.ts`, which needs a Node that runs TypeScript (22.18 or
+later), and takes `CARTESIA_API_KEY` from the environment or the checkout's `.env`. A run costs a
+few hundred Cartesia characters.
+
 ## Why this is not in the app repo
 
 Nothing here is secret — the repo is public and so is everything in it. The split is about three
