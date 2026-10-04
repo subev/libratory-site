@@ -14,7 +14,7 @@ export function ReaderApp() {
               Send your book to <strong className="font-semibold text-ink">Libratory Reader</strong>.
               Listen and follow the words wherever you go. It works offline, with no account.
             </p>
-            <p className="mt-4 max-w-[34rem] text-ink-muted">Your own EPUB ebooks and M4B audiobooks work here, too.</p>
+            <p className="mt-4 max-w-[34rem] text-ink-muted">A translated book opens in both languages. Your own EPUB ebooks and M4B audiobooks work here, too.</p>
             <StoreCta href="/reader/" label="See the iPhone app" />
           </div>
         </div>

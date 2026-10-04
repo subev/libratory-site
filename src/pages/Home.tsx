@@ -10,14 +10,14 @@ import { Transform } from "../components/Transform.tsx";
 const FEATURES = [
   { title: "Listen to your books", body: "Turn a PDF into an audiobook. Listen while you walk, cook, or rest." },
   { title: "Read and listen together", body: "Follow the words as they light up on the page." },
-  { title: "Make hard books easier", body: "Translate a chapter, use simpler words, or get a short summary." },
-  { title: "Ask your books questions", body: "Get an answer and see the pages it came from." },
+  { title: "Read in two languages", body: "Translate a book and hear it in both. Or ask for simpler words or a short summary." },
+  { title: "An assistant on every page", body: "Ask about your books and see the pages behind the answer. Or ask it to do the work." },
   { title: "Find what you need", body: "Search all your books at once. Keep them tidy in folders." },
   { title: "Keep your books private", body: "Use voices and AI on your computer, so your books stay with you." },
 ];
 
 const STEPS = [
-  { title: "Get the words out", body: "Add a PDF, even a scanned book. Libratory pulls the text off the pages." },
+  { title: "Get the words out", body: "Add a PDF, even a scanned book. For a hard scan, an AI model can read the pages. You get a searchable PDF back, too." },
   { title: "Sort out the chapters", body: "It finds the chapters and puts them in order. You can check and change them." },
   { title: "Pick a voice and listen", body: "Save an audiobook with chapters you can skip to." },
 ];
@@ -44,12 +44,20 @@ export function Home() {
           <div className="mx-auto max-w-5xl px-6 pt-16 pb-20 text-center sm:pt-20 sm:pb-24">
             <Mark className="mx-auto size-14" />
             <Wordmark className="mt-6 block text-2xl text-ink sm:text-3xl" />
-            <h1 className="mx-auto mt-8 max-w-3xl text-4xl tracking-tight sm:text-6xl">
+            <a
+              href="/reader/#two-languages"
+              className="group mt-7 inline-flex min-h-9 items-center gap-2.5 rounded-full border border-brass/35 bg-brass/4 py-1 pr-3.5 pl-1 text-[0.95rem] text-ink-secondary transition-colors hover:border-brass/60 hover:bg-brass/8"
+            >
+              <span className="rounded-full bg-brass px-2 py-0.5 font-sans text-[11px] font-semibold tracking-[0.06em] text-[#1a1408] uppercase">New</span>
+              Read a book in two languages on your iPhone
+              <span className="text-brass">→</span>
+            </a>
+            <h1 className="mx-auto mt-7 max-w-3xl text-4xl tracking-tight sm:text-6xl">
               Turn your books into audiobooks. For free.
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg text-ink-secondary">
               Add a PDF. Pick a voice. Listen and follow the words on the page.
-              You can ask questions, translate, and make hard parts easier, too.
+              Translate a book and hear it in both languages, too.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <DownloadButton />
@@ -92,11 +100,11 @@ export function Home() {
           <div className="mt-10"><Pipeline /></div>
         </Section>
 
-        <Section title="Hard to read? Make it easier." lead="Translate a chapter, ask for simpler words, or turn a long book into a short summary.">
+        <Section id="translate" title="Translate a book. Read it in both languages." lead="Pick a language and Libratory translates the book, chapter by chapter. The original stays. The translation gets its own voice. Then read both on your iPhone.">
           <Transform />
         </Section>
 
-        <Section title="Ask a question. Find the page." lead="Search your whole library with a question. The AI shows the passages behind its answer.">
+        <Section id="assistant" title="An assistant beside every page." lead="Ask about your books and see the passages behind each answer. Or ask it to make a book, translate one, or tidy your library.">
           <LibraryChat />
         </Section>
 
@@ -105,6 +113,24 @@ export function Home() {
         </Section>
 
         <ReaderApp />
+
+        <Section id="agents" title="Let your AI agent run it." lead="Libratory is an MCP server, so Claude Code, Cursor, Codex or Claude Desktop can use your library. Hand it a PDF and get an audiobook back.">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:items-start">
+            <div className="min-w-0 overflow-hidden rounded-xl border border-edge bg-raised font-mono text-[13px]/[1.7] shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
+              <div className="overflow-x-auto px-5 py-4 whitespace-nowrap">
+                <span className="text-ink-faint">$ </span>
+                <span className="text-ink">claude mcp add --transport http libratory http://localhost:3034/mcp</span>
+              </div>
+              <div className="border-t border-edge px-5 py-4 text-ink-secondary">
+                <span className="text-brass">›</span> Turn ~/Downloads/dune.pdf into an audiobook.
+              </div>
+            </div>
+            <div className="text-ink-muted">
+              <p>The agent gets the same tools as the assistant: make books, pick voices, translate, search, and export. It runs on your computer, on the same port as the app.</p>
+              <a href={`${REPO}/blob/main/docs/mcp.md`} className="mt-4 inline-block text-brass hover:text-ember-bright">See the tools →</a>
+            </div>
+          </div>
+        </Section>
 
         <Section id="download" title="Get Libratory for free" lead="Choose your computer to get started.">
           <Download />

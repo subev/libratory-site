@@ -1,6 +1,7 @@
 import { Eyebrow, Footer, Nav, REPO, Section, StoreCta } from "../components/Chrome.tsx";
 import { ReadAlongPhone } from "../components/phone.tsx";
 import { M4bPhone, MarksPhone, PlainEpubPhone } from "../components/ReaderScreens.tsx";
+import { NarratingPhone, TwoLanguages } from "../components/TwoLanguages.tsx";
 
 const NAV = [
   { href: "/#features", label: "Desktop app", wide: true },
@@ -40,20 +41,31 @@ export function Reader() {
         <section className="lamplight-hero border-b border-edge">
           <div className="mx-auto grid max-w-5xl items-center gap-14 px-6 pt-16 pb-20 [grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))]">
             <div className="min-w-0">
-              <Eyebrow>Libratory Reader · iPhone</Eyebrow>
+              <Eyebrow>Libratory Reader · iPhone and iPad</Eyebrow>
               <h1 className="mt-5 text-[clamp(2.125rem,4.6vw,3.25rem)] font-semibold tracking-tight">
-                Take your books with you.
+                Read a book in two languages.
               </h1>
               <p className="mt-6 max-w-[34rem] text-lg text-ink-secondary">
-                Listen on your iPhone. Watch each word light up as it is read.
-                Double-tap a sentence to hear it again.
+                The original and its translation, on one screen. Each one has its own voice.
+                Tap a word to see what it means in the other language.
               </p>
               <p className="mt-4 text-ink-muted">Works offline. No account. Free.</p>
               <StoreCta href="/#download" label="Get the desktop app" />
+              <p className="mt-7 max-w-[34rem] border-t border-edge pt-4 text-[0.95rem] text-ink-muted">
+                Also new: folders, tags, and a search across your whole library.
+              </p>
             </div>
-            <ReadAlongPhone />
+            <NarratingPhone narration="alternate" caption="Alternate sentences" />
           </div>
         </section>
+
+        <Section id="two-languages" title="One book. Two languages." lead="Read the original and the translation together. Try it: tap a word on either side.">
+          <TwoLanguages />
+        </Section>
+
+        <Section title="Read and listen together" lead="Watch each word light up as it is read. Double-tap a sentence to hear it again.">
+          <div className="flex justify-center"><ReadAlongPhone /></div>
+        </Section>
 
         <Section title="Your book, on your phone" lead="Make a book on your computer. Bring it with you.">
           <ol className="grid gap-8 sm:grid-cols-3">

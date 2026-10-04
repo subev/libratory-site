@@ -106,7 +106,7 @@ export function Skip({ back, step, className }: { back?: boolean; step: string; 
   );
 }
 
-function PauseGlyph({ className }: { className: string }) {
+export function PauseGlyph({ className }: { className: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
       <path d="M7.4 5h3.2v14H7.4zM13.4 5h3.2v14h-3.2z" />
@@ -114,8 +114,8 @@ function PauseGlyph({ className }: { className: string }) {
   );
 }
 
-const CAPSULE = "flex h-[38px] flex-none items-center gap-0.5 rounded-full bg-[rgba(253,250,245,0.94)] px-1.5 text-[#e2601f] shadow-[0_1px_8px_rgba(42,20,8,0.10)] backdrop-blur-md";
-const PRESS = "flex size-[26px] items-center justify-center";
+export const CAPSULE = "flex h-[38px] flex-none items-center gap-0.5 rounded-full bg-[rgba(253,250,245,0.94)] px-1.5 text-[#e2601f] shadow-[0_1px_8px_rgba(42,20,8,0.10)] backdrop-blur-md";
+export const PRESS = "flex size-[26px] items-center justify-center";
 
 /** The synced EPUB open on the phone: the same cues the desktop read-along runs, over the same print. */
 export function ReadAlongPhone() {

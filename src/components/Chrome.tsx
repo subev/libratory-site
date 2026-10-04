@@ -134,7 +134,7 @@ export function StoreCta({ href, label }: { href: string; label: string }) {
         <Button href={href} variant="ghost">{label}</Button>
       </div>
       <p className="mt-6 text-[0.95rem] text-ink-faint">
-        iPhone, iOS 26 · Free ·{" "}
+        iPhone and iPad, iOS 15.6 or later · Free ·{" "}
         <a href="/reader/privacy/" className="text-brass hover:text-ember-bright">privacy policy</a>
       </p>
     </>
