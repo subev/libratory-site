@@ -20,3 +20,7 @@
 # Committed, not content-hashed — they change only when the app's screens do
 /reader/screens/*
   Cache-Control: public, max-age=86400
+
+# Committed, not content-hashed — the guide's screenshots change only when the app's screens do
+/guide/*
+  Cache-Control: public, max-age=86400
