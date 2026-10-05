@@ -2,6 +2,7 @@ import { Fragment, useLayoutEffect, useRef, useState, type RefObject } from "rea
 import { useClip } from "./clip.ts";
 import { useInView, useLoopClock, useReducedMotion } from "./demo.tsx";
 import { Icon } from "./Icon.tsx";
+import { Phos } from "./Phos.tsx";
 import { CLIPS, type Clip } from "./twoLanguagesCues.ts";
 import { TEXT, type Lang } from "./twoLanguagesText.ts";
 import { CAPSULE, Glyph, INK, INK_FAINT, IOS, PAPER, PauseGlyph, PhoneFrame, PRESS, Skip, StatusBar } from "./phone.tsx";
@@ -271,11 +272,7 @@ export function TwoLanguagePhone({ moment, ms, period, playing, layout = "stack"
 
       <div className="flex flex-none flex-col bg-[#fdfbf7]">
         <div className="flex items-center gap-3 px-4 pt-2.5">
-          <Glyph
-            d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4ZM19.4 13.5l1.6 1.2-1.8 3.1-1.9-.7a7 7 0 0 1-1.7 1l-.3 2H10.7l-.3-2a7 7 0 0 1-1.7-1l-1.9.7L5 14.7l1.6-1.2a7 7 0 0 1 0-3L5 9.3l1.8-3.1 1.9.7a7 7 0 0 1 1.7-1l.3-2h3.6l.3 2a7 7 0 0 1 1.7 1l1.9-.7 1.8 3.1-1.6 1.2a7 7 0 0 1 0 3Z"
-            className="size-[18px] flex-none text-[#e2601f]"
-            width="1.6"
-          />
+          <Phos name="gear" className="size-5 flex-none text-[#e2601f]" />
           <span className="flex min-w-0 flex-1 flex-col gap-[3px]">
             <span className="relative block h-1 rounded-full bg-[rgba(42,20,8,0.1)]">
               <span className="absolute inset-y-0 left-0 min-w-1 rounded-full bg-[#e2601f]" style={{ width: `${(ms / period) * 100}%` }} />
