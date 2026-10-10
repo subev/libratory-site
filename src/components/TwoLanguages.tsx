@@ -528,7 +528,10 @@ export function TwoLanguages() {
           </div>
         ))}
       </div>
-      <p className="mt-8 font-mono text-[11.5px]/[1.6] text-ink-faint">
+      <p className="mt-8 max-w-2xl text-ink-muted">
+        Want to try one? The public shelf in Reader has two-language editions to download: Frankenstein in English and Bulgarian, Alice in English and French, A Christmas Carol in English and Spanish, and Dr Jekyll and Mr Hyde in English and Italian. Each is narrated in both languages.
+      </p>
+      <p className="mt-4 font-mono text-[11.5px]/[1.6] text-ink-faint">
         English read by Kokoro, a free voice in Libratory. German by Cartesia, a cloud voice you can add with your own key.
       </p>
     </div>

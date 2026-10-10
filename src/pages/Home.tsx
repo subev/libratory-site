@@ -137,7 +137,7 @@ export function Home() {
           <details className="mt-8 text-ink-muted">
             <summary className="cursor-pointer text-brass hover:text-ember-bright">Voices and AI setup</summary>
             <div className="mt-4 max-w-2xl space-y-3">
-              <p>Pick a language and preview a voice. Free options include Kokoro, KugelAudio, Pocket TTS, and your computer's built-in voices. Some need a graphics chip; Pocket TTS does not.</p>
+              <p>Pick a language and preview a voice. Free options include Kokoro, Piper, BgTTS, Pocket TTS, and your computer's built-in voices. Some need a graphics chip; Pocket TTS does not.</p>
               <p>For questions, summaries, and translations, run Ollama or LM Studio on your computer. Libratory finds them automatically.</p>
               <p>You can also connect online services with an API key. They receive the text you send and may charge fees.</p>
               <a href={`${REPO}#readme`} className="inline-block text-brass hover:text-ember-bright">Read the setup guide →</a>

@@ -17,7 +17,7 @@ const FOOT = [
 
 const STEPS = [
   { title: "Make your audiobook", body: "In the desktop app, save a synced EPUB. It holds the book, the audio, and the word highlights in one file." },
-  { title: "Send it to your iPhone", body: "Use AirDrop or the Files app. Open Reader and tap + to add the book." },
+  { title: "Send it to your iPhone", body: "Scan the code on the app's Phone page and Reader lists your finished books over Tailscale or the same Wi-Fi. Or use AirDrop or the Files app." },
   { title: "Read and listen", body: "Press play. Your book works offline and remembers your place." },
 ];
 
@@ -120,6 +120,9 @@ export function Reader() {
             <h2 className="mt-5 text-3xl tracking-tight sm:text-4xl">Your first book is already there.</h2>
             <p className="mt-5 max-w-2xl text-lg text-ink-secondary">
               Reader comes with a short sample book. Open it and press play.
+            </p>
+            <p className="mt-4 max-w-2xl text-ink-muted">
+              No computer with Libratory on it? The public shelf lists with nothing to set up. It holds public-domain classics narrated with Libratory, read along word by word: Frankenstein, Alice's Adventures in Wonderland, A Christmas Carol, Dr Jekyll and Mr Hyde, The Time Machine, The Call of the Wild, The War of the Worlds, and six tales by Poe.
             </p>
             <StoreCta href="/#download" label="Get the desktop app" />
           </div>
