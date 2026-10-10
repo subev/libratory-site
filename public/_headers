@@ -20,3 +20,9 @@
 # Committed, not content-hashed — they change only when the app's screens do
 /reader/screens/*
   Cache-Control: public, max-age=86400
+
+# Apple fetches this through its own content delivery network when the reader is installed; it
+# must come back as JSON, which an extensionless file would not on its own
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600

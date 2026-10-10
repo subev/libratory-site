@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["M72SXNJ42P.dev.libratory.reader"],
+        "components": [
+          { "/": "/pair", "comment": "A pairing link from the desktop app's Phone page; the code rides in the fragment" }
+        ]
+      }
+    ]
+  }
+}
