@@ -32,7 +32,7 @@ function Command({ text = COMMAND }: { text?: string }) {
 export function Download() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-      <Card os="mac" title="Mac" sub="For Macs with an Apple M-series chip.">
+      <Card os="mac" title="Mac" sub="Requires macOS 14 Sonoma or later on an Apple Silicon Mac.">
         <a
           href={DOWNLOAD}
           className="inline-flex h-11 items-center rounded-sm bg-ember px-6 text-[0.95rem] tracking-wide text-[#16140f] transition-colors hover:bg-ember-bright"

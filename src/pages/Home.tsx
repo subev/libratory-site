@@ -66,6 +66,7 @@ export function Home() {
             <p data-platform="mac" className="mt-5 items-baseline gap-2 text-sm text-ink-muted">
               or <code className="rounded-sm border border-edge bg-inset px-2 py-1 text-ink-secondary">{BREW}</code>
             </p>
+            <p data-platform="mac" className="mt-3 w-full justify-center text-sm text-ink-muted">Requires macOS 14 Sonoma or later on an Apple Silicon Mac.</p>
             <p className="mt-5 text-[0.95rem] text-ink-muted">
               Free for personal use · Mac, <a href="#download" className="text-brass hover:text-ember-bright">Linux and Windows</a>
             </p>
