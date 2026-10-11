@@ -7,7 +7,7 @@ export default defineConfig({
   // No router: a second page is a second entry, and Pages serves /reader/ from its own index.html
   build: {
     rollupOptions: {
-      input: { main: "index.html", reader: "reader/index.html" },
+      input: { main: "index.html", reader: "reader/index.html", learn: "learn/index.html" },
     },
   },
 });

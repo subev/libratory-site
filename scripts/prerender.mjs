@@ -1,11 +1,12 @@
 import { readFile, rm, writeFile } from "node:fs/promises";
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
-import { Home, Reader } from "../dist-ssr/entry-server.js";
+import { Home, Learn, Reader } from "../dist-ssr/entry-server.js";
 
 const PAGES = [
   { file: "dist/index.html", page: Home },
   { file: "dist/reader/index.html", page: Reader },
+  { file: "dist/learn/index.html", page: Learn },
 ];
 
 for (const { file, page } of PAGES) {

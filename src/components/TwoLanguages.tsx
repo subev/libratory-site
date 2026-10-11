@@ -431,8 +431,8 @@ const WAYS: Way[] = [
   },
   {
     id: "alternate",
-    title: "Alternate sentences",
-    body: "Hear each sentence in one language, then in the other.",
+    title: "Sentence pairs",
+    body: "Hear each sentence in one language, then the same sentence in the other.",
     narration: "alternate",
   },
   {
