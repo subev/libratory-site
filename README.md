@@ -5,8 +5,8 @@ about Libratory Reader for iPhone.
 
 Vite + React + Tailwind 4, matching the app's `packages/web`. A static build with no router: a page
 is an `.html` entry listed in `vite.config.ts` beside a client entry in `src/` and a component in
-`src/pages/`, and GitHub Pages needs no 404 fallback. `public/reader/privacy/` is hand-written HTML
-rather than a third entry — it is prose that never changes and needs no bundle.
+`src/pages/`, and GitHub Pages needs no 404 fallback. `public/reader/privacy/`, `public/reader/terms/` and `public/reader/support/` are
+hand-written HTML policy and support pages; they need no client bundle.
 
 `pnpm build` prerenders both pages to static markup and ships the client bundle beside them — the
 live demos hydrate over that markup, so the text is there before any script runs. `pnpm dev` renders
