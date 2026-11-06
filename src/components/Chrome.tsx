@@ -6,7 +6,7 @@ export const BREW = "brew install --cask subev/libratory/libratory";
 export const APP_STORE = "https://apps.apple.com/app/id6806798591";
 
 export function Mark({ className = "size-8" }: { className?: string }) {
-  return <img src="/mark.png" alt="" className={`rounded-[22%] ${className}`} />;
+  return <img src="/mark-2.png" alt="" className={className} />;
 }
 
 export function GitHubIcon({ className = "size-5" }: { className?: string }) {
@@ -32,7 +32,7 @@ export function Nav({ links, source }: { links: Link[]; source?: boolean }) {
     <header className="sticky top-0 z-20 border-b border-edge bg-page">
       <nav className="mx-auto flex h-16 max-w-5xl items-center gap-4 px-4 sm:gap-6 sm:px-6">
         <a href="/" className="flex items-center gap-2.5 sm:gap-3">
-          <Mark className="size-6 sm:size-7" />
+          <Mark className="size-8 sm:size-9" />
           <Wordmark className="text-sm sm:text-lg" />
         </a>
         <div className="ml-auto flex items-center gap-4 sm:gap-7">

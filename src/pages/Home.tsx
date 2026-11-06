@@ -42,7 +42,7 @@ export function Home() {
       <main>
         <section className="lamplight border-b border-edge">
           <div className="mx-auto max-w-5xl px-6 pt-16 pb-20 text-center sm:pt-20 sm:pb-24">
-            <Mark className="mx-auto size-14" />
+            <Mark className="mx-auto size-32" />
             <Wordmark className="mt-6 block text-2xl text-ink sm:text-3xl" />
             <a
               href="/reader/#two-languages"

@@ -8,6 +8,9 @@
 /mark.png
   Cache-Control: public, max-age=86400
 
+/mark-2.png
+  Cache-Control: public, max-age=86400
+
 /favicon.png
   Cache-Control: public, max-age=86400
 
