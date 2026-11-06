@@ -5,6 +5,12 @@
 /*.svg
   Cache-Control: public, max-age=86400
 
+/mark.png
+  Cache-Control: public, max-age=86400
+
+/favicon.png
+  Cache-Control: public, max-age=86400
+
 # Not content-hashed, and unfurl caches are stubborn — keep the window short enough that a
 # redrawn card reaches a crawler that re-fetches. To force one now, bump the ?v= number on og:image
 /og.png

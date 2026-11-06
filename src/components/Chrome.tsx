@@ -6,7 +6,7 @@ export const BREW = "brew install --cask subev/libratory/libratory";
 export const APP_STORE = "https://apps.apple.com/app/id6806798591";
 
 export function Mark({ className = "size-8" }: { className?: string }) {
-  return <img src="/mark.svg" alt="" className={className} />;
+  return <img src="/mark.png" alt="" className={`rounded-[22%] ${className}`} />;
 }
 
 export function GitHubIcon({ className = "size-5" }: { className?: string }) {
