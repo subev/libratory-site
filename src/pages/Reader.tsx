@@ -33,6 +33,12 @@ const KINDS = [
   { title: "Just listen", body: "Open an M4B audiobook. Pick a chapter, change the speed, or listen with the screen locked." },
 ];
 
+const DOCUMENTS = [
+  { title: "Your own documents", body: "Import PDFs, EPUBs and photographed pages. Local voices read them aloud on your device." },
+  { title: "Optional cloud extras", body: "Hosted page preparation, live translation and cloud voices are optional. They need Sign in with Apple, age 16+ eligibility and your permission for each provider." },
+  { title: "Local reading stays free", body: "No account or subscription needed. Books with supplied narration and translations keep playing without one." },
+];
+
 export function Reader() {
   return (
     <>
@@ -61,6 +67,20 @@ export function Reader() {
 
         <Section id="two-languages" title="One book. Two languages." lead="Read the original and the translation together. Try it: tap a word on either side.">
           <TwoLanguages />
+        </Section>
+
+        <Section id="documents" title="Read your own documents aloud." lead="New in Libratory 1.6 for iPhone and iPad: bring PDFs, EPUBs and photographed pages, and listen.">
+          <div className="grid gap-8 sm:grid-cols-3">
+            {DOCUMENTS.map((item) => (
+              <div key={item.title} className="border-l border-edge pl-5">
+                <h3 className="text-xl">{item.title}</h3>
+                <p className="mt-2 text-ink-muted">{item.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 max-w-2xl text-ink-muted">
+            Hosted features need iOS or iPadOS 26.2 or later (26.4 for some regional age checks). Eligible readers can claim a free trial, subject to capacity; subscriptions and top-ups are currently by invitation. See the <a href="/reader/terms/" className="text-brass hover:text-ember-bright">cloud service terms</a> and <a href="/reader/privacy/" className="text-brass hover:text-ember-bright">privacy notice</a>.
+          </p>
         </Section>
 
         <Section title="Read and listen together" lead="Watch each word light up as it is read. Double-tap a sentence to hear it again.">
