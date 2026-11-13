@@ -5,6 +5,7 @@ import { Landing } from "../components/Landing.tsx";
 const FOOT = [
   { href: "/books/", label: "Books" },
   { href: "/study/", label: "Study" },
+  { href: "/languages/", label: "Languages" },
   { href: "/mac/", label: "For your Mac", id: "download" },
   { href: "/reader/privacy/", label: "Privacy" },
   { href: `${REPO}/issues`, label: "Support" },
