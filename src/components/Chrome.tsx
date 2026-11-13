@@ -44,7 +44,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
   );
 }
 
-type Link = { href: string; label: string; current?: boolean; wide?: boolean; id?: string };
+export type Link = { href: string; label: string; current?: boolean; wide?: boolean; id?: string };
 
 export function Nav({ links, source }: { links: Link[]; source?: boolean }) {
   const style = "text-sm whitespace-nowrap transition-colors sm:text-[0.95rem]";
