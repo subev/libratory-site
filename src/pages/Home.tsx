@@ -4,6 +4,7 @@ import { Landing } from "../components/Landing.tsx";
 // Old links ending in /#download mean the Mac tool, so the id sits on the link that leads to it
 const FOOT = [
   { href: "/books/", label: "Books" },
+  { href: "/study/", label: "Study" },
   { href: "/mac/", label: "For your Mac", id: "download" },
   { href: "/reader/privacy/", label: "Privacy" },
   { href: `${REPO}/issues`, label: "Support" },
