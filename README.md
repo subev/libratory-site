@@ -1,7 +1,8 @@
 # libratory.dev
 
-The site for [Libratory](https://github.com/subev/libratory) — `/` about the free desktop app, `/reader/`
-about Libratory Reader for iPhone.
+The site for [Libratory](https://github.com/subev/libratory) — `/` about the iPhone app, `/mac/` about
+the free desktop app, `/reader/` about Libratory Reader with the desktop app, `/learn/` for language
+learners.
 
 Vite + React + Tailwind 4, matching the app's `packages/web`. A static build with no router: a page
 is an `.html` entry listed in `vite.config.ts` beside a client entry in `src/` and a component in

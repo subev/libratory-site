@@ -44,7 +44,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
   );
 }
 
-type Link = { href: string; label: string; current?: boolean; wide?: boolean };
+type Link = { href: string; label: string; current?: boolean; wide?: boolean; id?: string };
 
 export function Nav({ links, source }: { links: Link[]; source?: boolean }) {
   const style = "text-sm whitespace-nowrap transition-colors sm:text-[0.95rem]";
@@ -58,7 +58,7 @@ export function Nav({ links, source }: { links: Link[]; source?: boolean }) {
         </a>
         <div className="ml-auto flex items-center gap-4 sm:gap-7">
           {links.map((link) => link.current ? (
-            <span key={link.label} className={`${style} text-brass`}>{link.label}</span>
+            <span key={link.label} className={`${style} text-brass ${link.wide ? "hidden min-[520px]:inline" : ""}`}>{link.label}</span>
           ) : (
             <a
               key={link.label}
@@ -89,7 +89,7 @@ export function Footer({ links }: { links: Link[] }) {
         </div>
         <div className="flex flex-wrap gap-7 sm:ml-auto">
           {links.map((link) => (
-            <a key={link.label} href={link.href} className="inline-flex items-center gap-2 transition-colors hover:text-brass">
+            <a key={link.label} id={link.id} href={link.href} className="inline-flex items-center gap-2 transition-colors hover:text-brass">
               {link.href === REPO ? <GitHubIcon className="size-4" /> : null}
               {link.label}
             </a>
@@ -160,7 +160,7 @@ export function DownloadButton() {
   return (
     <>
       <Button href={DOWNLOAD} platform="mac">Download for Mac</Button>
-      <Button href="/#download" platform="other">Get Libratory free</Button>
+      <Button href="/mac/#download" platform="other">Get Libratory free</Button>
     </>
   );
 }

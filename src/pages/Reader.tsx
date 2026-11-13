@@ -4,13 +4,13 @@ import { M4bPhone, MarksPhone, PlainEpubPhone } from "../components/ReaderScreen
 import { ListeningPhone, TwoLanguages } from "../components/TwoLanguages.tsx";
 
 const NAV = [
-  { href: "/#features", label: "Desktop app", wide: true },
+  { href: "/mac/#features", label: "Desktop app", wide: true },
   { href: "/reader/", label: "iPhone", current: true },
   { href: "#get", label: "Get the app" },
 ];
 
 const FOOT = [
-  { href: "/", label: "Desktop app" },
+  { href: "/mac/", label: "Desktop app" },
   { href: REPO, label: "GitHub" },
   { href: "/reader/privacy/", label: "Privacy" },
 ];
@@ -50,7 +50,7 @@ export function Reader() {
                 Tap a word to see what it means in the other language.
               </p>
               <p className="mt-4 text-ink-muted">Works offline. No account. Free.</p>
-              <StoreCta href="/#download" label="Get the desktop app" />
+              <StoreCta href="/mac/#download" label="Get the desktop app" />
               <p className="mt-7 max-w-[34rem] border-t border-edge pt-4 text-[0.95rem] text-ink-muted">
                 Also new: folders, tags, and a search across your whole library.
               </p>
@@ -124,7 +124,7 @@ export function Reader() {
             <p className="mt-4 max-w-2xl text-ink-muted">
               No computer with Libratory on it? The public shelf lists with nothing to set up. It holds public-domain classics narrated with Libratory, read along word by word: Frankenstein, Alice's Adventures in Wonderland, A Christmas Carol, Dr Jekyll and Mr Hyde, The Time Machine, The Call of the Wild, The War of the Worlds, and six tales by Poe.
             </p>
-            <StoreCta href="/#download" label="Get the desktop app" />
+            <StoreCta href="/mac/#download" label="Get the desktop app" />
           </div>
         </section>
       </main>

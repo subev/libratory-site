@@ -9,7 +9,7 @@ const NAV = [
 ];
 
 const FOOT = [
-  { href: "/", label: "Desktop app" },
+  { href: "/mac/", label: "Desktop app" },
   { href: "/reader/", label: "iPhone" },
   { href: REPO, label: "GitHub" },
   { href: "/reader/privacy/", label: "Privacy" },
@@ -129,7 +129,7 @@ export function Learn() {
                   </li>
                 ))}
               </ol>
-              <div className="mt-7"><Button href="/#download" variant="ghost">Get the desktop app</Button></div>
+              <div className="mt-7"><Button href="/mac/#download" variant="ghost">Get the desktop app</Button></div>
             </div>
           </div>
         </Section>
@@ -159,7 +159,7 @@ export function Learn() {
             <p className="mt-5 max-w-2xl text-lg text-ink-secondary">
               Get Reader, open the public shelf, and start with a classic. Make your own with the desktop app.
             </p>
-            <StoreCta href="/#download" label="Get the desktop app" />
+            <StoreCta href="/mac/#download" label="Get the desktop app" />
           </div>
         </section>
       </main>
