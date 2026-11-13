@@ -1,18 +1,25 @@
 import { APP_STORE, Button, Footer, Nav, type Link } from "./Chrome.tsx";
-import { HeroMedia } from "./Media.tsx";
+import { HeroMedia, type Capture } from "./Media.tsx";
 
 export type Proof = { title: string; body: string };
 
 // Phone: the free line sits above the demo so it is on the first screen. Desktop: the text beside the demo.
 const AREAS = "[grid-template-areas:'h'_'s'_'f'_'d'_'b'_'n'] lg:[grid-template-areas:'._d'_'h_d'_'s_d'_'b_d'_'f_d'_'n_d'_'._d'] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[1fr_auto_auto_auto_auto_auto_1fr]";
 
-function Hero({ headline, line, free, note, demo }: { headline: string; line: string; free: string; note?: Proof; demo: string }) {
+function Hero({ headline, line, free, note, demo, capture }: {
+  headline: string;
+  line: string;
+  free: string;
+  note?: Proof;
+  demo: string;
+  capture?: Capture;
+}) {
   return (
     <section className="lamplight-hero border-b border-edge">
       <div className={`mx-auto grid max-w-5xl gap-x-14 px-6 pt-6 pb-14 text-center sm:pt-14 sm:pb-20 lg:text-left ${AREAS}`}>
         <h1 className="text-[clamp(2rem,4.6vw,3.25rem)] font-semibold tracking-tight text-balance [grid-area:h]">{headline}</h1>
         <p className="mt-3 text-lg text-balance text-ink-secondary [grid-area:s] sm:mt-5">{line}</p>
-        <div className="mt-5 flex justify-center [grid-area:d] sm:mt-8 lg:mt-0"><HeroMedia name={demo} /></div>
+        <div className="mt-5 flex justify-center [grid-area:d] sm:mt-8 lg:mt-0"><HeroMedia name={demo} capture={capture} /></div>
         <div className="mt-5 [grid-area:b] sm:mt-8"><Button href={APP_STORE}>Download on the App Store</Button></div>
         <p className="mt-3 text-balance text-ink-muted [grid-area:f] lg:mt-4">{free}</p>
         {note ? (
@@ -41,12 +48,13 @@ function Proofs({ proofs }: { proofs: Proof[] }) {
 }
 
 /** The home page and the use-case pages: one promise, one demo, one button, the free line, the proof blocks */
-export function Landing({ headline, line, free, note, demo, proofs, footer }: {
+export function Landing({ headline, line, free, note, demo, capture, proofs, footer }: {
   headline: string;
   line: string;
   free: string;
   note?: Proof;
   demo: string;
+  capture?: Capture;
   proofs: Proof[];
   footer: Link[];
 }) {
@@ -54,7 +62,7 @@ export function Landing({ headline, line, free, note, demo, proofs, footer }: {
     <>
       <Nav links={[]} />
       <main>
-        <Hero headline={headline} line={line} free={free} note={note} demo={demo} />
+        <Hero headline={headline} line={line} free={free} note={note} demo={demo} capture={capture} />
         <Proofs proofs={proofs} />
       </main>
       <Footer links={footer} />

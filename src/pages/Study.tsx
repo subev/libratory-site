@@ -18,6 +18,7 @@ export function Study() {
       line="Open the PDF or photograph the chapter, and listen with the page as printed."
       free="Free. No account. Works without internet."
       demo="study"
+      capture={{ src: "/demos/study.webp", alt: "A page of an EPUB book open in Libratory on an iPhone.", focus: "17%" }}
       proofs={PROOFS}
       footer={FOOT}
     />
