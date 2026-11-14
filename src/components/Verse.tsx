@@ -12,7 +12,7 @@ function Phone({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export type Scene = { title: string; body: string; note?: string; src: string; alt: string };
+export type Scene = { title: string; body: string; note?: string; src: string; alt: string; /** A cut-out of a screen, shown larger and without the phone */ plain?: { width: number; height: number } };
 
 /** Picture and text side by side, the picture changing sides from one scene to the next */
 export function Scenes({ scenes }: { scenes: Scene[] }) {
@@ -20,8 +20,19 @@ export function Scenes({ scenes }: { scenes: Scene[] }) {
     <section className={`${WRAP} py-14 sm:py-20`}>
       <div className="flex flex-col gap-16 sm:gap-24">
         {scenes.map((scene, index) => (
-          <div key={scene.title} className={`mx-auto flex max-w-3xl flex-col items-center justify-center gap-8 sm:gap-16 ${index % 2 ? "sm:flex-row-reverse" : "sm:flex-row"}`}>
-            <div className="flex flex-none justify-center sm:w-[280px]"><Phone src={scene.src} alt={scene.alt} /></div>
+          <div key={scene.title} className={`mx-auto flex max-w-4xl flex-col items-center justify-center gap-8 sm:gap-16 ${index % 2 ? "sm:flex-row-reverse" : "sm:flex-row"}`}>
+            {scene.plain ? (
+              <img
+                src={scene.src}
+                alt={scene.alt}
+                width={scene.plain.width}
+                height={scene.plain.height}
+                loading="lazy"
+                className="w-full max-w-[400px] flex-none rounded-xl border border-edge shadow-[0_30px_80px_rgba(0,0,0,0.55)] sm:w-[400px]"
+              />
+            ) : (
+              <div className="flex flex-none justify-center sm:w-[280px]"><Phone src={scene.src} alt={scene.alt} /></div>
+            )}
             <div className="max-w-md text-center sm:text-left">
               <h2 className="text-[clamp(1.6rem,3.2vw,2.2rem)] text-balance">{scene.title}</h2>
               <p className="mt-3 text-lg text-ink-secondary">{scene.body}</p>

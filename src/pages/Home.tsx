@@ -15,17 +15,19 @@ const FOOT = [
 
 const SCENES = [
   {
-    title: "It goes where you go.",
-    body: "It reads with the screen locked, at your speed, and remembers where you stopped.",
-    src: "/demos/player.webp",
-    alt: "Libratory's player on an iPhone: the chapter, a scrubber, skip back and forward, pause and the speed.",
+    title: "Every word knows its partner.",
+    body: "Read in two languages at once. The sentence you hear lights in both, and the word being spoken lights in the other language too. You learn the word where you met it.",
+    note: "Two-language books come with the app. Translating your own is online and uses credit.",
+    src: "/demos/word-pairs.webp",
+    alt: "A page in English and German in Libratory: the sentence being read is marked in both languages, and the word “both” is marked together with “beide”.",
+    plain: { width: 1170, height: 1519 },
   },
   {
-    title: "In the language you think in.",
-    body: "Hear a page as it was written. Then hear each sentence again in yours.",
-    note: "Translation is online and uses credit. Listening does not.",
-    src: "/demos/two-languages.webp",
-    alt: "A book in English and German open in Libratory, the sentence being read marked in both languages.",
+    title: "The page you photographed, lit.",
+    body: "It reads the print itself, on your iPhone, and marks the sentence on your own page. Nothing is uploaded.",
+    src: "/demos/photographed-page.webp",
+    alt: "A photographed page of a printed novel in Libratory, the sentence being read aloud marked on the print.",
+    plain: { width: 1170, height: 1190 },
   },
 ];
 
