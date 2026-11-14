@@ -1,4 +1,3 @@
-import { REPO } from "../components/Chrome.tsx";
 import { Landing } from "../components/Landing.tsx";
 import { Doors, Scenes, Small } from "../components/Verse.tsx";
 
@@ -11,7 +10,7 @@ const FOOT = [
   { href: "/articles/", label: "Articles" },
   { href: "/mac/", label: "For your Mac", id: "download" },
   { href: "/reader/privacy/", label: "Privacy" },
-  { href: `${REPO}/issues`, label: "Support" },
+  { href: "/reader/support/", label: "Support" },
 ];
 
 const SCENES = [

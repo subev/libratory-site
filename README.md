@@ -6,8 +6,8 @@ learners.
 
 Vite + React + Tailwind 4, matching the app's `packages/web`. A static build with no router: a page
 is an `.html` entry listed in `vite.config.ts` beside a client entry in `src/` and a component in
-`src/pages/`, and GitHub Pages needs no 404 fallback. `public/reader/privacy/` is hand-written HTML
-rather than a third entry — it is prose that never changes and needs no bundle.
+`src/pages/`, and GitHub Pages needs no 404 fallback. `public/reader/privacy/`, `public/reader/terms/` and `public/reader/support/` are
+hand-written HTML policy and support pages; they need no client bundle.
 
 `pnpm build` prerenders both pages to static markup and ships the client bundle beside them — the
 live demos hydrate over that markup, so the text is there before any script runs. `pnpm dev` renders
@@ -29,9 +29,10 @@ The PNG is committed rather than built: Cloudflare has no browser, and the card 
 the words on it do. Edit `scripts/og.html`, run `pnpm og`, commit both.
 
 Unfurl caches are stubborn and keyed on the URL, so a redrawn card can keep showing the old one for
-days. To force it, bump the `og:image` URL in `index.html` to `/og.png?v=2`. Facebook, LinkedIn and
-Twitter each have a debugger that re-fetches on demand; iMessage does not, and clears only by
-sending the link to a fresh conversation.
+days. To force it, bump the `?v=` number on the `og:image` and `twitter:image` URLs in `index.html`,
+`learn/index.html` and `reader/index.html`. Facebook, LinkedIn and Twitter each have a debugger
+that re-fetches on demand; iMessage does not, and clears only by sending the link to a fresh
+conversation.
 
 Cloudflare Pages builds and deploys every push to `main` — build command `pnpm build`, output
 directory `dist`, `NODE_VERSION=22`. There is no workflow in this repo; Cloudflare does the build.
@@ -71,4 +72,3 @@ things:
 
 The domain is on Cloudflare, and Pages wires the apex record itself when the custom domain is added
 from the project's **Custom domains** tab. `public/CNAME` is left in place only so a move back to
-GitHub Pages needs no thought; Cloudflare ignores it.
