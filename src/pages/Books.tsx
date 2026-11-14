@@ -1,25 +1,38 @@
 import { Landing } from "../components/Landing.tsx";
+import { Honest, Small, Steps } from "../components/Verse.tsx";
 
 const FOOT = [
   { href: "/", label: "Home" },
   { href: "/reader/privacy/", label: "Privacy" },
 ];
 
-const PROOFS = [
-  { title: "One photo per page.", body: "Hold the book flat. The iPhone reads the text itself; nothing is uploaded." },
-  { title: "The page stays.", body: "Your page is on the screen with the sentence you are hearing marked on it." },
-  { title: "Your book, your ears.", body: "The scan stays on your phone. There is no way to send it to anyone." },
+const STEPS = [
+  { title: "Lay it open.", body: "Photograph two pages at once. The iPhone reads the print itself; nothing is uploaded." },
+  { title: "Press play.", body: "The voice reads your own copy: the same pages, the same print, the sentence marked as it is spoken." },
+  { title: "Put the phone in your pocket.", body: "It reads with the screen locked, at your speed, and remembers where you stopped." },
 ];
 
 export function Books() {
   return (
     <Landing
-      headline="Listen to the books on your shelf, a chapter at a time."
-      line="Photograph tonight's chapter. Hear it tomorrow."
+      long
+      headline="You already bought the book. Why are you paying again to hear it?"
+      line="It's on your shelf. It's yours. Nobody said eyes only."
       free="Free. No account. Works without internet."
       demo="books"
-      proofs={PROOFS}
+      capture={{
+        src: "/demos/photographed-page.webp",
+        alt: "A photographed page of a printed novel in Libratory, the sentence being read aloud marked on the print.",
+        focus: "0%",
+        plain: { width: 1170, height: 1190 },
+      }}
       footer={FOOT}
-    />
+    >
+      <Steps steps={STEPS} />
+      <Honest>
+        It struggles with curved pages and poor light. Hold the book flat, near a window. A whole book is a lot of photographs, so do a chapter at a time. If you have the PDF or the EPUB, open that and skip the camera.
+      </Honest>
+      <Small>For the books you own, for your own ears. The scan stays on your phone.</Small>
+    </Landing>
   );
 }

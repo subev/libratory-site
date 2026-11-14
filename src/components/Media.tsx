@@ -6,7 +6,7 @@ const CROP = "3 / 2";
 const EMPTY = "flex items-center justify-center border border-dashed border-edge-strong bg-inset p-6 text-sm text-ink-faint";
 
 /** A 1170×2532 capture; `focus` is how far down the 3:2 phone crop sits, past the status bar and toolbar */
-export type Capture = { src: string; alt: string; focus: string };
+export type Capture = { src: string; alt: string; focus: string; /** A cut-out of a screen, shown as it is on every width */ plain?: { width: number; height: number } };
 
 /** `name` marks an empty slot, so each page's missing capture can be found in the markup */
 export function HeroMedia({ name, capture }: { name: string; capture?: Capture }) {
@@ -16,6 +16,20 @@ export function HeroMedia({ name, capture }: { name: string; capture?: Capture }
       <PhoneFrame width={300} height={602} radius={46} pad={11} screen="var(--bg-raised)" lift>{screen}</PhoneFrame>
     </div>
   );
+
+  if (capture?.plain) {
+    return (
+      <div className="flex w-full justify-center">
+        <img
+          src={capture.src}
+          alt={capture.alt}
+          width={capture.plain.width}
+          height={capture.plain.height}
+          className="w-full max-w-[440px] rounded-xl border border-edge shadow-[0_30px_80px_rgba(0,0,0,0.55)]"
+        />
+      </div>
+    );
+  }
 
   if (capture) {
     return (

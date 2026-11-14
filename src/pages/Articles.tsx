@@ -1,25 +1,29 @@
 import { Landing } from "../components/Landing.tsx";
+import { Steps } from "../components/Verse.tsx";
 
 const FOOT = [
   { href: "/", label: "Home" },
   { href: "/reader/privacy/", label: "Privacy" },
 ];
 
-const PROOFS = [
+const STEPS = [
   { title: "Save it as a PDF.", body: "In Safari: Reader, then Share, Options, PDF, and open it in Libratory." },
-  { title: "The page stays.", body: "The article is on the screen with its pictures, and the sentence you are hearing is marked." },
-  { title: "Then no internet needed.", body: "Once it is on your phone it reads on a plane." },
+  { title: "Press play.", body: "On the walk, at the sink, on the train. Once it is on your phone it needs no internet." },
+  { title: "Set your speed.", body: "Down to 0.75× when the writing deserves it. Up to 2× when it doesn't." },
 ];
 
 export function Articles() {
   return (
     <Landing
-      headline="Listen to that long article you saved."
-      line="Save it as a PDF, open it in Libratory, press Play."
+      long
+      headline="“Read later” is where articles go to die."
+      line="You saved it three weeks ago. It's still good. Press play."
       free="Free. No account. Works without internet."
       demo="articles"
-      proofs={PROOFS}
+      capture={{ src: "/demos/player.webp", alt: "Libratory's player on an iPhone: the chapter, a scrubber, pause and the speed.", focus: "88%" }}
       footer={FOOT}
-    />
+    >
+      <Steps steps={STEPS} />
+    </Landing>
   );
 }
