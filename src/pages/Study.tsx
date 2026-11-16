@@ -7,24 +7,24 @@ const FOOT = [
 ];
 
 const COLUMNS = [
-  { title: "The page as printed.", body: "Figures, tables and formulas stay where the author put them, with the sentence you are hearing marked." },
-  { title: "Eyes free for the figure.", body: "The voice reads the text. You look at the diagram it is talking about." },
-  { title: "PDF, EPUB or paper.", body: "Open a file, or photograph the pages of a book you own." },
+  { title: "First as printed.", body: "The voice reads the page word for word, with the sentence and the word lit. That part is free and stays on your phone." },
+  { title: "Then only what matters.", body: "Key takeaways: the page boiled down to what it claims, read to you in the same voice." },
+  { title: "Then your way.", body: "Write one line, like “explain it to a ten-year-old” or “explain it to an engineer”, and every page is read to you like that." },
 ];
 
 export function Study() {
   return (
     <Landing
       long
-      headline="You've read that paragraph four times. Try hearing it once."
-      line="Open the paper or the chapter and listen, with the page as printed in front of you."
-      free="Free. No account. Works without internet."
+      headline="You've read it four times. Maybe you're a listener."
+      line="Hear the page read to you. Then hear it explained like you're ten, or boiled down to what matters."
+      free="Reading aloud is free. No account."
       demo="study"
       capture={{ src: "/demos/study.webp", alt: "A page of a book open in Libratory on an iPhone: the sentence being read aloud is marked, and the word being spoken is marked inside it.", focus: "17%" }}
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />
-      <Small>Reading aloud happens on the phone, so it works on a plane or in a basement library.</Small>
+      <Small>Key takeaways and your own angles are online, need sign-in and use credit, and arrive with the next update. For anything that matters, check it against the page.</Small>
     </Landing>
   );
 }
