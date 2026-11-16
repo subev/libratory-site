@@ -22,9 +22,9 @@ export function Books() {
       demo="books"
       capture={{
         src: "/demos/photographed-page.webp",
-        alt: "A photographed page of a printed novel in Libratory, the sentence being read aloud marked on the print.",
+        alt: "A photographed page of a printed novel in Libratory, the sentence being read aloud marked on the print and the spoken word marked inside it.",
         focus: "0%",
-        plain: { width: 1170, height: 1190 },
+        plain: { width: 1170, height: 1066 },
       }}
       footer={FOOT}
     >

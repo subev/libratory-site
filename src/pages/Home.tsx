@@ -24,10 +24,10 @@ const SCENES = [
   },
   {
     title: "The page you photographed, lit.",
-    body: "It reads the print itself, on your iPhone, and marks the sentence on your own page. Nothing is uploaded.",
+    body: "It reads the print itself, on your iPhone, and marks the sentence, and the word inside it, on your own page. Nothing is uploaded.",
     src: "/demos/photographed-page.webp",
-    alt: "A photographed page of a printed novel in Libratory, the sentence being read aloud marked on the print.",
-    plain: { width: 1170, height: 1190 },
+    alt: "A photographed page of a printed novel in Libratory, the sentence being read aloud marked on the print and the spoken word marked inside it.",
+    plain: { width: 1170, height: 1066 },
   },
 ];
 

@@ -20,7 +20,7 @@ export function Study() {
       line="Open the paper or the chapter and listen, with the page as printed in front of you."
       free="Free. No account. Works without internet."
       demo="study"
-      capture={{ src: "/demos/study.webp", alt: "A page of an EPUB book open in Libratory on an iPhone.", focus: "17%" }}
+      capture={{ src: "/demos/study.webp", alt: "A page of a book open in Libratory on an iPhone: the sentence being read aloud is marked, and the word being spoken is marked inside it.", focus: "17%" }}
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />
