@@ -159,16 +159,16 @@ export function Lines({ lines }: { lines: string[] }) {
 export type Said = { label: string; text: string; audio: string; listen: string };
 
 /** The same passage twice, as printed and as the app explained it, each with the app's own sound */
-export function Explained({ title, printed, explained, note }: { title: string; printed: Said; explained: Said; note: string }) {
+export function Explained({ title, printed, explained, more, note }: { title: string; printed: Said; explained: Said; more?: Said; note: string }) {
   return (
     <section className="border-t border-edge">
       <div className={`${WRAP} py-12 sm:py-16`}>
         <h2 className="mx-auto max-w-2xl text-center text-[clamp(1.5rem,3vw,2rem)] text-balance">{title}</h2>
-        <div className="mt-9 grid gap-6 md:grid-cols-2">
-          {[printed, explained].map((said, index) => (
-            <figure key={said.label} className={`flex flex-col rounded-xl border p-6 ${index === 1 ? "border-brass bg-raised" : "border-edge"}`}>
+        <div className={`mt-9 grid gap-6 ${more ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>
+          {[printed, explained, ...(more ? [more] : [])].map((said, index) => (
+            <figure key={said.label} className={`flex flex-col rounded-xl border p-6 ${index > 0 ? "border-brass bg-raised" : "border-edge"}`}>
               <figcaption className="text-sm font-semibold tracking-wide text-brass uppercase">{said.label}</figcaption>
-              <blockquote className={`mt-3 grow ${index === 1 ? "text-lg text-ink" : "text-[0.95rem] text-ink-muted"}`}>{said.text}</blockquote>
+              <blockquote className={`mt-3 grow ${index > 0 ? (more ? "text-ink" : "text-lg text-ink") : "text-[0.95rem] text-ink-muted"}`}>{said.text}</blockquote>
               <audio controls preload="none" src={said.audio} aria-label={said.listen} className="mt-5 w-full" />
             </figure>
           ))}

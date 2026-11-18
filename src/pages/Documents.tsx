@@ -52,7 +52,7 @@ export function Documents() {
         title="First what it says. Then what it means."
         printed={PRINTED}
         explained={SIMPLY}
-        note="The federal student loan promissory note, page 2, item 15 B. We asked the app to explain it like we were five. The answer and both voices are the app's own, unedited. Explaining needs sign-in and uses credit, and it arrives with the next update."
+        note="The federal student loan promissory note, page 2, item 15 B. We asked the app to explain it like we were five. The answer and both voices are the app's own, unedited. Explaining needs sign-in and uses credit."
       />
       <Columns columns={COLUMNS} />
       <Lines lines={PAPERS} />
