@@ -15,15 +15,11 @@ const COLUMNS = [
 const PRINTED = {
   label: "As printed",
   text: "I have the option of paying the interest that accrues on my loans during grace, in-school, deferment (including in-school deferment), forbearance, and certain other periods, but if I do not do so, ED may add unpaid interest that accrues on my loans to the principal balance of those loans at the end of the grace, deferment, forbearance, or other period. This is called \"capitalization.\" Capitalization will increase the principal amount owed on the loan and the total amount of interest I must pay.",
-  audio: "/demos/loan-note-as-printed.m4a",
-  listen: "Hear the passage as printed",
 };
 
 const SIMPLY = {
   label: "Explained simply",
   text: "Item 15 B explains that while you are in school or in a pause from payments, your loan can build up interest. You're allowed to pay that interest as it builds. If you don't, the lender can add the unpaid interest onto the main amount you borrowed at the end of that period — the note calls this \"capitalization.\" That makes the amount you owe bigger, and the total interest you pay will also go up.",
-  audio: "/demos/loan-note-explained.m4a",
-  listen: "Hear the passage explained simply",
 };
 
 const PAPERS = [
@@ -52,7 +48,7 @@ export function Documents() {
         title="First what it says. Then what it means."
         printed={PRINTED}
         explained={SIMPLY}
-        note="The federal student loan promissory note, page 2, item 15 B. We asked the app to explain it like we were five. The answer and both voices are the app's own, unedited. Explaining needs sign-in and uses credit."
+        note="The federal student loan promissory note, page 2, item 15 B. We asked the app to explain it like we were five. The answer is the app's own, unedited. Explaining needs sign-in and uses credit."
       />
       <Columns columns={COLUMNS} />
       <Lines lines={PAPERS} />
