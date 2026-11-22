@@ -1,3 +1,4 @@
+import { CLIPS_PLAYED, RETOLD_CLIP, TRANSLATED_CLIP } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
 import { Doors, Scenes, Small } from "../components/Verse.tsx";
 
@@ -27,8 +28,10 @@ const SCENES = [
     title: "The page and its translation, both lit.",
     body: "The sentence you hear lights in both languages, and the word being spoken lights in the other language too. You learn the word where you met it.",
     note: "Two-language books come with the app. Translating your own is online and uses credit.",
-    src: "/demos/tax-notice.webp",
-    alt: "A German tax notice open in Libratory: the sentence asking for payment is marked with “zahlen Sie” lit, and below it the English sentence with “pay” lit.",
+    src: "/demos/page-and-translation.webp",
+    alt: "Crime and Punishment in Russian in Libratory, the first sentence marked with “медленно” lit, and under it the English translation with “slowly” lit.",
+    plain: { width: 1170, height: 1510 },
+    clip: CLIPS_PLAYED ? TRANSLATED_CLIP : undefined,
     href: "/translations/",
     more: "Translations",
   },
@@ -49,12 +52,8 @@ export function Home() {
       line="Your phone holds you with a voice and words that light up. Libratory gives the same two things to what you chose to read."
       free="Listening is free."
       demo="home"
-      capture={{
-        src: "/demos/word-pairs.webp",
-        alt: "A page in English and German in Libratory: the sentence being read is marked in both languages, and the word “both” is marked together with “beide”.",
-        focus: "0%",
-        plain: { width: 1170, height: 1519 },
-      }}
+      capture={{ src: "/demos/retold-page.webp", alt: "Crime and Punishment open in Libratory: the first page above, its lines underlined, and under it the Key takeaways pane being read aloud, with the word “stairs” lit.", focus: "0%", plain: { width: 1170, height: 1495 } }}
+      clip={CLIPS_PLAYED ? RETOLD_CLIP : undefined}
       footer={FOOT}
     >
       <Scenes scenes={SCENES} />

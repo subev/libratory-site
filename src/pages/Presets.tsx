@@ -1,3 +1,4 @@
+import { CLIPS_PLAYED, RETOLD_CLIP } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
 import { Columns, Honest, Small } from "../components/Verse.tsx";
 
@@ -22,6 +23,8 @@ export function Presets() {
       line="Hear the page told another way, in a pane under it. While the voice reads, the page underlines the lines each part comes from and lights the key words."
       free="Reading the page as printed is free. No account."
       demo="presets"
+      capture={{ src: "/demos/retold-page.webp", alt: "Crime and Punishment open in Libratory: the first page above, its lines underlined, and under it the Key takeaways pane being read aloud, with the word “stairs” lit.", focus: "0%", plain: { width: 1170, height: 1495 } }}
+      clip={CLIPS_PLAYED ? RETOLD_CLIP : undefined}
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />
