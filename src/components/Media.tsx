@@ -8,14 +8,41 @@ const EMPTY = "flex items-center justify-center border border-dashed border-edge
 /** A 1170×2532 capture; `focus` is how far down the 3:2 phone crop sits, past the status bar and toolbar */
 export type Capture = { src: string; alt: string; focus: string; /** A cut-out of a screen, shown as it is on every width */ plain?: { width: number; height: number } };
 
+/** A screen recording with the app's own sound; only one a person has played goes here */
+export type Clip = { src: string; poster: string; label: string; width: number; height: number };
+
+export function ClipPlayer({ clip, className = "" }: { clip: Clip; className?: string }) {
+  return (
+    <video
+      src={clip.src}
+      poster={clip.poster}
+      aria-label={clip.label}
+      width={clip.width}
+      height={clip.height}
+      controls
+      playsInline
+      preload="none"
+      className={`h-auto w-full rounded-xl border border-edge bg-inset shadow-[0_30px_80px_rgba(0,0,0,0.55)] ${className}`}
+    />
+  );
+}
+
 /** `name` marks an empty slot, so each page's missing capture can be found in the markup */
-export function HeroMedia({ name, capture }: { name: string; capture?: Capture }) {
+export function HeroMedia({ name, capture, clip }: { name: string; capture?: Capture; clip?: Clip }) {
   const crop = "w-full max-w-[560px] rounded-xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] lg:hidden";
   const frame = (screen: ReactNode) => (
     <div className="hidden lg:block">
       <PhoneFrame width={300} height={602} radius={46} pad={11} screen="var(--bg-raised)" lift>{screen}</PhoneFrame>
     </div>
   );
+
+  if (clip) {
+    return (
+      <div className="flex w-full justify-center">
+        <ClipPlayer clip={clip} className="max-w-[340px]" />
+      </div>
+    );
+  }
 
   if (capture?.plain) {
     return (

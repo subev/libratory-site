@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ClipPlayer, type Clip } from "./Media.tsx";
 import { PhoneFrame } from "./phone.tsx";
 
 const WRAP = "mx-auto max-w-5xl px-6";
@@ -12,7 +13,37 @@ function Phone({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export type Scene = { title: string; body: string; note?: string; src: string; alt: string; /** A cut-out of a screen, shown larger and without the phone */ plain?: { width: number; height: number } };
+export type Scene = {
+  title: string;
+  body: string;
+  note?: string;
+  /** A scene with no picture is words only, until a lit one exists */
+  src?: string;
+  alt?: string;
+  /** A cut-out of a screen, shown larger and without the phone */
+  plain?: { width: number; height: number };
+  clip?: Clip;
+  href?: string;
+  more?: string;
+};
+
+function ScenePicture({ scene }: { scene: Scene }) {
+  if (scene.clip) return <div className="w-full max-w-[340px] flex-none sm:w-[300px]"><ClipPlayer clip={scene.clip} /></div>;
+  if (!scene.src || !scene.alt) return null;
+  if (scene.plain) {
+    return (
+      <img
+        src={scene.src}
+        alt={scene.alt}
+        width={scene.plain.width}
+        height={scene.plain.height}
+        loading="lazy"
+        className="w-full max-w-[400px] flex-none rounded-xl border border-edge shadow-[0_30px_80px_rgba(0,0,0,0.55)] sm:w-[400px]"
+      />
+    );
+  }
+  return <div className="flex flex-none justify-center sm:w-[280px]"><Phone src={scene.src} alt={scene.alt} /></div>;
+}
 
 /** Picture and text side by side, the picture changing sides from one scene to the next */
 export function Scenes({ scenes }: { scenes: Scene[] }) {
@@ -21,22 +52,12 @@ export function Scenes({ scenes }: { scenes: Scene[] }) {
       <div className="flex flex-col gap-16 sm:gap-24">
         {scenes.map((scene, index) => (
           <div key={scene.title} className={`mx-auto flex max-w-4xl flex-col items-center justify-center gap-8 sm:gap-16 ${index % 2 ? "sm:flex-row-reverse" : "sm:flex-row"}`}>
-            {scene.plain ? (
-              <img
-                src={scene.src}
-                alt={scene.alt}
-                width={scene.plain.width}
-                height={scene.plain.height}
-                loading="lazy"
-                className="w-full max-w-[400px] flex-none rounded-xl border border-edge shadow-[0_30px_80px_rgba(0,0,0,0.55)] sm:w-[400px]"
-              />
-            ) : (
-              <div className="flex flex-none justify-center sm:w-[280px]"><Phone src={scene.src} alt={scene.alt} /></div>
-            )}
-            <div className="max-w-md text-center sm:text-left">
+            <ScenePicture scene={scene} />
+            <div className={`max-w-md text-center ${scene.src || scene.clip ? "sm:text-left" : "sm:max-w-xl"}`}>
               <h2 className="text-[clamp(1.6rem,3.2vw,2.2rem)] text-balance">{scene.title}</h2>
               <p className="mt-3 text-lg text-ink-secondary">{scene.body}</p>
               {scene.note ? <p className="mt-3 text-[0.95rem] text-ink-faint">{scene.note}</p> : null}
+              {scene.href ? <a href={scene.href} className="mt-4 inline-block text-brass hover:text-ember-bright">{scene.more ?? "More"} →</a> : null}
             </div>
           </div>
         ))}
@@ -113,10 +134,11 @@ export function Honest({ title = "What it can't do", children }: { title?: strin
 export type Door = { verse: string; label: string; href: string };
 
 /** One line per use, each leading to its page */
-export function Doors({ doors }: { doors: Door[] }) {
+export function Doors({ doors, title }: { doors: Door[]; title?: string }) {
   return (
     <section className="border-t border-edge">
       <div className={`${WRAP} py-14 sm:py-20`}>
+        {title ? <h2 className="mx-auto mb-6 max-w-3xl font-display text-sm uppercase tracking-[0.22em] text-brass">{title}</h2> : null}
         <ul className="mx-auto flex max-w-3xl flex-col">
           {doors.map((door) => (
             <li key={door.href} className="border-b border-edge first:border-t">

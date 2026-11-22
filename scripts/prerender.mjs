@@ -1,7 +1,7 @@
 import { readFile, rm, writeFile } from "node:fs/promises";
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
-import { Articles, Books, Documents, Home, Languages, Learn, Mac, Reader, Study } from "../dist-ssr/entry-server.js";
+import { Articles, Books, Documents, Home, Languages, Learn, Mac, Presets, Reader, Study, Translations } from "../dist-ssr/entry-server.js";
 
 const PAGES = [
   { file: "dist/index.html", page: Home },
@@ -13,6 +13,8 @@ const PAGES = [
   { file: "dist/languages/index.html", page: Languages },
   { file: "dist/study/index.html", page: Study },
   { file: "dist/books/index.html", page: Books },
+  { file: "dist/presets/index.html", page: Presets },
+  { file: "dist/translations/index.html", page: Translations },
 ];
 
 for (const { file, page } of PAGES) {

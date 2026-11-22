@@ -3,6 +3,8 @@ import { Doors, Scenes, Small } from "../components/Verse.tsx";
 
 // Old links ending in /#download mean the Mac tool, so the id sits on the link that leads to it
 const FOOT = [
+  { href: "/presets/", label: "Presets" },
+  { href: "/translations/", label: "Translations" },
   { href: "/books/", label: "Books" },
   { href: "/study/", label: "Study" },
   { href: "/documents/", label: "Documents" },
@@ -15,19 +17,20 @@ const FOOT = [
 
 const SCENES = [
   {
-    title: "Every word knows its partner.",
-    body: "Read in two languages at once. The sentence you hear lights in both, and the word being spoken lights in the other language too. You learn the word where you met it.",
-    note: "Two-language books come with the app. Translating your own is online and uses credit.",
-    src: "/demos/word-pairs.webp",
-    alt: "A page in English and German in Libratory: the sentence being read is marked in both languages, and the word “both” is marked together with “beide”.",
-    plain: { width: 1170, height: 1519 },
+    title: "Hear the page told another way.",
+    body: "Key takeaways, or a line of your own like “explain it to a ten-year-old”. The voice reads the retelling in a pane under the page, and the page underlines the lines it comes from, with the word lamp on the key words.",
+    note: "Presets are online and use credit. Listening to the page as printed is free.",
+    href: "/presets/",
+    more: "Presets",
   },
   {
-    title: "The page you photographed, lit.",
-    body: "It reads the print itself, on your iPhone, and marks the sentence, and the word inside it, on your own page. Nothing is uploaded.",
-    src: "/demos/photographed-page.webp",
-    alt: "A photographed page of a printed novel in Libratory, the sentence being read aloud marked on the print and the spoken word marked inside it.",
-    plain: { width: 1170, height: 1066 },
+    title: "The page and its translation, both lit.",
+    body: "The sentence you hear lights in both languages, and the word being spoken lights in the other language too. You learn the word where you met it.",
+    note: "Two-language books come with the app. Translating your own is online and uses credit.",
+    src: "/demos/tax-notice.webp",
+    alt: "A German tax notice open in Libratory: the sentence asking for payment is marked with “zahlen Sie” lit, and below it the English sentence with “pay” lit.",
+    href: "/translations/",
+    more: "Translations",
   },
 ];
 
@@ -46,11 +49,16 @@ export function Home() {
       line="Your phone holds you with a voice and words that light up. Libratory gives the same two things to what you chose to read."
       free="Listening is free."
       demo="home"
-      capture={{ src: "/demos/lamp.webp", alt: "A page open in Libratory on an iPhone, the sentence being read aloud marked on it.", focus: "9%" }}
+      capture={{
+        src: "/demos/word-pairs.webp",
+        alt: "A page in English and German in Libratory: the sentence being read is marked in both languages, and the word “both” is marked together with “beide”.",
+        focus: "0%",
+        plain: { width: 1170, height: 1519 },
+      }}
       footer={FOOT}
     >
       <Scenes scenes={SCENES} />
-      <Doors doors={DOORS} />
+      <Doors doors={DOORS} title="And what people read with it" />
       <Small>
         Listening is free with the voices already on your iPhone. No account. It works without internet. PDF, EPUB, or a photo of the page.
       </Small>

@@ -7,3 +7,5 @@ export { Documents } from "./pages/Documents.tsx";
 export { Languages } from "./pages/Languages.tsx";
 export { Study } from "./pages/Study.tsx";
 export { Books } from "./pages/Books.tsx";
+export { Presets } from "./pages/Presets.tsx";
+export { Translations } from "./pages/Translations.tsx";
