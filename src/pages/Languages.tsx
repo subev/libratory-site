@@ -1,5 +1,5 @@
 import { Landing } from "../components/Landing.tsx";
-import { Columns, Honest } from "../components/Verse.tsx";
+import { Columns, Small } from "../components/Verse.tsx";
 
 const FOOT = [
   { href: "/", label: "Home" },
@@ -24,9 +24,7 @@ export function Languages() {
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />
-      <Honest title="For deadlines, ask a person too">
-        Machine translation of official language is good and not perfect. The app's own menus are in English.
-      </Honest>
+      <Small>The app's own menus are in English.</Small>
     </Landing>
   );
 }

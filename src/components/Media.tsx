@@ -39,7 +39,7 @@ export function HeroMedia({ name, capture, clip }: { name: string; capture?: Cap
   if (clip) {
     return (
       <div className="flex w-full justify-center">
-        <ClipPlayer clip={clip} className="max-w-[340px]" />
+        <ClipPlayer clip={clip} className="max-w-[260px] sm:max-w-[320px]" />
       </div>
     );
   }

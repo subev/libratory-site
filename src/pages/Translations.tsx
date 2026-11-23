@@ -1,6 +1,6 @@
-import { CLIPS_PLAYED, TRANSLATED_CLIP } from "../components/clips.ts";
+import { CLIPS_ON, TRANSLATED_CLIP } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
-import { Columns, Honest, Small } from "../components/Verse.tsx";
+import { Columns, Small } from "../components/Verse.tsx";
 
 const FOOT = [
   { href: "/", label: "Home" },
@@ -25,14 +25,11 @@ export function Translations() {
       free="Listening to the original is free. No account."
       demo="translations"
       capture={{ src: "/demos/page-and-translation.webp", alt: "Crime and Punishment in Russian in Libratory, the first sentence marked with “медленно” lit, and under it the English translation with “slowly” lit.", focus: "0%", plain: { width: 1170, height: 1510 } }}
-      clip={CLIPS_PLAYED ? TRANSLATED_CLIP : undefined}
+      clip={CLIPS_ON ? TRANSLATED_CLIP : undefined}
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />
-      <Honest title="For deadlines, ask a person too">
-        Machine translation is good and not perfect. That is why the original stays lit above it. The app's own menus are in English.
-      </Honest>
-      <Small>Translating your own pages is online, needs an account and uses credit.</Small>
+      <Small>Translating your own pages is online, needs an account and uses credit. The app's own menus are in English.</Small>
     </Landing>
   );
 }

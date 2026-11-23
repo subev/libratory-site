@@ -1,5 +1,5 @@
 import { Landing } from "../components/Landing.tsx";
-import { Columns, Explained, Honest, Lines } from "../components/Verse.tsx";
+import { Columns, Explained, Lines } from "../components/Verse.tsx";
 
 const FOOT = [
   { href: "/", label: "Home" },
@@ -52,9 +52,6 @@ export function Documents() {
       />
       <Columns columns={COLUMNS} />
       <Lines lines={PAPERS} />
-      <Honest title="Not a lawyer">
-        It tells you what the paper says. It does not tell you whether to sign. For anything that matters, ask a person too.
-      </Honest>
     </Landing>
   );
 }

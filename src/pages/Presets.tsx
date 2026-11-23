@@ -1,6 +1,6 @@
-import { CLIPS_PLAYED, RETOLD_CLIP } from "../components/clips.ts";
+import { CLIPS_ON, RETOLD_CLIP } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
-import { Columns, Honest, Small } from "../components/Verse.tsx";
+import { Columns, Small } from "../components/Verse.tsx";
 
 const FOOT = [
   { href: "/", label: "Home" },
@@ -24,13 +24,10 @@ export function Presets() {
       free="Reading the page as printed is free. No account."
       demo="presets"
       capture={{ src: "/demos/retold-page.webp", alt: "Crime and Punishment open in Libratory: the first page above, its lines underlined, and under it the Key takeaways pane being read aloud, with the word “stairs” lit.", focus: "0%", plain: { width: 1170, height: 1495 } }}
-      clip={CLIPS_PLAYED ? RETOLD_CLIP : undefined}
+      clip={CLIPS_ON ? RETOLD_CLIP : undefined}
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />
-      <Honest title="Check it against the page">
-        A retelling can leave things out. That is what the underlines are for. Hold How it reads to go back to the page as printed, and if a passage can't be retold, it is read as printed with a short note saying why.
-      </Honest>
       <Small>Key takeaways and presets are online, need an account and credit, and need iOS 26.2 or later. Your book stays on your phone; only the passage being retold is sent.</Small>
     </Landing>
   );

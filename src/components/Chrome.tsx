@@ -61,7 +61,7 @@ export function Nav({ links, source }: { links: Link[]; source?: boolean }) {
 export function Footer({ links }: { links: Link[] }) {
   return (
     <footer className="border-t border-edge">
-      <div className="mx-auto flex max-w-5xl flex-col gap-5 px-6 py-12 text-[0.95rem] text-ink-faint sm:flex-row sm:items-center">
+      <div className="mx-auto flex max-w-5xl flex-col gap-5 px-6 pt-12 pb-6 text-[0.95rem] text-ink-faint sm:flex-row sm:items-center">
         <div className="flex items-center gap-3">
           <Mark className="size-6" />
           <Wordmark className="text-ink-muted" />
@@ -75,6 +75,9 @@ export function Footer({ links }: { links: Link[] }) {
           ))}
         </div>
       </div>
+      <p className="mx-auto max-w-5xl px-6 pb-10 text-sm text-ink-faint">
+        Retellings and translations are written by language models and can be wrong. For anything that matters, check the original.
+      </p>
     </footer>
   );
 }

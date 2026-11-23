@@ -35,3 +35,7 @@
 /.well-known/apple-app-site-association
   Content-Type: application/json
   Cache-Control: public, max-age=3600
+
+# Committed, not content-hashed — short, so a replaced or pulled clip reaches readers within the hour
+/clips/*
+  Cache-Control: public, max-age=3600

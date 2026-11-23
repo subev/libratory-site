@@ -28,7 +28,7 @@ export type Scene = {
 };
 
 function ScenePicture({ scene }: { scene: Scene }) {
-  if (scene.clip) return <div className="w-full max-w-[340px] flex-none sm:w-[300px]"><ClipPlayer clip={scene.clip} /></div>;
+  if (scene.clip) return <div className="w-full max-w-[260px] flex-none sm:w-[300px] sm:max-w-none"><ClipPlayer clip={scene.clip} /></div>;
   if (!scene.src || !scene.alt) return null;
   if (scene.plain) {
     return (

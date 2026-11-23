@@ -1,4 +1,4 @@
-import { CLIPS_PLAYED, RETOLD_CLIP, TRANSLATED_CLIP } from "../components/clips.ts";
+import { CLIPS_ON, RETOLD_CLIP, TRANSLATED_CLIP } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
 import { Doors, Scenes, Small } from "../components/Verse.tsx";
 
@@ -31,7 +31,7 @@ const SCENES = [
     src: "/demos/page-and-translation.webp",
     alt: "Crime and Punishment in Russian in Libratory, the first sentence marked with “медленно” lit, and under it the English translation with “slowly” lit.",
     plain: { width: 1170, height: 1510 },
-    clip: CLIPS_PLAYED ? TRANSLATED_CLIP : undefined,
+    clip: CLIPS_ON ? TRANSLATED_CLIP : undefined,
     href: "/translations/",
     more: "Translations",
   },
@@ -53,7 +53,7 @@ export function Home() {
       free="Listening is free."
       demo="home"
       capture={{ src: "/demos/retold-page.webp", alt: "Crime and Punishment open in Libratory: the first page above, its lines underlined, and under it the Key takeaways pane being read aloud, with the word “stairs” lit.", focus: "0%", plain: { width: 1170, height: 1495 } }}
-      clip={CLIPS_PLAYED ? RETOLD_CLIP : undefined}
+      clip={CLIPS_ON ? RETOLD_CLIP : undefined}
       footer={FOOT}
     >
       <Scenes scenes={SCENES} />
