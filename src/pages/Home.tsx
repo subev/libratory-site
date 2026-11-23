@@ -1,4 +1,4 @@
-import { CLIPS_ON, GERMAN_CLIP, SIMPLE_CLIP, VERSE_CLIP } from "../components/clips.ts";
+import { GERMAN_CLIP, SIMPLE_CLIP, VERSE_CLIP } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
 import { Doors, Scenes, Small, type Scene } from "../components/Verse.tsx";
 
@@ -24,7 +24,7 @@ const SCENES: Scene[] = [
     src: "/demos/page-key-words.webp",
     alt: "Kant’s Critique of Pure Reason, the page “Of Space”, open in Libratory, the key phrase “we can imagine one space only” strongly underlined and the sentences around it lightly, and under it the pane Explain it to a five-year-old with “sandbox” lit.",
     plain: { width: 1170, height: 1450 },
-    clip: CLIPS_ON ? SIMPLE_CLIP : undefined,
+    clip: SIMPLE_CLIP,
     href: "/presets/",
     more: "Presets",
   },
@@ -35,7 +35,7 @@ const SCENES: Scene[] = [
     src: "/demos/german-reader.webp",
     alt: "A German reader for beginners from 1908, in Fraktur, open in Libratory with “ein Mann” lit in the first sentence, and under it the English, “Once upon a time there was a man”, with “man” lit.",
     plain: { width: 1170, height: 1620 },
-    clip: CLIPS_ON ? GERMAN_CLIP : undefined,
+    clip: GERMAN_CLIP,
     href: "/translations/",
     more: "Translations",
   },
@@ -56,8 +56,8 @@ export function Home() {
       line="Your phone holds you with a voice and words that light up. Libratory gives the same two things to what you chose to read."
       free="Listening is free."
       demo="home"
-      capture={{ src: "/demos/verse-key-line.webp", alt: "Nekrasov’s poem «Пьяница» in old Russian type open in Libratory, the key line «Все та же хата бѣдная» strongly underlined and the lines around it lightly, and under it the Rhymed English verse pane, “The same poor hut is all you see”, with “hut” lit.", focus: "0%", plain: { width: 1170, height: 1496 } }}
-      clip={CLIPS_ON ? VERSE_CLIP : undefined}
+      capture={{ src: "/demos/verse-rhymed.webp", alt: "Nekrasov’s poem «Пьяница» in old Russian type open in Libratory, the key line «Идешь, какъ обезславленный» strongly underlined and the lines around it lightly, and under it the Rhymed English verse pane, “Grows paler still, and wan within. Down-trodden, crushed, with drooping head”, with “Down” lit.", focus: "0%", plain: { width: 1170, height: 1596 } }}
+      clip={VERSE_CLIP}
       footer={FOOT}
     >
       <Scenes scenes={SCENES} />

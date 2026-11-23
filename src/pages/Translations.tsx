@@ -1,4 +1,4 @@
-import { CLIPS_ON, GERMAN_CLIP } from "../components/clips.ts";
+import { GERMAN_CLIP } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
 import { Columns, Small } from "../components/Verse.tsx";
 
@@ -25,7 +25,7 @@ export function Translations() {
       free="Listening to the original is free. No account."
       demo="translations"
       capture={{ src: "/demos/german-reader.webp", alt: "A German reader for beginners from 1908, in Fraktur, open in Libratory with “ein Mann” lit in the first sentence, and under it the English, “Once upon a time there was a man”, with “man” lit.", focus: "0%", plain: { width: 1170, height: 1620 } }}
-      clip={CLIPS_ON ? GERMAN_CLIP : undefined}
+      clip={GERMAN_CLIP}
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />

@@ -1,4 +1,4 @@
-import { CLIPS_ON, SIMPLE_CLIP } from "../components/clips.ts";
+import { SIMPLE_CLIP } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
 import { Columns, Small } from "../components/Verse.tsx";
 
@@ -24,7 +24,7 @@ export function Presets() {
       free="Reading the page as printed is free. No account."
       demo="presets"
       capture={{ src: "/demos/page-key-words.webp", alt: "Kant’s Critique of Pure Reason, the page “Of Space”, open in Libratory, the key phrase “we can imagine one space only” strongly underlined and the sentences around it lightly, and under it the pane Explain it to a five-year-old with “sandbox” lit.", focus: "0%", plain: { width: 1170, height: 1450 } }}
-      clip={CLIPS_ON ? SIMPLE_CLIP : undefined}
+      clip={SIMPLE_CLIP}
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />
