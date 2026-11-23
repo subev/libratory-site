@@ -1,20 +1,25 @@
 import type { Clip } from "./Media.tsx";
 
-// true puts the clips up; false shows each page's still in their place
+// true puts the clips up; false shows each page's still in their place. Turned on only after a person has played them with sound.
 export const CLIPS_ON = false;
 
-export const RETOLD_CLIP: Clip = {
-  src: "/clips/retold-page.mp4",
-  poster: "/clips/retold-page-poster.webp",
-  label: "Crime and Punishment as Key takeaways, read aloud under the page, 28 seconds with sound",
+/** Home: an old Russian poem heard as rhymed English verse */
+export const VERSE_CLIP: Clip = {
+  src: "/clips/verse-retold.mp4",
+  poster: "/clips/verse-retold-poster.webp",
+  label: "A page of Nekrasov's poem “The Drunkard” in old Russian type, heard as rhymed English verse in the pane under it, 29 seconds with sound",
   width: 1170,
   height: 2532,
 };
 
-export const TRANSLATED_CLIP: Clip = {
-  src: "/clips/page-and-translation.mp4",
-  poster: "/clips/page-and-translation-poster.webp",
-  label: "Crime and Punishment read in Russian and then English, the word lit in both, 30 seconds with sound",
+/** Presets: a hard page explained to a five-year-old */
+export const SIMPLE_CLIP: Clip = {
+  src: "/clips/page-explained.mp4",
+  poster: "/clips/page-explained-poster.webp",
+  label: "A page of Kant's Critique of Pure Reason explained to a five-year-old, read aloud in the pane under it, 28 seconds with sound",
   width: 1170,
   height: 2532,
 };
+
+/** Translations: a German beginner book, the word lit in both languages. Not recorded yet */
+export const GERMAN_CLIP: Clip | undefined = undefined;
