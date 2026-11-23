@@ -11,7 +11,7 @@ const FOOT = [
 ];
 
 const COLUMNS = [
-  { title: "Both, lit.", body: "The original on top, the translation under it. As the voice reads, the sentence and the word light in both, so “zahlen” and “pay” find each other." },
+  { title: "Both, lit.", body: "The original on top, the translation under it. As the voice reads, the sentence and the word light in both, so “Mann” and “man” find each other." },
   { title: "Your order.", body: "Hear the original first and then yours, the other way round, or only one of them. Tap a word in the other language to hear that sentence its way." },
   { title: "Your own pages.", body: "A PDF, an EPUB, or a photo of the letter that came in the post. Or start with a two-language book that comes with the app." },
 ];
@@ -24,7 +24,7 @@ export function Translations() {
       line="Your page and its translation together. The sentence you hear lights in both languages, and so does the word being spoken."
       free="Listening to the original is free. No account."
       demo="translations"
-      capture={{ src: "/demos/tax-notice.webp", alt: "A German tax notice open in Libratory: the sentence asking for payment is marked with “zahlen Sie” lit, and below it the English sentence with “pay” lit.", focus: "52%" }}
+      capture={{ src: "/demos/german-reader.webp", alt: "A German reader for beginners from 1908, in Fraktur, open in Libratory with “ein Mann” lit in the first sentence, and under it the English, “Once upon a time there was a man”, with “man” lit.", focus: "0%", plain: { width: 1170, height: 1620 } }}
       clip={CLIPS_ON ? GERMAN_CLIP : undefined}
       footer={FOOT}
     >

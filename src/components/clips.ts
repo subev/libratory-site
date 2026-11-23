@@ -7,7 +7,7 @@ export const CLIPS_ON = false;
 export const VERSE_CLIP: Clip = {
   src: "/clips/verse-retold.mp4",
   poster: "/clips/verse-retold-poster.webp",
-  label: "A page of Nekrasov's poem “The Drunkard” in old Russian type, heard as rhymed English verse in the pane under it, 29 seconds with sound",
+  label: "A page of Nekrasov's poem “The Drunkard” in old Russian type, heard as rhymed English verse in the pane under it, its key line underlined on the page, 21 seconds with sound",
   width: 1170,
   height: 2532,
 };
@@ -16,10 +16,16 @@ export const VERSE_CLIP: Clip = {
 export const SIMPLE_CLIP: Clip = {
   src: "/clips/page-explained.mp4",
   poster: "/clips/page-explained-poster.webp",
-  label: "A page of Kant's Critique of Pure Reason explained to a five-year-old, read aloud in the pane under it, 28 seconds with sound",
+  label: "A page of Kant's Critique of Pure Reason explained to a five-year-old in the pane under it, its key phrases underlined on the page, 29 seconds with sound",
   width: 1170,
   height: 2532,
 };
 
-/** Translations: a German beginner book, the word lit in both languages. Not recorded yet */
-export const GERMAN_CLIP: Clip | undefined = undefined;
+/** Translations: a German beginner's reader, the word lit in both languages */
+export const GERMAN_CLIP: Clip = {
+  src: "/clips/german-reader.mp4",
+  poster: "/clips/german-reader-poster.webp",
+  label: "A German reader for beginners from 1908 read in German and then in English, each word lit with its partner, 21 seconds with sound",
+  width: 1170,
+  height: 2532,
+};
