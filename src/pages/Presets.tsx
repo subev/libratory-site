@@ -23,7 +23,6 @@ export function Presets() {
       line="Hear the page told another way, in a pane under it. While the voice reads, the page underlines the lines each part comes from and lights the key words."
       free="Reading the page as printed is free. No account."
       demo="presets"
-      capture={{ src: "/demos/page-key-words.webp", alt: "Kant’s Critique of Pure Reason, the page “Of Space”, open in Libratory, the key phrase “we can imagine one space only” strongly underlined and the sentences around it lightly, and under it the pane Explain it to a five-year-old with “sandbox” lit.", focus: "0%", plain: { width: 1170, height: 1450 } }}
       clip={SIMPLE_CLIP}
       footer={FOOT}
     >
