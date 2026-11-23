@@ -27,14 +27,42 @@ export function ClipPlayer({ clip, className = "" }: { clip: Clip; className?: s
   );
 }
 
+/** Two clips of the same page, shown side by side and captioned */
+export type ClipPairing = { first: Clip; firstLabel: string; second: Clip; secondLabel: string };
+
+export function ClipPair({ pair }: { pair: ClipPairing }) {
+  const sides = [
+    { clip: pair.first, label: pair.firstLabel },
+    { clip: pair.second, label: pair.secondLabel },
+  ];
+  return (
+    <div className="grid w-full max-w-[480px] grid-cols-2 gap-3 sm:gap-5">
+      {sides.map(({ clip, label }) => (
+        <figure key={clip.src} className="flex flex-col items-center gap-2">
+          <ClipPlayer clip={clip} />
+          <figcaption className="text-sm text-ink-muted">{label}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 /** `name` marks an empty slot, so each page's missing capture can be found in the markup */
-export function HeroMedia({ name, capture, clip }: { name: string; capture?: Capture; clip?: Clip }) {
+export function HeroMedia({ name, capture, clip, pair }: { name: string; capture?: Capture; clip?: Clip; pair?: ClipPairing }) {
   const crop = "w-full max-w-[560px] rounded-xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] lg:hidden";
   const frame = (screen: ReactNode) => (
     <div className="hidden lg:block">
       <PhoneFrame width={300} height={602} radius={46} pad={11} screen="var(--bg-raised)" lift>{screen}</PhoneFrame>
     </div>
   );
+
+  if (pair) {
+    return (
+      <div className="flex w-full justify-center">
+        <ClipPair pair={pair} />
+      </div>
+    );
+  }
 
   if (clip) {
     return (

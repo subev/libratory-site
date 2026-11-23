@@ -1,4 +1,4 @@
-import { GERMAN_CLIP, SIMPLE_CLIP, VERSE_CLIP } from "../components/clips.ts";
+import { GERMAN_CLIP, LITERAL_CLIP, SIMPLE_CLIP, VERSE_CLIP, VERSE_PAIR } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
 import { Doors, Scenes, Small, type Scene } from "../components/Verse.tsx";
 
@@ -21,6 +21,9 @@ const SCENES: Scene[] = [
     title: "Hear the page told another way.",
     body: "Key takeaways, or a line of your own like “explain it to a five-year-old” or “rhymed English verse”. The voice reads the retelling in a pane under the page, and the page underlines the lines it comes from, with the word lamp on the key words.",
     note: "Presets are online and use credit. Listening to the page as printed is free.",
+    src: "/demos/capital-explained.webp",
+    alt: "A page of Marx’s Capital open in Libratory, “resold for £100+£10 or £110” strongly underlined and the lines around it lightly, and under it the pane Explain it to a five-year-old, “A man buys cotton for 100 pounds. Later he sells it for 110 pounds.”, with “Later” lit.",
+    plain: { width: 1170, height: 1440 },
     clip: SIMPLE_CLIP,
     href: "/presets/",
     more: "Presets",
@@ -54,7 +57,8 @@ export function Home() {
       free="Listening is free."
       demo="home"
       capture={{ src: "/demos/verse-rhymed.webp", alt: "Nekrasov’s poem «Пьяница» in old Russian type open in Libratory, the key line «Идешь, какъ обезславленный» strongly underlined and the lines around it lightly, and under it the Rhymed English verse pane, “Grows paler still, and wan within. Down-trodden, crushed, with drooping head”, with “Down” lit.", focus: "0%", plain: { width: 1170, height: 1596 } }}
-      clip={VERSE_CLIP}
+      clip={VERSE_CLIP ?? LITERAL_CLIP}
+      pair={VERSE_PAIR}
       footer={FOOT}
     >
       <Scenes scenes={SCENES} />

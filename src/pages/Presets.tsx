@@ -23,6 +23,7 @@ export function Presets() {
       line="Hear the page told another way, in a pane under it. While the voice reads, the page underlines the lines each part comes from and lights the key words."
       free="Reading the page as printed is free. No account."
       demo="presets"
+      capture={{ src: "/demos/capital-explained.webp", alt: "A page of Marx’s Capital open in Libratory, “resold for £100+£10 or £110” strongly underlined and the lines around it lightly, and under it the pane Explain it to a five-year-old, “A man buys cotton for 100 pounds. Later he sells it for 110 pounds.”, with “Later” lit.", focus: "0%", plain: { width: 1170, height: 1440 } }}
       clip={SIMPLE_CLIP}
       footer={FOOT}
     >

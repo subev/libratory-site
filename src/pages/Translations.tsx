@@ -1,6 +1,6 @@
-import { GERMAN_CLIP } from "../components/clips.ts";
+import { GERMAN_CLIP, LITERAL_CLIP, VERSE_CLIP, VERSE_PAIR } from "../components/clips.ts";
 import { Landing } from "../components/Landing.tsx";
-import { Columns, Small } from "../components/Verse.tsx";
+import { Columns, PairScene, Small } from "../components/Verse.tsx";
 
 const FOOT = [
   { href: "/", label: "Home" },
@@ -29,6 +29,13 @@ export function Translations() {
       footer={FOOT}
     >
       <Columns columns={COLUMNS} />
+      <PairScene
+        title="The same page, word for word, then as verse."
+        body="Nekrasov, from an 1899 printing in the old spelling. On the left each sentence is read in Russian, then in English, every word lit beside its partner. On the right the same lines come back as rhymed English verse, and the page underlines the lines each couplet came from."
+        note="Rhymed verse is a preset: one line you write once. Both are online and use credit."
+        pair={VERSE_PAIR}
+        clip={LITERAL_CLIP ?? VERSE_CLIP}
+      />
       <Small>Translating your own pages is online, needs an account and uses credit. The app's own menus are in English.</Small>
     </Landing>
   );

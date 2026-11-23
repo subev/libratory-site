@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ClipPlayer, type Clip } from "./Media.tsx";
+import { ClipPair, ClipPlayer, type Clip, type ClipPairing } from "./Media.tsx";
 import { PhoneFrame } from "./phone.tsx";
 
 const WRAP = "mx-auto max-w-5xl px-6";
@@ -43,6 +43,23 @@ function ScenePicture({ scene }: { scene: Scene }) {
     );
   }
   return <div className="flex flex-none justify-center sm:w-[280px]"><Phone src={scene.src} alt={scene.alt} /></div>;
+}
+
+/** Two takes of the same page under one heading; with one pulled, the other shows alone, and with both pulled nothing does */
+export function PairScene({ title, body, note, pair, clip }: { title: string; body: string; note?: string; pair?: ClipPairing; clip?: Clip }) {
+  if (!pair && !clip) return null;
+  return (
+    <section className={`${WRAP} py-14 sm:py-20`}>
+      <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
+        <div className="max-w-xl">
+          <h2 className="text-[clamp(1.6rem,3.2vw,2.2rem)] text-balance">{title}</h2>
+          <p className="mt-3 text-lg text-ink-secondary">{body}</p>
+          {note ? <p className="mt-3 text-[0.95rem] text-ink-faint">{note}</p> : null}
+        </div>
+        {pair ? <ClipPair pair={pair} /> : clip ? <div className="w-full max-w-[260px]"><ClipPlayer clip={clip} /></div> : null}
+      </div>
+    </section>
+  );
 }
 
 /** Picture and text side by side, the picture changing sides from one scene to the next */

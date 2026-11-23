@@ -1,6 +1,6 @@
 import { APP_STORE, Button, Footer, Nav, type Link } from "./Chrome.tsx";
 import type { ReactNode } from "react";
-import { HeroMedia, type Capture, type Clip } from "./Media.tsx";
+import { HeroMedia, type Capture, type Clip, type ClipPairing } from "./Media.tsx";
 
 export type Proof = { title: string; body: string };
 
@@ -9,9 +9,10 @@ export type Proof = { title: string; body: string };
 const TEXT_ONLY = "[grid-template-areas:'h'_'s'_'b'_'f'_'n'] max-w-3xl lg:text-center";
 const AREAS = "[grid-template-areas:'h'_'s'_'f'_'d'_'b'_'n'] lg:[grid-template-areas:'._d'_'h_d'_'s_d'_'b_d'_'f_d'_'n_d'_'._d'] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-rows-[1fr_auto_auto_auto_auto_auto_1fr]";
 
-function Hero({ headline, line, free, note, demo, capture, clip, long }: {
+function Hero({ headline, line, free, note, demo, capture, clip, pair, long }: {
   long?: boolean;
   clip?: Clip;
+  pair?: ClipPairing;
   headline: string;
   line: string;
   free: string;
@@ -19,13 +20,13 @@ function Hero({ headline, line, free, note, demo, capture, clip, long }: {
   demo: string;
   capture?: Capture;
 }) {
-  const media = Boolean(capture || clip);
+  const media = Boolean(capture || clip || pair);
   return (
     <section className="lamplight-hero border-b border-edge">
       <div className={`mx-auto grid gap-x-14 px-6 pt-6 pb-14 text-center sm:pt-14 sm:pb-20 ${media ? `max-w-5xl lg:text-left ${AREAS}` : TEXT_ONLY}`}>
         <h1 className={`${long ? "text-[clamp(1.7rem,3.5vw,2.5rem)]" : "text-[clamp(2rem,4.6vw,3.25rem)]"} font-semibold tracking-tight text-balance [grid-area:h]`}>{headline}</h1>
         <p className="mt-3 text-lg text-balance text-ink-secondary [grid-area:s] sm:mt-5">{line}</p>
-        {media ? <div className="mt-5 flex justify-center [grid-area:d] sm:mt-8 lg:mt-0"><HeroMedia name={demo} capture={capture} clip={clip} /></div> : null}
+        {media ? <div className="mt-5 flex justify-center [grid-area:d] sm:mt-8 lg:mt-0"><HeroMedia name={demo} capture={capture} clip={clip} pair={pair} /></div> : null}
         <div className="mt-5 [grid-area:b] sm:mt-8"><Button href={APP_STORE}>Download on the App Store</Button></div>
         <p className="mt-3 text-balance text-ink-muted [grid-area:f] lg:mt-4">{free}</p>
         {note ? (
@@ -60,7 +61,7 @@ const PITCH = [
   { href: "/translations/", label: "Translations" },
 ];
 
-export function Landing({ headline, line, free, note, demo, capture, clip, proofs, footer, long, children }: {
+export function Landing({ headline, line, free, note, demo, capture, clip, pair, proofs, footer, long, children }: {
   /** A headline of several sentences is set smaller */
   long?: boolean;
   children?: ReactNode;
@@ -71,6 +72,8 @@ export function Landing({ headline, line, free, note, demo, capture, clip, proof
   demo: string;
   capture?: Capture;
   clip?: Clip;
+  /** Two clips side by side, shown in place of `clip` */
+  pair?: ClipPairing;
   proofs?: Proof[];
   footer: Link[];
 }) {
@@ -78,7 +81,7 @@ export function Landing({ headline, line, free, note, demo, capture, clip, proof
     <>
       <Nav links={PITCH.map((link) => ({ ...link, current: link.href === `/${demo}/` }))} />
       <main>
-        <Hero headline={headline} line={line} free={free} note={note} demo={demo} capture={capture} clip={clip} long={long} />
+        <Hero headline={headline} line={line} free={free} note={note} demo={demo} capture={capture} clip={clip} pair={pair} long={long} />
         {proofs ? <Proofs proofs={proofs} /> : null}
         {children}
       </main>
